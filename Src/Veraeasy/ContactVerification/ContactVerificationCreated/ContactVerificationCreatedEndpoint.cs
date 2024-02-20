@@ -4,6 +4,7 @@ using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Veraeasy.ContactVerification.Data.Database;
 using Veraeasy.ContactVerification.Data;
+using Veraeasy.Common.Validation.Requests;
 
 internal static class ContactVerificationCreatedEndpoint
 {
@@ -12,13 +13,17 @@ internal static class ContactVerificationCreatedEndpoint
                 ContactVerificationDbContext persistence,
                 CancellationToken cancellationToken) =>
             {
-                var cv = ContactVerification.PrepareEntryWithDefaultExpire(request.businessId, request.email, request.mobileNumber, request.createdAt);
+                var cv = ContactVerification.PrepareEntryWithDefaultExpire(
+                    request.BusinessId,
+                    request.Email,
+                    request.MobileNumber,
+                    DateTimeOffset.Parse(request.CreatedAt).UtcDateTime);
                 await persistence.ContactEntries.AddAsync(cv, cancellationToken);
                 await persistence.SaveChangesAsync(cancellationToken);
 
                 return Results.Created($"/{ContactVerificationApiPaths.Create}/{cv.Id}", cv.Id);
             })
-        //.ValidateRequest<CreateContactVerificationRequest>()
+        .ValidateRequest<CreateContactVerificationRequest>()
         .WithOpenApi(operation => new(operation)
         {
             Summary = "Triggers creation of a new contact verification entry",

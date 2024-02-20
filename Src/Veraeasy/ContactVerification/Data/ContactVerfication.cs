@@ -12,13 +12,14 @@ internal sealed class ContactVerification
     //TODO: add ContactVerificationStatus The status is a FSM: IDLE,EXPIRED,VERIFIED.
 
 
-    private ContactVerification(Guid id, string businessId,  string emailHash, string mobileNumberHash, DateTimeOffset createdAt, DateTimeOffset ExpireAt)
+    private ContactVerification(Guid id, string businessId,  string emailHash, string mobileNumberHash, DateTimeOffset createdAt, DateTimeOffset expireAt)
     {
         Id = id;
         BusinessId = businessId;
         EmailHash = emailHash;
         MobileNumberHash = mobileNumberHash;
         CreatedAt = createdAt;
+        ExpireAt = expireAt;
     }
 
     internal static ContactVerification PrepareEntryWithDefaultExpire(string businessId, string email, string mobile, DateTimeOffset nowDate)
@@ -29,7 +30,7 @@ internal sealed class ContactVerification
             email,
             mobile,
             nowDate,
-            nowDate.AddDays(90));
+            nowDate.AddDays(90).UtcDateTime);
 
         return cv;
     }

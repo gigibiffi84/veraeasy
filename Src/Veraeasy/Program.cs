@@ -1,4 +1,7 @@
 
+using Veraeasy.Common.Clock;
+using Veraeasy.Common.Events.EventBus;
+using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification;
 using Veraeasy.ContactVerification.ContactVerificationCreated;
 
@@ -10,6 +13,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddEventBus();
+builder.Services.AddRequestsValidations();
+builder.Services.AddClock();
 builder.Services.AddContactVerification(builder.Configuration);
 
 var app = builder.Build();

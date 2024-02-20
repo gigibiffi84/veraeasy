@@ -11,6 +11,7 @@ first iteration for the mvp project focus on real and urgent needs:
     - text email and text sms are fixed and not profiled.
 
 second iteration:
+    - enable mx verification of email address
     - enable contact verification owner to upload verification evidences and privacy doc.
     - enable cv owners to update the cv status to verified.
     - enable cv owners to search on their contact certification entries by status and business id.
@@ -30,6 +31,7 @@ https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?
 By event storming we found the followinf modules each contains an aggregate:
      - ContactVerify: provides api to create a contact verification a contact verification entry is a pair email,phone number and must the creation must contains all validation rules of this entity. The aggregate root is the ContactVerification Entity and is composed by an email hash id, a mobile number hash id, a businessId and a list of tags separated by comma. CRUD REST aPI must be provided. Furthermore the contactverify module must provide api to update the status.
      The status is a FSM: IDLE,EXPIRED,VERIFIED.
+     For well formed validation use FluentValidation or these regex https://www.coffeecup.com/help/articles/regular-expression-examples/#phonenumber-italy
      - EmailVerify
      - MobileNumberVerify
      - EmailAssertion

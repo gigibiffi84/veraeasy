@@ -1,3 +1,7 @@
 namespace Veraeasy.ContactVerification.ContactVerificationCreated;
 
-public sealed record CreateContactVerificationRequest(string businessId, string email, string mobileNumber, DateTimeOffset createdAt);
+public sealed record CreateContactVerificationRequest(
+    string BusinessId,
+    string Email,
+    string MobileNumber,
+    string CreatedAt);
