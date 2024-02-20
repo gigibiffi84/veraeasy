@@ -1,4 +1,7 @@
-namespace Veraeasy.ContactVerification.CreateContactVerification;
+using Veraeasy.ContactVerification.Domain.CreateContactVerification;
+
+namespace Veraeasy.ContactVerification.Application;
+
 
 public sealed record CreateContactVerificationRequest(
     string BusinessId,

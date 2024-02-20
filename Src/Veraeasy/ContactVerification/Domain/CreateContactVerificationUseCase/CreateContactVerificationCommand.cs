@@ -1,6 +1,6 @@
-using Veraeasy.Common.Cqrs;
+namespace Veraeasy.ContactVerification.Domain.CreateContactVerification;
 
-namespace Veraeasy.ContactVerification.CreateContactVerification;
+using Veraeasy.Common.Cqrs;
 
 public sealed record CreateContactVerificationCommand(
     string BusinessId,

@@ -1,7 +1,8 @@
-namespace Veraeasy.ContactVerification.CreateContactVerification;
+namespace Veraeasy.ContactVerification.Application;
 
 using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification.Domain;
+using Veraeasy.ContactVerification.Domain.CreateContactVerification;
 
 internal static class CreateContactVerificationEndpoint
 {

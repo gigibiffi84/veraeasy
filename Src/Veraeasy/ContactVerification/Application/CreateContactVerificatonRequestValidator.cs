@@ -1,6 +1,7 @@
-namespace Veraeasy.ContactVerification.CreateContactVerification;
+namespace Veraeasy.ContactVerification.Domain.CreateContactVerification;
 
 using FluentValidation;
+using Veraeasy.ContactVerification.Application;
 
 internal sealed class CreateContactVerificatonRequestValidator : AbstractValidator<CreateContactVerificationRequest>
 {
@@ -9,7 +10,6 @@ internal sealed class CreateContactVerificatonRequestValidator : AbstractValidat
 
     public CreateContactVerificatonRequestValidator()
     {
-
         DateTimeOffset res = DateTimeOffset.UtcNow;
         RuleFor(request => request.Email).NotEmpty();
         RuleFor(request => request.MobileNumber).NotEmpty();

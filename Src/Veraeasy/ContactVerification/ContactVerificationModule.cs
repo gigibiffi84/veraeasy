@@ -9,7 +9,7 @@ internal static class ContactVerificationModule
     internal static IServiceCollection AddContactVerification(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddDatabase(configuration);
-        services.AddMediationModule();
+        services.AddContactVerificationAggregateModule();
         services.AddScoped<IContactVerificationAggregate, ContactVerificationAggregate>();
 
         return services;

@@ -3,7 +3,7 @@ using Veraeasy.Common.Clock;
 using Veraeasy.Common.Events.EventBus;
 using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification;
-using Veraeasy.ContactVerification.CreateContactVerification;
+using Veraeasy.ContactVerification.Application;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +31,6 @@ app.UseHttpsRedirection();
 //app.UseCors();
 
 app.MapControllers();
-app.MapContactVerificationCreated();
+app.MapContactVerificatinEndpoints();
 
 app.Run();

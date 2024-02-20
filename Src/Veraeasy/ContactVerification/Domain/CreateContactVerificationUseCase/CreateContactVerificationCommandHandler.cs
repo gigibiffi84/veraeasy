@@ -1,8 +1,7 @@
+namespace Veraeasy.ContactVerification.Domain.CreateContactVerification;
+
 using Veraeasy.Common.Cqrs;
 using Veraeasy.ContactVerification.Data;
-
-namespace Veraeasy.ContactVerification.CreateContactVerification;
-
 
 [UsedImplicitly]
 internal sealed class CreateContactVerificationCommandHandler
