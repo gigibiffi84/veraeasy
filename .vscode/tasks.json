@@ -1,0 +1,12 @@
+{
+	"tasks": [
+		{
+			"type": "dotnet",
+			"task": "build",
+			"group": "build",
+			"problemMatcher": [],
+			"args": ["build", "Veraeasy.sln"],
+			"label": "dotnet: build"
+		}
+	]
+}

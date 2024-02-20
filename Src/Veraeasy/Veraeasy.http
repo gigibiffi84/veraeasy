@@ -1,0 +1,6 @@
+@Veraeasy_HostAddress = http://localhost:5166
+
+GET {{Veraeasy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

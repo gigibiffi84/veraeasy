@@ -21,7 +21,13 @@ third iteration:
     - enable users to extends a contact verification with e lead and a profile.
     - enable contact verificatin owner to attach a link or a copy about a privacy compliance document.
 
-https://miro.com/app/board/uXjVNrD1N88=/
+Below the link of the event stormin diagram: https://miro.com/app/board/uXjVNrD1N88=/
+
+To design application architecture we need to use DI (dependency injection features) provided by .net8+ and documented at this link:
+https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0
+
+### Run locally
+From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
 ### What is this repository for? ###
 
