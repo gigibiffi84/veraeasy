@@ -6,7 +6,7 @@ internal sealed class ContactVerificationDbContext(DbContextOptions<ContactVerif
 {
     private const string Schema = "ContactVerification";
 
-    public DbSet<ContactVerification> Offers => Set<ContactVerification>();
+    public DbSet<ContactVerification> ContactEntries => Set<ContactVerification>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
