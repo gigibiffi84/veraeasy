@@ -11,9 +11,9 @@ internal static class CreateContactVerificationEndpoint
                 IContactVerificationAggregate aggregate,
                 CancellationToken cancellationToken) =>
             {
-                var cv = request.ToCommand();
-                var contractId = await aggregate.ExecuteCommandAsync(cv, cancellationToken);
-
+                var command = request.ToCommand();
+                var contractId = await aggregate.ExecuteCommandAsync(command, cancellationToken);
+                aggregate.ContactVerificationCreated(command.ToDomainEvent(contractId));
 
                 return Results.Created($"/{ContactVerificationApiPaths.Create}/{contractId}", contractId);
             })
