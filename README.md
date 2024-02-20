@@ -26,6 +26,16 @@ Below the link of the event stormin diagram: https://miro.com/app/board/uXjVNrD1
 To design application architecture we need to use DI (dependency injection features) provided by .net8+ and documented at this link:
 https://learn.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-8.0
 
+### Aggregates and modules
+By event storming we found the followinf modules each contains an aggregate:
+     - ContactVerify: provides api to create a contact verification a contact verification entry is a pair email,phone number and must the creation must contains all validation rules of this entity. The aggregate root is the ContactVerification Entity and is composed by an email hash id, a mobile number hash id, a businessId and a list of tags separated by comma. CRUD REST aPI must be provided. Furthermore the contactverify module must provide api to update the status.
+     The status is a FSM: IDLE,EXPIRED,VERIFIED.
+     - EmailVerify
+     - MobileNumberVerify
+     - EmailAssertion
+     - MobileNumberAssertion
+
+
 ### Run locally
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
