@@ -35,6 +35,8 @@ By event storming we found the followinf modules each contains an aggregate:
      - EmailAssertion
      - MobileNumberAssertion
 
+### Migrations
+dotnet tool install dotnet-ef
 
 ### Run locally
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
