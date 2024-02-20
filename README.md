@@ -44,6 +44,15 @@ after created entities ==> dotnet ef migrations add Init
 ### Run locally
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
+### Naive test from swagger
+To test from swagger use this example json
+{
+  "businessId": "test",
+  "email": "bifulcoluigi@gmail.com",
+  "mobileNumber": "+393405753976",
+  "createdAt": "2024-02-20 00:00:00"
+}
+
 ### What is this repository for? ###
 
 * Quick summary

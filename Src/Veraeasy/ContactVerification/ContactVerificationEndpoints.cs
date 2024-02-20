@@ -1,6 +1,8 @@
+using Veraeasy.ContactVerification.CreateContactVerification;
+
 namespace Veraeasy.ContactVerification;
 
-using ContactVerificationCreated;
+
 
 internal static class ContactVerificationEndpoints
 {

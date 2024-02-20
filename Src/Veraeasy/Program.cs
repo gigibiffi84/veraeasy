@@ -3,7 +3,7 @@ using Veraeasy.Common.Clock;
 using Veraeasy.Common.Events.EventBus;
 using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification;
-using Veraeasy.ContactVerification.ContactVerificationCreated;
+using Veraeasy.ContactVerification.CreateContactVerification;
 
 
 var builder = WebApplication.CreateBuilder(args);

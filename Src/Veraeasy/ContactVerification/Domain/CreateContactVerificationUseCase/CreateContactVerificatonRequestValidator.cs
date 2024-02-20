@@ -1,4 +1,4 @@
-namespace Veraeasy.ContactVerification.ContactVerificationCreated;
+namespace Veraeasy.ContactVerification.CreateContactVerification;
 
 using FluentValidation;
 

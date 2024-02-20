@@ -1,6 +1,6 @@
 namespace Veraeasy.ContactVerification.Data;
 
-internal sealed class ContactVerification
+public sealed class ContactVerification
 {
     public Guid Id { get; init; }
     public string BusinessId {get; init;}
@@ -22,7 +22,7 @@ internal sealed class ContactVerification
         ExpireAt = expireAt;
     }
 
-    internal static ContactVerification PrepareEntryWithDefaultExpire(string businessId, string email, string mobile, DateTimeOffset nowDate)
+    public static ContactVerification PrepareEntryWithDefaultExpire(string businessId, string email, string mobile, DateTimeOffset nowDate)
     {
         var cv = new ContactVerification(
             Guid.NewGuid(),
