@@ -3,6 +3,7 @@ namespace Veraeasy.ContactVerification;
 using Veraeasy.ContactVerification.Infrastructure;
 using Veraeasy.ContactVerification.Data.Database;
 using Veraeasy.ContactVerification.Domain;
+using Veraeasy.ContactVerification.Domain.Service;
 
 internal static class ContactVerificationModule
 {
@@ -11,7 +12,7 @@ internal static class ContactVerificationModule
         services.AddDatabase(configuration);
         services.AddContactVerificationAggregateModule();
         services.AddScoped<IContactVerificationAggregate, ContactVerificationAggregate>();
-
+        services.AddScoped<IContactVerificationQueryService, ContactVerificationQueryService>();
         return services;
     }
 
