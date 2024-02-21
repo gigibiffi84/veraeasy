@@ -1,9 +1,9 @@
-using MediatR;
+using Veraeasy.Common.Cqrs;
 using Veraeasy.ContactVerification.Data;
 
 namespace Veraeasy.ContactVerification.Domain.Queries;
 
-public class GetContactVerificationByIdHandler(IContactVerificationRepository? repository) : IRequestHandler<GetContactVerificationById, Data.ContactVerification>
+public class GetContactVerificationByIdHandler(IContactVerificationRepository? repository) : IQueryHandler<GetContactVerificationById, Data.ContactVerification>
 
 {
     public async Task<Data.ContactVerification> Handle(GetContactVerificationById request, CancellationToken cancellationToken)

@@ -23,4 +23,10 @@ internal sealed class ContactVerificationRepository(ContactVerificationDbContext
     {
        return await persistence.ContactEntries.FindAsync([id], cancellationToken: cancellationToken);
     }
+
+    public async Task<IAsyncEnumerable<ContactVerification>> ListByOwnerAsync(string owner, CancellationToken cancellationToken = default)
+    {
+        return persistence.ContactEntries.Where(c => c.Owner.ToLower().Equals(owner)).AsAsyncEnumerable();
+
+    }
 }

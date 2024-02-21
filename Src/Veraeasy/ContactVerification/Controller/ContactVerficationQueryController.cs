@@ -37,7 +37,13 @@ public class ContactVerficationQueryController : ControllerBase
     {
         var result = await queryService.GetContactVerificationbyId(id);
         return Ok(result);
-        //return await Task.FromResult(Ok());
+    }
+
+    [HttpGet("owner/{owner}")]
+    public async Task<IActionResult> ListContactVerificationByOwner(string owner)
+    {
+        var result = await queryService.ListContactVerificationByOwner(owner);
+        return Ok(result);
     }
 
 }
