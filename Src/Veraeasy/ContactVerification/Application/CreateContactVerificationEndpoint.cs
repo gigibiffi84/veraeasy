@@ -1,17 +1,23 @@
 namespace Veraeasy.ContactVerification.Application;
 
+using System.Security.Claims;
 using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification.Domain;
 using Veraeasy.ContactVerification.Domain.CreateContactVerification;
 
 internal static class CreateContactVerificationEndpoint
 {
-    internal static void MapContactVerificationCreated(this IEndpointRouteBuilder app) => app.MapPost(ContactVerificationApiPaths.Create,
-            async (CreateContactVerificationRequest request,
+    internal static void MapContactVerificationCreated(this IEndpointRouteBuilder app) =>
+    app.MapPost(ContactVerificationApiPaths.Create,
+            async
+            (
+                CreateContactVerificationRequest request,
                 IContactVerificationAggregate aggregate,
-                CancellationToken cancellationToken) =>
+                ClaimsPrincipal user,
+                CancellationToken cancellationToken
+            ) =>
             {
-                var command = request.ToCommand();
+                var command = request.ToCommand(ref user);
                 var contractId = await aggregate.ExecuteCommandAsync(command, cancellationToken);
                 aggregate.ContactVerificationCreated(command.ToDomainEvent(contractId));
 

@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Veraeasy.ContactVerification.Domain.CreateContactVerification;
 
 namespace Veraeasy.ContactVerification.Application;
@@ -10,7 +11,8 @@ public sealed record CreateContactVerificationRequest(
     string CreatedAt)
 {
 
-    public CreateContactVerificationCommand ToCommand() => new(BusinessId, Email, MobileNumber, CreatedAt);
+    public CreateContactVerificationCommand ToCommand(ref ClaimsPrincipal user)
+        => new(BusinessId, Email, MobileNumber, user, CreatedAt);
 
 }
 

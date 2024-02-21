@@ -45,9 +45,13 @@ after created entities ==> dotnet ef migrations add Init
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
 ### Naive test from swagger
+
 #### Dev mode authentication
 To authenticate using dev mode you can use the dotnet user-jwts create command to generate a token
-that expires after 1 hour
+that expires after 1 hour.
+To generate specific role or claim based tokens use dotnet user-jwts create --scope "greetings_api" --role "admin".
+For support use this link https://learn.microsoft.com/en-us/aspnet/core/security/authentication/jwt-authn?view=aspnetcore-8.0&tabs=windows
+
 Then authenticate from swagger copy and paste the token.
 To test from swagger use this example json
 {
