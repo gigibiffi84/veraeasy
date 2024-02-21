@@ -17,6 +17,7 @@ internal static class CreateContactVerificationEndpoint
 
                 return Results.Created($"/{ContactVerificationApiPaths.Create}/{contractId}", contractId);
             })
+        .RequireAuthorization()
         .ValidateRequest<CreateContactVerificationRequest>()
         .WithOpenApi(operation => new(operation)
         {

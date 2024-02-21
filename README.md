@@ -45,6 +45,10 @@ after created entities ==> dotnet ef migrations add Init
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
 ### Naive test from swagger
+#### Dev mode authentication
+To authenticate using dev mode you can use the dotnet user-jwts create command to generate a token
+that expires after 1 hour
+Then authenticate from swagger copy and paste the token.
 To test from swagger use this example json
 {
   "businessId": "test",
