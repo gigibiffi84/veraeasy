@@ -18,7 +18,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
             {
                 c.OperationFilter<AuthorizationHeaderOperationFilter>();
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "Todo API v1", Version = "v1"} );
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "ContactVerification API v1", Version = "v1"} );
                 c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
                 {
                     Scheme = "Bearer",
