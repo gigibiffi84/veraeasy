@@ -55,6 +55,10 @@ Migration Log:
  - AddBusinessId
  - AddOwner
 
+To add migrations when using more than one dbcontext use
+
+dotnet ef migrations add EmailVerification -c EmailVerificationDbContext
+
 ### Run locally
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
@@ -96,29 +100,7 @@ When an email verification is started then:
  - Rate Limiting: Implement rate limiting mechanisms to prevent brute-force attacks or automated attempts to verify OTPs.
  - Error Handling: Implement proper error handling to handle exceptions during the email verification process, providing meaningful error messages to users.
 
+### Troubleshooting
 
-### What is this repository for? ###
-
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
-
-### How do I get set up? ###
-
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+MediaTr issue when receiving duplicate event in notification handler.
+https://github.com/jbogard/MediatR/issues/718

@@ -13,6 +13,7 @@ public class ContactVerificationEventHandler : IEventHandler<ContactVerification
     }
     public Task Handle(ContactVerificationEvent notification, CancellationToken cancellationToken)
     {
+        //this is the right point to send event out of this domain
         _logger.LogInformation($"Received new event in ContactVerificationEventHandler {notification.EventType}");
         return Task.CompletedTask;
     }

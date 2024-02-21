@@ -4,6 +4,7 @@ using Veraeasy.Common.Clock;
 using Veraeasy.Common.Events.EventBus;
 using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification;
+using Veraeasy.EmailVerification;
 using Veraeasy.ContactVerification.Application;
 
 
@@ -32,6 +33,7 @@ builder.Services.AddEventBus();
 builder.Services.AddRequestsValidations();
 builder.Services.AddClock();
 builder.Services.AddContactVerification(builder.Configuration);
+builder.Services.AddEmailVerificationModule(builder.Configuration);
 
 var app = builder.Build();
 
@@ -44,6 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseContactVerification();
+app.UseEmailVerificationModule();
 app.UseHttpsRedirection();
 //app.UseCors();
 
