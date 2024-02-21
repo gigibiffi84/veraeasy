@@ -5,16 +5,20 @@ This README would normally document whatever steps are necessary to get your app
 ### Mvp Requirements
 first iteration for the mvp project focus on real and urgent needs:
     - a way to verify email address trough otp - a way to verify phone numbers trough a verified email and sms otp.
-    - contact certification must be related to a business id.
-    - notify the contact certification entry to the owner about the contacts verifcation steps.
-    - send the contact certification entry package signed with all evidences and a privacy document.
+    - contact verification must be related to a business id.
+    - contact verification must be related to an ownerid. The relationship between
+    a contact verification and an owner is 1-to-1. contact verification must be filtered by default by owner.
+    - notify the contact verification entry to the owner about the contacts verifcation steps.
+    - send the contact verification entry package signed with all evidences and a privacy document.
     - text email and text sms are fixed and not profiled.
+    - user can login with prefixed users without registration process.
 
 second iteration:
     - enable mx verification of email address
     - enable contact verification owner to upload verification evidences and privacy doc.
     - enable cv owners to update the cv status to verified.
-    - enable cv owners to search on their contact certification entries by status and business id.
+    - enable cv owners to search on their contact verification entries by status and business id.
+    - the owner id must be related to an identity and the identity may be reconciliated trough email, in this scenario user can register,
 
 third iteration:
     - enable owners to design a email text template.
@@ -40,6 +44,10 @@ By event storming we found the followinf modules each contains an aggregate:
 ### Migrations
 dotnet tool install dotnet-ef
 after created entities ==> dotnet ef migrations add Init
+Migration Log:
+ - Seed
+ - AddBusinessId
+ - AddOwner
 
 ### Run locally
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html

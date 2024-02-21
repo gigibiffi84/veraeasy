@@ -13,6 +13,8 @@ internal sealed class ContactVerificationEntityConfiguration : IEntityTypeConfig
         builder.HasKey(cv => cv.Id);
         builder.Property(cv => cv.CreatedAt).IsRequired();
         builder.Property(cv => cv.EmailHash).IsRequired();
+        builder.Property(cv => cv.Owner).IsRequired();
+        builder.Property(cv => cv.BusinessId).IsRequired();
         builder.Property(cv => cv.MobileNumberHash).IsRequired();
         builder.Property(cv => cv.ExpireAt).IsRequired();
     }
