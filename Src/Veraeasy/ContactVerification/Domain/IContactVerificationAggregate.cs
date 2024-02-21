@@ -1,10 +1,13 @@
 using Veraeasy.Common.Cqrs;
+using Veraeasy.ContactVerification.Data.Database.Reporitories;
 using Veraeasy.ContactVerification.Domain.CreateContactVerification;
 
 namespace Veraeasy.ContactVerification.Domain;
 public interface IContactVerificationAggregate
 {
-    void ContactVerificationCreated(ContactVerificationCreatedDomainEvent e);
+    Task ContactVerificationCreated(ContactVerificationCreatedDomainEvent e, CancellationToken cancellationToken = default);
+
+    void ContactVerificationAdded(ContactVerificationAddedChange e);
 
     Task ExecuteCommandAsync(ICommand command, CancellationToken cancellationToken = default);
 

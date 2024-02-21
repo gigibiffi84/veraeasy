@@ -4,7 +4,11 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Mvp Requirements
 first iteration for the mvp project focus on real and urgent needs:
-    - a way to verify email address trough otp - a way to verify phone numbers trough a verified email and sms otp.
+    - a way to verify email address trough otp
+        * create an EmailVerificationModule that expose an api to
+            - start an email verification
+            - update an email verification
+    - a way to verify phone numbers trough a verified email and sms otp.
     - contact verification must be related to a business id.
     - contact verification must be related to an ownerid. The relationship between
     a contact verification and an owner is 1-to-1. contact verification must be filtered by default by owner.
@@ -12,6 +16,8 @@ first iteration for the mvp project focus on real and urgent needs:
     - send the contact verification entry package signed with all evidences and a privacy document.
     - text email and text sms are fixed and not profiled.
     - user can login with prefixed users without registration process.
+    - owner can't revoke the contact verification
+    - a created contact verification can be started only if mail and number are valids.
 
 second iteration:
     - enable mx verification of email address
@@ -68,6 +74,28 @@ To test from swagger use this example json
   "mobileNumber": "+393405753976",
   "createdAt": "2024-02-20 00:00:00"
 }
+
+### Transactions
+Despite contactverification module is a simple module that commit oneshot transaction
+Could be useful to read this doc when we need to implement transactions in more complex scenarios:
+https://learn.microsoft.com/it-it/ef/ef6/saving/transactions?redirectedfrom=MSDN
+
+Observable models and entity: https://learn.microsoft.com/it-it/ef/core/change-tracking/change-detection
+
+### Email verification steps
+The Email verification module is responsible to receive ContactVerificationCreated integration events
+his endpoint is a startEmailVerification.
+When an email verification is started then:
+ - Generate an OTP: Use a library or custom code to generate a random OTP and associate it with the user's email address in your application's database.
+ - Send OTP: Send the OTP to the user's email address using an email service provider or an SMTP server. Include clear instructions on how to proceed with the verification process.
+- Validate OTP: FINALLY When the user enters the received OTP, compare it with the stored OTP in the database. If they match, mark the email address as verified and allow the user to proceed.
+
+#### Securitu considerations
+ - Secure Storage: Store OTPs securely in your application's database, utilizing encryption and hashing techniques to protect sensitive information.
+ - Expiration Time: Set an expiration time for OTPs to ensure that they are valid for a limited duration. This helps prevent misuse of expired OTPs.
+ - Rate Limiting: Implement rate limiting mechanisms to prevent brute-force attacks or automated attempts to verify OTPs.
+ - Error Handling: Implement proper error handling to handle exceptions during the email verification process, providing meaningful error messages to users.
+
 
 ### What is this repository for? ###
 

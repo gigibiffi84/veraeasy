@@ -1,6 +1,7 @@
 namespace Veraeasy.Common.Events.EventBus.InMemory;
 
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 
 internal static class InMemoryEventBusModule
 {

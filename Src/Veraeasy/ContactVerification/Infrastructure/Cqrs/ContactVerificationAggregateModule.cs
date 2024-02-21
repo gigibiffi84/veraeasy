@@ -7,9 +7,9 @@ internal static class ContactVerificationAggregateModule
 {
     internal static IServiceCollection AddContactVerificationAggregateModule(this IServiceCollection services)
     {
-        var commandsHandlersAssembly = typeof(IContactVerificationAggregate).Assembly;
+        var handlersAssembly = typeof(Veraeasy.ContactVerification.ContactVerificationModule).Assembly;
 
-        services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(commandsHandlersAssembly));
+        services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblies(handlersAssembly));
 
         return services;
     }
