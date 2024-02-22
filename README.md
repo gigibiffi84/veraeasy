@@ -47,6 +47,8 @@ By event storming we found the followinf modules each contains an aggregate:
      - EmailAssertion
      - MobileNumberAssertion
 
+## Backend
+
 ### Migrations
 dotnet tool install dotnet-ef
 after created entities ==> dotnet ef migrations add Init
@@ -110,3 +112,7 @@ When an email verification is started then:
 MediaTr issue when receiving duplicate event in notification handler.
 https://github.com/jbogard/MediatR/issues/718
 https://github.com/CodeMazeBlog/cqrs-mediatr-aspnet-core/blob/master/CqrsMediatrExample/CqrsMediatrExample/Handlers/EmailHandler.cs
+
+## Frontend
+For frontend we are going to use React 18
+to seewhat react transpile for us using babel go to babeljs.io/repl
