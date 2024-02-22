@@ -1,6 +1,7 @@
 namespace Veraeasy.EmailVerification.Data.Database;
 
 using Microsoft.EntityFrameworkCore;
+using Veraeasy.EmailVerification.Data.Database.Reporitories;
 
 internal static class EmailVerificationDatabaseModule
 {
@@ -10,7 +11,7 @@ internal static class EmailVerificationDatabaseModule
     {
         var connectionString = configuration.GetConnectionString(ConnectionStringName);
         services.AddDbContext<EmailVerificationDbContext>(options => options.UseNpgsql(connectionString));
-        //TODO: services.AddRepositories();
+        services.AddEmailVerificationRepositories();
 
         return services;
     }

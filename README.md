@@ -79,6 +79,11 @@ To test from swagger use this example json
   "createdAt": "2024-02-20 00:00:00"
 }
 
+{
+  "email": "bifulcoluigi@gmail.com",
+  "createdAt": "2024-02-20 00:00:00"
+}
+
 ### Transactions
 Despite contactverification module is a simple module that commit oneshot transaction
 Could be useful to read this doc when we need to implement transactions in more complex scenarios:
@@ -104,3 +109,4 @@ When an email verification is started then:
 
 MediaTr issue when receiving duplicate event in notification handler.
 https://github.com/jbogard/MediatR/issues/718
+https://github.com/CodeMazeBlog/cqrs-mediatr-aspnet-core/blob/master/CqrsMediatrExample/CqrsMediatrExample/Handlers/EmailHandler.cs

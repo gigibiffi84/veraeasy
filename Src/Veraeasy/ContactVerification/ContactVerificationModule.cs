@@ -4,6 +4,7 @@ using Veraeasy.ContactVerification.Infrastructure;
 using Veraeasy.ContactVerification.Data.Database;
 using Veraeasy.ContactVerification.Domain;
 using Veraeasy.ContactVerification.Domain.Service;
+using Veraeasy.ContactVerification.Controller;
 
 internal static class ContactVerificationModule
 {
@@ -11,6 +12,7 @@ internal static class ContactVerificationModule
     {
         services.AddDatabase(configuration);
         services.AddContactVerificationAggregateModule();
+        services.AddScoped<ContactVerficationQueryController>();
         services.AddScoped<IContactVerificationAggregate, ContactVerificationAggregate>();
         services.AddScoped<IContactVerificationQueryService, ContactVerificationQueryService>();
         return services;

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Veraeasy.EmailVerification.Data.Database;
@@ -11,9 +12,11 @@ using Veraeasy.EmailVerification.Data.Database;
 namespace Veraeasy.EmailVerification.Data.Database.Migrations
 {
     [DbContext(typeof(EmailVerificationDbContext))]
-    partial class EmailVerificationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240222111112_OtpSecret")]
+    partial class OtpSecret
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
