@@ -116,3 +116,6 @@ https://github.com/CodeMazeBlog/cqrs-mediatr-aspnet-core/blob/master/CqrsMediatr
 ## Frontend
 For frontend we are going to use React 18
 to seewhat react transpile for us using babel go to babeljs.io/repl
+For css we are temporaraly using Bulma components
+
+https://bulma.io/documentation/components/
