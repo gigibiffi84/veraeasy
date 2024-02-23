@@ -1,6 +1,6 @@
-function ProfileCard({title, handle, logo, description}) {
+function ProfileCard({title, handle, logo, description, id}) {
     return(
-        <div className="card">
+        <div key={id} className="card">
         <div className="card-image">
           <figure className="image is-1by1">
             <img src={logo} alt="Placeholder image" />
@@ -16,9 +16,6 @@ function ProfileCard({title, handle, logo, description}) {
 
           <div className="content">
             {description} <a>@bulmaio</a>.
-            <a href="#">#css</a> <a href="#">#responsive</a>
-            <br />
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
           </div>
         </div>
       </div>
