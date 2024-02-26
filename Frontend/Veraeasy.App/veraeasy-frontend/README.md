@@ -46,3 +46,7 @@ https://react.dev/reference/react/useCallback
 
 Use ref is used when you want to update date and do NOT want to trigger re-render.
 https://react.dev/reference/react/useRef
+
+### Icons and images
+icons are from lucide icons
+images are taken form https://lovepik.com/images/png-login.html

@@ -24,6 +24,7 @@ import {
     User,
     X,
     ChevronDown,
+    LogIn,
     type Icon as LucideIcon,
 } from "lucide-react"
 
@@ -31,6 +32,7 @@ export type Icon = LucideIcon
 
 export const Icons = {
     down: ChevronDown,
+    login: LogIn,
     logo: Command,
     close: X,
     spinner: Loader2,

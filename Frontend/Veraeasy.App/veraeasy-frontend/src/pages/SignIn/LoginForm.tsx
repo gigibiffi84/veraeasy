@@ -61,11 +61,13 @@ export default function LoginForm() {
                     <Button
                         type="submit"
                         disabled={isLoading}
-                        className={cn(buttonVariants())}>
+                        className="w-full"
+                        variant="default">
                         {isLoading && (
                             <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                         )}
                         Sign In
+                        <Icons.login />
                     </Button>
                 </div>
             </form>

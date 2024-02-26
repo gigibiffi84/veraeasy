@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import {useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
@@ -7,6 +7,7 @@ import Root from "@/pages/Root.tsx";
 import HomePage from "@/pages/HomePage.tsx";
 import ContactVerificationWorkflowPage from "@/pages/ContactVerificationWorkflowPage.tsx";
 import LoginPage from "@/pages/SignIn/LoginPage.tsx";
+import {ThemeProvider} from "@/components/theme-provider.tsx";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +20,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginPage />
+                element: <LoginPage/>
             },
             {
                 path: 'verifications/:id',
@@ -29,13 +30,16 @@ const router = createBrowserRouter([
         ]
     }
 ])
+
 function App() {
 
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  )
+    return (
+        <>
+            <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+                <RouterProvider router={router}/>
+            </ThemeProvider>
+        </>
+    )
 }
 
 export default App
