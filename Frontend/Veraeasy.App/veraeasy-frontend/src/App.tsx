@@ -5,8 +5,8 @@ import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "@/pages/Root.tsx";
 import HomePage from "@/pages/HomePage.tsx";
-import LoginPage from "@/pages/LoginPage.tsx";
 import ContactVerificationWorkflowPage from "@/pages/ContactVerificationWorkflowPage.tsx";
+import LoginPage from "@/pages/SignIn/LoginPage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginPage></LoginPage>
+                element: <LoginPage />
             },
             {
                 path: 'verifications/:id',
