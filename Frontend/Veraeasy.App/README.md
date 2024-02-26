@@ -15,15 +15,24 @@ using react router dom for the moment
 next it will be nice to use this https://tanstack.com/query/latest/docs/framework/react/examples/react-router
 the example showed in the tanstack query react router is very meaningful for our needs
 
-### First iteration wave 2
- - create prject structure
+### First iteration wave 0
+ - Create project strucutre
+ - Create ui layout
+ - Create page layout
+ - Create component layout (maybe with shimmers?)
+ - Compose all with react router and loaders (shimmers)
+ - Create seed api for data
+ - Interpolate shimmers with seed data
+
+### First iteration wave 1
+ - create a login ui page (async thunk)
+ - seed login page
+ - create a signup page ()
  - seeding contact verifications with this metadata, business_id, person_id, email, mobileNumber
  - seeding the status List for workflow verification => statusName, action(next or null), expectedNextStatusList (can be empty)
  - seeding contact verification status with business_id, person_id, currentStatus
- - create a login ui page
- - create a signup page
 
-### First iteration wave 1
+### First iteration wave 2
 - create an homepage of type SearchContactVerificationPage with a item list of contact verification merged with current status
 - create contact verification item component
 - add search and delete beahviors
