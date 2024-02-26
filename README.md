@@ -120,3 +120,98 @@ For css we are temporaraly using Bulma components
 
 https://bulma.io/documentation/components/
 https://unsplash.com/documentation/user-authentication-workflow
+https://state-updates.vercel.app/
+
+https://react.dev/reference/react/Component#static-proptypes
+
+### Tailwind CSS
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+https://www.npmjs.com/package/classnames
+
+you will notice that text-white will override all other colors used in the buttons. A very quick and easy solution is to use the tailwind-merge utility library as mentioned in the thread here.
+
+npm install tailwind-merge
+import { twMerge } from 'tailwind-merge';
+
+```css
+
+const classes = twMerge(
+    className('px-3 py-1.5 border', {
+    'border-blue-500 bg-blue-500 text-white': primary,
+    'border-gray-900 bg-gray-900 text-white': secondary,
+    'border-green-500 bg-green-500 text-white': success,
+    'border-yellow-400 bg-yellow-400 text-white': warning,
+    'border-red-500 bg-red-500 text-white': danger,
+    'rounded-full': rounded,
+    'bg-white': outline,
+    'text-blue-500': outline && primary,
+    'text-gray-900': outline && secondary,
+    'text-green-500': outline && success,
+    'text-yellow-400': outline && warning,
+    'text-red-500': outline && danger
+    })
+);
+
+```
+https://www.udemy.com/course/react-redux/learn/lecture/34695062#questions/19109310
+
+### Icons
+https://react-icons.github.io/react-icons/
+
+### Event handlers
+use destructuring of all other props to pass trough all event handler for compoenents
+
+### Redux and  ReduxToolkit
+createSlice
+useSelector
+useDispatch
+configureStore
+createAsyncThunk (need extraReducers when creaitng slices for managing correctly async netowrk request response state) such as
+ - pending
+ - fulfileld (succesS)
+ - rejected (error)
+
+### Loading 
+use skeletong with a loading animation with shimeer and taliwind css
+
+### Async thunk common behaviors refactoring
+https://www.udemy.com/course/react-redux/learn/lecture/34697372#overview
+
+``` javascript
+    function useThunk(thunk) {
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
+    
+    const runThunk = useCallback(() => {
+        setIsLoading(true);
+        dispatch(thunk());
+        .unwrap()
+        .catch((err) => setError(error))
+        .finally(() => setIsLoading(false));
+    }, [dispatch, thunk]);
+    
+    return [runThunk, isLoading, error];
+    }
+```
+
+then to use common thunk behavior 
+```
+    const [doRunThunk, isLoading, isError] = useThunk(myCustomAsyncThunk);
+```
+
+in this way we have wrapper our thunk to a loading logic
+not the usecallback function to keep the same reference to dispatch and thunk
+
+### Using typescript and vite with ui shadcn components
+https://ui.shadcn.com/docs/installation/vite
+schema validation https://zod.dev/?id=basic-usage
+forms https://react-hook-form.com/get-started#TypeScript, https://www.udemy.com/course/react-redux/learn/lecture/42293622#overview
+form event React.FormEvent<HtmlformEvent>
+
+routing using react routers
+
+using tanstack query instead of async thunks to benefits from cqrs
+https://tanstack.com/query/latest/docs/framework/react/examples/optimistic-updates-ui

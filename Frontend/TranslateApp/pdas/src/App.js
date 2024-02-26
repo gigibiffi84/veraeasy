@@ -52,10 +52,10 @@ function App() {
   }
 
   return (
-    <div>
+    <div className="bg-teal-50">
       <section className='her is-primary'>
         <div className='hero-body'>
-          <p className='title'>Personal Digital Assistants</p>
+          <p className='text-3xl font-bold underline'>Personal Digital Assistants</p>
           <SearchBar onSubmit={handleSubmit}></SearchBar>
         </div>
 
