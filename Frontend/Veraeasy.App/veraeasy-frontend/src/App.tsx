@@ -11,7 +11,7 @@ import LoginPage from "@/pages/SignIn/LoginPage.tsx";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root></Root>,
+        element: <Root className="p-0"></Root>,
         children: [
             {
                 index: true,

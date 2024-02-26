@@ -3,14 +3,28 @@ import SignIngLogo from "@/components/SignInLogo.tsx";
 import GSignComponent from "@/components/GSignComponent.tsx";
 import LoginFormInput from "@/components/LoginFormInput.tsx";
 import {Button} from "@/components/ui/button.tsx";
+import {useOutletContext} from "react-router";
+import {LegacyRef, useEffect, useRef} from "react";
+import {useRefElement} from "rooks";
 
 export default function LoginPage() {
+    const [scrollDown, setScrollDown] = useOutletContext();
+    const divRef = useRef(null);
+    useEffect(()=>{
+        console.log('scroll down context is', scrollDown);
+        if(scrollDown && divRef){
+            divRef?.current.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+        setScrollDown(false);
+    }, [scrollDown])
     return(
         <>
             <div
-                className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
-                <div className="hidden bg-cover lg:block lg:w-1/2"
-                     style={{backgroundImage: "url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80')" }}></div>
+                id="scrollInto-1"
+                ref={divRef}
+                className="flex mx-auto">
+                <div className="login-bg-image hidden bg-cover lg:block lg:w-1/2"
+                    ></div>
 
                 <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
                     <SignIngLogo>Welcome</SignIngLogo>

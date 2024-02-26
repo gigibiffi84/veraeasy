@@ -1,3 +1,4 @@
 export default function Header() {
-    return <div>Header Component</div>;
+    return <nav className="">Header</nav>
+        
 }

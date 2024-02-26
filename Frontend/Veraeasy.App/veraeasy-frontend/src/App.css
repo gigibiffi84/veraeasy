@@ -1,8 +1,27 @@
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  margin-top:0;
+  margin-bottom: 0;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+  padding-left: 0rem;
+  padding-right: 0rem;
+  padding-top: 0px;
+  padding-bottom: 0.25rem;
+}
+.custom-img {
+  background-image: url("assets/bg-3.jpg");
+}
+
+.login-bg-image {
+  background-image: url("assets/login-bg-1.jpg");
+}
+
+.header-gradient{
+  background: rgb(22,39,59);
+  background: -moz-linear-gradient(236deg, rgba(22,39,59,1) 0%, rgba(44,105,157,1) 35%, rgba(152,193,225,1) 100%);
+  background: -webkit-linear-gradient(236deg, rgba(22,39,59,1) 0%, rgba(44,105,157,1) 35%, rgba(152,193,225,1) 100%);
+  background: linear-gradient(236deg, rgba(22,39,59,1) 0%, rgba(44,105,157,1) 35%, rgba(152,193,225,1) 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#16273b",endColorstr="#98c1e1",GradientType=1);
 }
 
 .logo {

@@ -18,7 +18,7 @@ export default function LoginFormInput({children, form, name, type, label}: Form
                             {children || <p></p>}                            
                         </div>
                         <FormControl className="flex items-center justify-between mt-4">
-                            <Input type={type || "text"} placeholder={label} {...field} />
+                            <Input className="form-input px-4 py-3 rounded-full" type={type || "text"} placeholder={label} {...field} />
                         </FormControl>
                         <FormDescription>
                         </FormDescription>

@@ -23,12 +23,14 @@ import {
     Twitter,
     User,
     X,
+    ChevronDown,
     type Icon as LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+    down: ChevronDown,
     logo: Command,
     close: X,
     spinner: Loader2,

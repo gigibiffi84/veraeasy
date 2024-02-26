@@ -15,11 +15,42 @@ module.exports = {
       center: true,
       padding: "2rem",
       screens: {
+        sm: '480px',
+        md: '768px',
+        lg: '976px',
+        xl: '1440px',
         "2xl": "1400px",
       },
     },
     extend: {
       colors: {
+          "veraeasy-blue-1": {
+            light: '#8ab5d6',
+            "50": "#ecf3f8",
+            "100": "#d8e6f1",
+            "200": "#b1cde4",
+            "300": "#8ab5d6",
+            "400": "#639cc9",
+            "500": "#3c83bb",
+            "600": "#306996",
+            "700": "#244f70",
+            "800": "#18344b",
+            "900": "#0c1a25"
+          },
+          'veraeasy-blue': {
+            DEFAULT: '#3c83bb',
+            '50': '#f3f7fc',
+            '100': '#e6eff8',
+            '200': '#c8ddef',
+            '300': '#98c1e1',
+            '400': '#619fcf',
+            '500': '#3c83bb',
+            '600': '#2c699d',
+            '700': '#23517b',
+            '800': '#22486a',
+            '900': '#213e59',
+            '950': '#16273b',
+          },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -75,5 +106,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+      require("tailwindcss-animate"),
+      require('@tailwindcss/forms'),
+  ],
 };
