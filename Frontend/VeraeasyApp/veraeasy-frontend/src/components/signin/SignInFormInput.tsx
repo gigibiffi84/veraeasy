@@ -3,7 +3,7 @@ import {Input} from "@/components/ui/input.tsx";
 import {FormFieldProps} from "@/types/Types";
 import React from "react";
 
-export default function LoginFormInput({children, form, name, type, label}: FormFieldProps): React.JSX.Element {
+export default function SignInFormInput({children, form, name, type, label}: FormFieldProps): React.JSX.Element {
     return (
         <div className="mt-4">
             <FormField

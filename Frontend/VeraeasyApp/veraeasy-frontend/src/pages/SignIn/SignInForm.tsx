@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button"
 import {Form,} from "@/components/ui/form"
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import LoginFormInput from "@/components/signin/LoginFormInput.tsx";
+import SignInFormInput from "@/components/signin/SignInFormInput.tsx";
 import React from "react";
 import {Icons} from "@/components/icons.tsx";
 import {useSelector} from "react-redux";
@@ -22,7 +22,7 @@ const formSchema = z.object({
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-export default function LoginForm({onSubmit}) {
+export default function SignInForm({onSubmit}) {
 
     const isLoading$ = useSelector<RootState>((state) => state.rootReducer.signinState.loading)
 
@@ -46,18 +46,18 @@ export default function LoginForm({onSubmit}) {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleLogin)} className="space-y-8">
-                <LoginFormInput form={form} name="username" label="Username"
-                                disabled={isLoading}
-                                type="text">
+                <SignInFormInput form={form} name="username" label="Username"
+                                 disabled={isLoading}
+                                 type="text">
                     {<a href="#" className="text-xs text-gray-500 dark:text-gray-300 hover:underline">
                         Forget
                         Username?</a>}
-                </LoginFormInput>
-                <LoginFormInput form={form} name="password" label="Password" disabled={isLoading$ as boolean}
-                                type="password">
+                </SignInFormInput>
+                <SignInFormInput form={form} name="password" label="Password" disabled={isLoading$ as boolean}
+                                 type="password">
                     {<a href="#" className="text-xs text-gray-500 dark:text-gray-300 hover:underline">Forget
                         Password?</a>}
-                </LoginFormInput>
+                </SignInFormInput>
                 <div className="mt-6">
                     <Button
                         type="submit"

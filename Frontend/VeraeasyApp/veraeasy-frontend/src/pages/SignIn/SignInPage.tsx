@@ -3,11 +3,11 @@ import {useAuth} from "@/lib/hooks/useAuth";
 import {useEffect, useRef} from "react";
 import SignIngLogo from "@/components/signin/SignInLogo.tsx";
 import GSignComponent from "@/components/signin/GSignComponent.tsx";
-import LoginForm from "@/pages/SignIn/LoginForm.tsx";
+import SignInForm from "@/pages/SignIn/SignInForm.tsx";
 import {useOutletContext} from "react-router";
 
 
-export default function LoginPage() {
+export default function SignInPage() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
     const [scrollDown, setScrollDown] = useOutletContext();
@@ -55,7 +55,7 @@ export default function LoginPage() {
                         <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
                     </div>
 
-                    <LoginForm onSubmit={handeLogin}></LoginForm>
+                    <SignInForm onSubmit={handeLogin}></SignInForm>
 
                     <div className="flex items-center justify-between mt-4">
                         <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>

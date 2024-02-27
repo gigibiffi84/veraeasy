@@ -3,7 +3,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "@/pages/Root.tsx";
 import HomePage from "@/pages/HomePage.tsx";
 import ContactVerificationWorkflowPage from "@/pages/ContactVerificationWorkflowPage.tsx";
-import LoginPage from "@/pages/SignIn/LoginPage.tsx";
+import SignInPage from "@/pages/SignIn/SignInPage.tsx";
 import {ThemeProvider} from "@/components/theme-provider.tsx";
 import {AuthRoute} from "@/components/auth/AuthRoute.tsx";
 import {RootStore} from "@/features/Store.ts";
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/login',
-                element: <LoginPage/>
+                element: <SignInPage/>
             },
             {
                 path: 'verifications/:id',

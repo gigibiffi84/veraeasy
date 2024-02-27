@@ -1,4 +1,4 @@
-import LoginApi from "@/api/loginApi.ts";
+import LoginApi from "@/api/SignInApi";
 
 const SignInService = {
     login: LoginApi.userLogin
