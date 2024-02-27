@@ -1,21 +1,23 @@
-import {CredentialsType, UserLoginErrorTye, UserType} from "@/types/Types.ts";
+import {CredentialsType, UserLoginErrorType, UserSignInResponseSuccessType} from "@/types/Types.ts";
 import {ofType} from "redux-observable";
 import {catchError, map, mergeMap, of} from "rxjs";
 import SignInService from "@/features/signin/SignInService.tsx";
 import {ActionCreatorWithPayload, createAction, createReducer} from "@reduxjs/toolkit";
 
 export interface SignInState {
-    currentUser: UserType,
+    currentUser: string,
+    currentToken: string,
     loading: boolean,
     fetched: boolean,
     error: string
 }
 
 const initialState: SignInState = {
-    currentUser: {} as UserType,
+    currentUser: "",
     loading: false,
     fetched: false,
-    error: ""
+    error: "",
+    currentToken: ""
 };
 
 // action types
@@ -28,25 +30,26 @@ const types = {
 //actions
 
 export const requestLoginAction: ActionCreatorWithPayload<CredentialsType, string> = createAction<CredentialsType>(types.LOGIN_REQUEST);
-export const loginSuccessAction: ActionCreatorWithPayload<UserType, string> = createAction<UserType>(types.LOGIN_SUCCESS);
-export const loginFailuerAction: ActionCreatorWithPayload<UserLoginErrorTye, string> = createAction<UserLoginErrorTye>(types.LOGIN_ERROR);
+export const loginSuccessAction: ActionCreatorWithPayload<UserSignInResponseSuccessType, string> = createAction<UserSignInResponseSuccessType>(types.LOGIN_SUCCESS);
+export const loginFailuerAction: ActionCreatorWithPayload<UserLoginErrorType, string> = createAction<UserLoginErrorType>(types.LOGIN_ERROR);
 
 //reducers
-
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 export const signInReducers = createReducer<SignInState>(initialState, (builder) =>
     builder
         .addCase(requestLoginAction, (state, action) => {
             return {
                 ...state,
-                loading: true
+                loading: true,
+                currentUser: action.payload.username as string
             };
         })
         .addCase(loginSuccessAction, (state, action) => {
             return {
                 ...state,
                 fetched: true,
-                currentUser: action.payload,
+                currentUser: (action.payload as UserSignInResponseSuccessType).user.email as string,
+                currentToken: (action.payload as UserSignInResponseSuccessType).accessToken,
                 loading: false
             };
         })
@@ -54,7 +57,8 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
             return {
                 ...state,
                 fetched: false,
-                currentUser: {username: null},
+                currentUser: "",
+                currentToken: "",
                 loading: false,
                 error: action.payload.toString()
             }
@@ -62,12 +66,17 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
 );
 
 // Epic
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const userLoginEpic = (action$, store) => action$.pipe(
     ofType(types.LOGIN_REQUEST),
     mergeMap((action) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
         return SignInService.login(action.payload as CredentialsType).pipe(
-            map((response: any) => {
-                return loginSuccessAction({username: response.user});
+            map((response: UserSignInResponseSuccessType) => {
+                return loginSuccessAction(response);
             }),
             catchError(error => {
                 return of(loginFailuerAction({error: error.response}));

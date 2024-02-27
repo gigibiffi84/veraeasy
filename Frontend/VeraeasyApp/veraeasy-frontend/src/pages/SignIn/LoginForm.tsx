@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button"
 import {Form,} from "@/components/ui/form"
 import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
-import LoginFormInput from "@/components/LoginFormInput.tsx";
+import LoginFormInput from "@/components/signin/LoginFormInput.tsx";
 import React from "react";
 import {Icons} from "@/components/icons.tsx";
 import {useSelector} from "react-redux";

@@ -1,10 +1,11 @@
-import LoginForm from "@/pages/SignIn/LoginForm.tsx";
-import SignIngLogo from "@/components/SignInLogo.tsx";
-import GSignComponent from "@/components/GSignComponent.tsx";
-import {useOutletContext} from "react-router";
+import HeroComponent from "@/components/signin/HeroComponent";
+import {useAuth} from "@/lib/hooks/useAuth";
 import {useEffect, useRef} from "react";
-import HeroComponent from "@/components/HeroComponent.tsx";
-import {useAuth} from "@/lib/hooks/useAuth.tsx";
+import SignIngLogo from "@/components/signin/SignInLogo.tsx";
+import GSignComponent from "@/components/signin/GSignComponent.tsx";
+import LoginForm from "@/pages/SignIn/LoginForm.tsx";
+import {useOutletContext} from "react-router";
+
 
 export default function LoginPage() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

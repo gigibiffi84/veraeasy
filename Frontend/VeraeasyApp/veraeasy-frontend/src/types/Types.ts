@@ -19,7 +19,15 @@ export type UserType = {
     username: string | null | undefined;
 }
 
-export type UserLoginErrorTye = {
+export type UserSignInResponseSuccessType = {
+    "accessToken": string,
+    "user": {
+        "email": string,
+        "id": number
+    }
+}
+
+export type UserLoginErrorType = {
     error: string | null | undefined;
 }
 
