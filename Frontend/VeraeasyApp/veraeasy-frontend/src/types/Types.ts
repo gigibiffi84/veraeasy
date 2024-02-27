@@ -6,7 +6,7 @@ export type FormFieldProps = {
     name: string;
     form: UseFormReturn<{ username: string, password: string }>;
     children: React.JSX.Element;
-    disabled: boolean;
+    editable: boolean;
 };
 
 export type LoginContext = {

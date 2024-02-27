@@ -3,7 +3,14 @@ import {Input} from "@/components/ui/input.tsx";
 import {FormFieldProps} from "@/types/Types";
 import React from "react";
 
-export default function SignInFormInput({children, form, name, type, label}: FormFieldProps): React.JSX.Element {
+export default function SignInFormInput({
+                                            children,
+                                            form,
+                                            name,
+                                            type,
+                                            label,
+                                            editable
+                                        }: FormFieldProps): React.JSX.Element {
     return (
         <div className="mt-4">
             <FormField
@@ -19,7 +26,7 @@ export default function SignInFormInput({children, form, name, type, label}: For
                             </div>
                             <FormControl className="flex items-center justify-between mt-4">
                                 <Input className="form-input px-4 py-3 rounded-full" type={type || "text"}
-                                       placeholder={label} {...field} />
+                                       placeholder={label} {...field} disabled={!editable}/>
                             </FormControl>
                             <FormDescription>
                             </FormDescription>

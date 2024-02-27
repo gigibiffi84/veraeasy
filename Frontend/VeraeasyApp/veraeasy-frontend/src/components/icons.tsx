@@ -2,6 +2,7 @@ import {
     AlertTriangle,
     ArrowRight,
     Check,
+    ChevronDown,
     ChevronLeft,
     ChevronRight,
     Command,
@@ -9,9 +10,11 @@ import {
     File,
     FileText,
     HelpCircle,
+    type Icon as LucideIcon,
     Image,
     Laptop,
     Loader2,
+    LogIn,
     LucideProps,
     Moon,
     MoreVertical,
@@ -22,15 +25,14 @@ import {
     Trash,
     Twitter,
     User,
+    UserCheck,
     X,
-    ChevronDown,
-    LogIn,
-    type Icon as LucideIcon,
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+    loginSuccess: UserCheck,
     down: ChevronDown,
     login: LogIn,
     logo: Command,
@@ -54,7 +56,7 @@ export const Icons = {
     sun: SunMedium,
     moon: Moon,
     laptop: Laptop,
-    gitHub: ({ ...props }: LucideProps) => (
+    gitHub: ({...props}: LucideProps) => (
         <svg
             aria-hidden="true"
             focusable="false"
