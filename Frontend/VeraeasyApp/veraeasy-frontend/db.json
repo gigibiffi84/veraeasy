@@ -1,0 +1,44 @@
+{
+  "users": [
+    {
+      "email": "bifulcoluigi@mail.com",
+      "password": "$2a$10$9yJlFQ206vf0FRXkF9A6tu.vCHn9FOqcRqppLwEPET3AX5sX4A6Z2",
+      "id": 1
+    }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "a title",
+      "views": 100,
+      "userId": 1
+    },
+    {
+      "id": "2",
+      "title": "another title",
+      "views": 200,
+      "userId": 1
+    },
+    {
+      "title": "a title",
+      "views": 100,
+      "userId": 1,
+      "id": "thOtgKy"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "text": "a comment about post 1",
+      "postId": "1"
+    },
+    {
+      "id": "2",
+      "text": "another comment about post 1",
+      "postId": "1"
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

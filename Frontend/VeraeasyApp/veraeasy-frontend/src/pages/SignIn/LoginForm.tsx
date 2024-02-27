@@ -2,11 +2,13 @@ import {z} from "zod"
 
 import {Button} from "@/components/ui/button"
 import {Form,} from "@/components/ui/form"
-import {useForm} from "react-hook-form";
+import {useForm, UseFormReturn} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import LoginFormInput from "@/components/LoginFormInput.tsx";
 import React from "react";
 import {Icons} from "@/components/icons.tsx";
+import {useSelector} from "react-redux";
+import {RootState} from "@/features/Store.ts";
 
 
 const formSchema = z.object({
@@ -18,33 +20,40 @@ const formSchema = z.object({
         .max(20, {message: "Password is invalid"}),
 })
 
-export default function LoginForm() {
-    const form = useForm<z.infer<typeof formSchema>>({
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
+export default function LoginForm({onSubmit}) {
+
+    const isLoading$ = useSelector<RootState>((state) => state.rootReducer.signinState.loading)
+
+
+    const form: UseFormReturn<{ username: string, password: string }> = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: ""
+            username: "",
+            password: ""
         },
     });
 
     const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        console.log(values)
+    function handleLogin(values: z.infer<typeof formSchema>) {
+        setIsLoading(true);
+        console.log('user login', values);
+        onSubmit(values);
     }
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                <LoginFormInput error={undefined} form={form} name="username" label="Username" disabled={isLoading}
+            <form onSubmit={form.handleSubmit(handleLogin)} className="space-y-8">
+                <LoginFormInput form={form} name="username" label="Username"
+                                disabled={isLoading}
                                 type="text">
                     {<a href="#" className="text-xs text-gray-500 dark:text-gray-300 hover:underline">
                         Forget
                         Username?</a>}
                 </LoginFormInput>
-                <LoginFormInput error={undefined} form={form} name="password" label="Password" disabled={isLoading}
+                <LoginFormInput form={form} name="password" label="Password" disabled={isLoading$ as boolean}
                                 type="password">
                     {<a href="#" className="text-xs text-gray-500 dark:text-gray-300 hover:underline">Forget
                         Password?</a>}

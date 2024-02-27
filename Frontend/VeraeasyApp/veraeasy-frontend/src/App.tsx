@@ -1,6 +1,3 @@
-import {useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "@/pages/Root.tsx";
@@ -8,15 +5,18 @@ import HomePage from "@/pages/HomePage.tsx";
 import ContactVerificationWorkflowPage from "@/pages/ContactVerificationWorkflowPage.tsx";
 import LoginPage from "@/pages/SignIn/LoginPage.tsx";
 import {ThemeProvider} from "@/components/theme-provider.tsx";
+import {AuthRoute} from "@/components/auth/AuthRoute.tsx";
+import {RootStore} from "@/features/Store.ts";
+import {Provider} from "react-redux";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root className="p-0"></Root>,
+        element: <Root className={"p-0"}></Root>,
         children: [
             {
                 index: true,
-                element: <HomePage></HomePage>
+                element: <AuthRoute><HomePage></HomePage></AuthRoute>
             },
             {
                 path: '/login',
@@ -36,7 +36,9 @@ function App() {
     return (
         <>
             <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
-                <RouterProvider router={router}/>
+                <Provider store={RootStore}>
+                    <RouterProvider router={router}/>
+                </Provider>
             </ThemeProvider>
         </>
     )

@@ -4,8 +4,10 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md)
+  uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast
+  Refresh
 
 ## Expanding the ESLint configuration
 
@@ -25,21 +27,26 @@ export default {
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
+- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked`
+  or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and
+  add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
 ### Parallax effect
+
 https://daily-dev-tips.com/posts/tailwind-css-parallax-effect/
 
 ### Scroll into view with ref list
+
 https://blog.saeloun.com/2023/06/08/scrolling-to-the-element-with-fixed-header-using-scrollIntoView/
 
-### Reminder on useCallback and useRefs 
-Use callback is used to cache function definition during the curren re-render, if no new render is needed bind to thos deps no new function si redefined
+### Reminder on useCallback and useRefs
+
+Use callback is used to cache function definition during the curren re-render, if no new render is needed bind to thos
+deps no new function si redefined
 so it is useful to recreate function definition when one of the parameters function values changes
-it's a best practice to bind the usecallback deps with instance compoennt parameters to be sure that 
+it's a best practice to bind the usecallback deps with instance compoennt parameters to be sure that
 function input is bound to component data.
 
 https://react.dev/reference/react/useCallback
@@ -48,5 +55,32 @@ Use ref is used when you want to update date and do NOT want to trigger re-rende
 https://react.dev/reference/react/useRef
 
 ### Icons and images
+
 icons are from lucide icons
 images are taken form https://lovepik.com/images/png-login.html
+
+### React-rxjs for bind state to stream
+
+https://react-rxjs.org/docs/getting-started
+https://www.npmjs.com/package/react-error-boundary
+https://javascript.plainenglish.io/getting-best-of-rxjs-redux-react-f4c369ab181a
+
+https://javascript.plainenglish.io/getting-best-of-rxjs-redux-react-f4c369ab181a
+
+https://redux-observable.js.org/docs/basics/Epics.html
+
+### Seed data
+
+To seed data was introduced json-serverdb
+To manage logged users https://www.npmjs.com/package/json-server-auth
+
+Protected routes are:
+
+    - /664/*	User must be logged to write the resource. Everyone can read the resource.
+    - /660/*	User must be logged to write or read the resource.
+    - /644/*	User must own the resource to write the resource. Everyone can read the resource.
+    - /640/*	User must own the resource to write the resource. User must be logged to read the resource.
+    - /600/*	User must own the resource to write or read the resource.
+    - /444/*	No one can write the resource. Everyone can read the resource.
+    - /440/*	No one can write the resource. User must be logged to read the resource.
+    - /400/*	No one can write the resource. User must own the resource to read the resource.
