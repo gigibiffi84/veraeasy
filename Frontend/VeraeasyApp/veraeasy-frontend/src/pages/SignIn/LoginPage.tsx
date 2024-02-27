@@ -1,11 +1,9 @@
 import LoginForm from "@/pages/SignIn/LoginForm.tsx";
 import SignIngLogo from "@/components/SignInLogo.tsx";
 import GSignComponent from "@/components/GSignComponent.tsx";
-import LoginFormInput from "@/components/LoginFormInput.tsx";
-import {Button} from "@/components/ui/button.tsx";
 import {useOutletContext} from "react-router";
-import {LegacyRef, useEffect, useRef} from "react";
-import {useRefElement} from "rooks";
+import {useEffect, useRef} from "react";
+import HeroComponent from "@/components/HeroComponent.tsx";
 
 export default function LoginPage() {
     const [scrollDown, setScrollDown] = useOutletContext();
@@ -19,6 +17,8 @@ export default function LoginPage() {
     }, [scrollDown])
     return(
         <>
+            <HeroComponent onScrollDown={()=>setScrollDown(true)}></HeroComponent>
+
             <div
                 id="scrollInto-1"
                 ref={divRef}
