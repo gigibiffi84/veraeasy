@@ -54,10 +54,19 @@ https://react.dev/reference/react/useCallback
 Use ref is used when you want to update date and do NOT want to trigger re-render.
 https://react.dev/reference/react/useRef
 
+### Rooks (utilis hooks)
+
+https://rooks.vercel.app/docs/useLocalstorageState
+https://usehooks.com/uselocalstorage
+
 ### Icons and images
 
 icons are from lucide icons
 images are taken form https://lovepik.com/images/png-login.html
+
+### React router
+
+https://blog.logrocket.com/authentication-react-router-v6/
 
 ### React-rxjs for bind state to stream
 
@@ -68,6 +77,35 @@ https://javascript.plainenglish.io/getting-best-of-rxjs-redux-react-f4c369ab181a
 https://javascript.plainenglish.io/getting-best-of-rxjs-redux-react-f4c369ab181a
 
 https://redux-observable.js.org/docs/basics/Epics.html
+
+### React redux store and performances notes about memoized component
+
+https://react-redux.js.org/api/hooks#performance
+
+As mentioned earlier, by default useSelector() will do a reference equality comparison of the selected value when
+running the selector function after an action is dispatched, and will only cause the component to re-render if the
+selected value changed. However, unlike connect(), useSelector() does not prevent the component from re-rendering due to
+its parent re-rendering, even if the component's props did not change.
+
+If further performance optimizations are necessary, you may consider wrapping your function component in React.memo():
+
+```
+const CounterComponent = ({ name }) => {
+  const counter = useSelector((state) => state.counter)
+  return (
+    <div>
+      {name}: {counter}
+    </div>
+  )
+}
+
+export const MemoizedCounterComponent = React.memo(CounterComponent)
+
+```
+
+### Logo generator
+
+https://logomark.ai/
 
 ### Seed data
 
