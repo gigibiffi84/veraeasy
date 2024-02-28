@@ -15,7 +15,7 @@ const AuthContext = createContext<LoginContext>();
 export const AuthProvider = ({children}) => {
 
     const [user, setUser] = useLocalstorageState<string | null | undefined>("veraeasy:user", "");
-    const [token, setToken] = useLocalstorageState<string | null | undefined>("veraeasy:user", "");
+    const [token, setToken] = useLocalstorageState<string | null | undefined>("veraeasy:token", "");
 
     const navigate = useNavigate();
 
@@ -26,11 +26,6 @@ export const AuthProvider = ({children}) => {
 
 
     const login = useCallback(async (data: CredentialsType) => {
-        /*const res = await LoginApi.userLogin(data);
-        if (res.accessToken) {
-            setUser(data.username);
-            navigate("/home");
-        }*/
         loginAction(data);
     }, [navigate, setUser]);
 

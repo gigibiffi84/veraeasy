@@ -20,18 +20,20 @@ import {
     MoreVertical,
     Pizza,
     Plus,
+    Search,
     Settings,
     SunMedium,
     Trash,
     Twitter,
     User,
     UserCheck,
-    X,
+    X
 } from "lucide-react"
 
 export type Icon = LucideIcon
 
 export const Icons = {
+    search: Search,
     loginSuccess: UserCheck,
     down: ChevronDown,
     login: LogIn,

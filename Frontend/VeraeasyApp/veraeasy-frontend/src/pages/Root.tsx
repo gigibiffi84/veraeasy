@@ -7,7 +7,7 @@ export default function Root() {
     const [scrollDown, setScrollDown] = useState(false);
 
     return <div className="p-0">
-        <div className="mt-5 overflow-hidden">
+        <div className="bg-gray-100 mt-1 overflow-hidden">
             <AuthProvider>
                 <Outlet context={[scrollDown, setScrollDown]}/>
             </AuthProvider>
