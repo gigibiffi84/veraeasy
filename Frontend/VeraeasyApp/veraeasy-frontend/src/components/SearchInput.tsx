@@ -1,32 +1,34 @@
 import {Input} from "@/components/ui/input.tsx";
 import {Label} from "@/components/ui/label.tsx";
 import {Icons} from "@/components/icons.tsx";
-import {ChangeEvent, useEffect, useState} from "react";
-import {useDebounce} from "rooks";
+import {pluckCurrentTargetValue, useObservableCallback, useSubscription} from "observable-hooks";
+import {SearchInputProps} from "@/types/Types.ts";
+import {ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
 
-export default function SearchInput() {
+export type OnSearchFunction = (search: string) => void;
 
-    const [searchKeys, setSearchKeys] = useState('');
-    const setValueDebounced = useDebounce(setSearchKeys, 500);
+export type OnSearchCompleteFunction = (searchResult:
+                                            ContactVerificationType[] |
+                                            { error: string; } |
+                                            { state: string; }) => void;
 
-    const handleSearchInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-        console.log(event.target.value);
-        setValueDebounced(event.target.value);
-    }
+export default function SearchInput({inputText, onSearch}: SearchInputProps) {
 
-    useEffect(() => {
+    const [onChange, textChange$] = useObservableCallback<
+        string,
+        React.FormEvent<HTMLInputElement>
+    >(pluckCurrentTargetValue);
 
-    }, []);
+    useSubscription(textChange$, onSearch);
 
     return (
         <div className="flex flex-col w-full max-w-lg items-center ">
             <div className="flex w-full max-w-lg items-center gap-1.5">
                 <Label htmlFor="email"> <Icons.search></Icons.search></Label>
-                <Input onChange={handleSearchInputChange} type="text"
+                <Input value={inputText} onChange={onChange} type="text"
                        placeholder="Try search by email or mobile number..."/>
 
             </div>
-            <div><p className="font-mono">Trying to search for: {searchKeys}</p></div>
         </div>
     )
 }

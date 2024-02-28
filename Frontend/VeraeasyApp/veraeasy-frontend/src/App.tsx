@@ -1,7 +1,7 @@
 import './App.css'
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Root from "@/pages/Root.tsx";
-import HomePage from "@/pages/HomePage.tsx";
+import HomePage from "@/pages/Home/HomePage.tsx";
 import ContactVerificationWorkflowPage from "@/pages/ContactVerificationWorkflowPage.tsx";
 import SignInPage from "@/pages/SignIn/SignInPage.tsx";
 import {ThemeProvider} from "@/components/theme-provider.tsx";

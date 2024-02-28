@@ -1,8 +1,8 @@
-import {CredentialsType, UserSignInResponseSuccessType} from "@/types/Types.ts";
 // import axios from 'axios';
 import {ajax} from 'rxjs/ajax'
 import {map} from 'rxjs/operators'
 import {Observable} from 'rxjs'
+import {CredentialsType, UserSignInResponseSuccessType} from "@/api/SigninTypes.ts";
 
 const userLogin = (credentials: CredentialsType): Observable<UserSignInResponseSuccessType> => {
 

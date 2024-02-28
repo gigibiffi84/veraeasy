@@ -1,4 +1,20 @@
 import {UseFormReturn} from "react-hook-form";
+import {OnSearchCompleteFunction, OnSearchFunction} from "@/components/SearchInput.tsx";
+import {CredentialsType} from "@/api/SigninTypes.ts";
+import {ContacListFetcherFunction} from "@/api/ContactVerificationApi.ts";
+
+export interface SearchInputProps {
+    inputText: string;
+    onSearch: OnSearchFunction;
+}
+
+export interface SearchContactInputProps {
+    inputText: string;
+    onSearch: OnSearchFunction;
+    onSearchResultComplete: OnSearchCompleteFunction;
+    fetcherFunction: ContacListFetcherFunction;
+
+}
 
 export type FormFieldProps = {
     type: string;
@@ -15,23 +31,3 @@ export type LoginContext = {
     logout: () => void
 }
 
-export type UserType = {
-    username: string | null | undefined;
-}
-
-export type UserSignInResponseSuccessType = {
-    "accessToken": string,
-    "user": {
-        "email": string,
-        "id": number
-    }
-}
-
-export type UserLoginErrorType = {
-    error: string | null | undefined;
-}
-
-export type CredentialsType = {
-    username: string | null | undefined;
-    password: string;
-}

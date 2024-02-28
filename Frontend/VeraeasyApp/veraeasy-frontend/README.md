@@ -70,7 +70,10 @@ https://blog.logrocket.com/authentication-react-router-v6/
 
 ### React-rxjs for bind state to stream
 
-https://react-rxjs.org/docs/getting-started
+https://react-rxjs.org/docs/getting-started WARNING DEPRECATED
+WE CHOOSED TO USE OBSERVABLE HOOKS INSTEAD
+https://observable-hooks.js.org/examples/#conditional-rendering-vanilla-javascript
+
 https://www.npmjs.com/package/react-error-boundary
 https://javascript.plainenglish.io/getting-best-of-rxjs-redux-react-f4c369ab181a
 
