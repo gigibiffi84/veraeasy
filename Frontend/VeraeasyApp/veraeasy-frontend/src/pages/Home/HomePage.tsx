@@ -9,6 +9,7 @@ import StatefulSearchInput from '@/components/typeahead/StatefulSearchInput';
 import LoadingSpinner from "@/components/ui/spinner.tsx";
 import SummaryCardList from "@/components/summarycard/SummaryCardList.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
+import CreateContactComponent from "@/components/create/CreateContactComponent.tsx";
 
 export const LoginButton = () => {
     return (<button
@@ -126,9 +127,9 @@ export default function HomePage() {
                             <button id="toggle" className='lg:hidden ml-7'>
                                 <svg className="w-7 h-7" fill="#333" viewBox="0 0 20 20"
                                      xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
+                                    <path fillRule="evenodd"
                                           d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
-                                          clip-rule="evenodd"></path>
+                                          clipRule="evenodd"></path>
                                 </svg>
                             </button>
                         </div>
@@ -146,6 +147,9 @@ export default function HomePage() {
             </div>
             <div className="md:container md:mx-auto md:mt-5 flex justify-center border-0 ">
                 <div>Search result count is: {loading ? "..." : contacts.length}</div>
+            </div>
+            <div>
+                <CreateContactComponent></CreateContactComponent>
             </div>
             <div className="md:container md:mx-auto md:mt-1 flex justify-center border-0 ">
                 {isDefault ? <SkeletonCardList></SkeletonCardList> : <div></div>}

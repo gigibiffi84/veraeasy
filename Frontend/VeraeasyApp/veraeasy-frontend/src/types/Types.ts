@@ -27,6 +27,14 @@ export type FormFieldProps = {
     editable: boolean;
 };
 
+export type ContactFormFieldProps = {
+    type: string;
+    label: string;
+    name: string;
+    form: UseFormReturn<{ dossierId: string, personId: string, email: string, mobileNumber: string }>;
+    editable: boolean;
+};
+
 export type LoginContext = {
     user: string | null | undefined;
     login: (data: CredentialsType) => Promise<void>,
