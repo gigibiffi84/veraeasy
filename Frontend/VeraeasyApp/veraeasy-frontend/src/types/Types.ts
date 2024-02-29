@@ -6,6 +6,7 @@ import {ContacListFetcherFunction} from "@/api/ContactVerificationApi.ts";
 export interface SearchInputProps {
     inputText: string;
     onSearch: OnSearchFunction;
+    enableFocus: boolean;
 }
 
 export interface SearchContactInputProps {

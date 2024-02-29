@@ -1,15 +1,15 @@
-import {CredentialsType, UserLoginErrorType, UserSignInResponseSuccessType} from "@/types/Types.ts";
 import {ofType} from "redux-observable";
 import {catchError, map, mergeMap, of} from "rxjs";
 import SignInService from "@/features/signin/SignInService.tsx";
 import {ActionCreatorWithPayload, createAction, createReducer} from "@reduxjs/toolkit";
+import {CredentialsType, UserLoginErrorType, UserSignInResponseSuccessType} from "@/api/SigninTypes";
 
 export interface SignInState {
     currentUser: string,
     currentToken: string,
     loading: boolean,
     fetched: boolean,
-    error: string
+    error: string | null | undefined
 }
 
 const initialState: SignInState = {
@@ -41,7 +41,9 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
             return {
                 ...state,
                 loading: true,
-                currentUser: action.payload.username as string
+                currentUser: action.payload.username as string,
+                error: null,
+                fetched: false
             };
         })
         .addCase(loginSuccessAction, (state, action) => {
@@ -50,7 +52,8 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
                 fetched: true,
                 currentUser: (action.payload as UserSignInResponseSuccessType).user.email as string,
                 currentToken: (action.payload as UserSignInResponseSuccessType).accessToken,
-                loading: false
+                loading: false,
+                error: null
             };
         })
         .addCase(loginFailuerAction, (state, action) => {
@@ -60,7 +63,7 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
                 currentUser: "",
                 currentToken: "",
                 loading: false,
-                error: action.payload.toString()
+                error: action.payload.error as string
             }
         })
 );
@@ -79,7 +82,7 @@ export const userLoginEpic = (action$, store) => action$.pipe(
                 return loginSuccessAction(response);
             }),
             catchError(error => {
-                return of(loginFailuerAction({error: error.response}));
+                return of(loginFailuerAction({error: error}));
             }),
         );
     }),

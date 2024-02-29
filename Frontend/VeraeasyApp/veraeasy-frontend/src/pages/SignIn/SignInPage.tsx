@@ -5,6 +5,7 @@ import SignIngLogo from "@/components/signin/SignInLogo.tsx";
 import GSignComponent from "@/components/signin/GSignComponent.tsx";
 import SignInForm from "@/pages/SignIn/SignInForm.tsx";
 import {useOutletContext} from "react-router";
+import {useAppToast} from "@/lib/hooks/useToasts.tsx";
 
 
 export default function SignInPage() {
@@ -12,6 +13,7 @@ export default function SignInPage() {
     // @ts-expect-error
     const [scrollDown, setScrollDown] = useOutletContext();
     const {login} = useAuth();
+    useAppToast();
 
     const divRef = useRef(null);
 

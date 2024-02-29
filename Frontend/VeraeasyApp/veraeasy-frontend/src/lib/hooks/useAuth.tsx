@@ -1,14 +1,14 @@
 import {createContext, useCallback, useContext, useEffect, useMemo} from "react";
 import {useNavigate} from "react-router";
 import {useLocalstorageState} from "rooks";
-import {CredentialsType, LoginContext} from "@/types/Types.ts";
 import useLoginAction from "@/lib/hooks/useLoginAction.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/features/Store.ts";
 import {SignInState} from "@/features/signin/UserSignInState.tsx";
+import {CredentialsType} from "@/api/SigninTypes.ts";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-const AuthContext = createContext<LoginContext>();
+const AuthContext = createContext();
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error

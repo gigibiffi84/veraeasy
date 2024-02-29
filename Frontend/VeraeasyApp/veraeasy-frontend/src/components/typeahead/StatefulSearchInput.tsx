@@ -40,7 +40,7 @@ export default function StatefulSearchInput({
 
     return (
         <div className="flex flex-col w-full max-w-lg items-center ">
-            <SearchInput inputText={inputText} onSearch={onSearch}></SearchInput>
+            <SearchInput enableFocus={true} inputText={inputText} onSearch={onSearch}></SearchInput>
         </div>
     )
 }

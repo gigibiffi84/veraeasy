@@ -12,7 +12,7 @@ export type OnSearchCompleteFunction = (searchResult:
                                             { error: string; } |
                                             { state: string; }) => void;
 
-export default function SearchInput({inputText, onSearch}: SearchInputProps) {
+export default function SearchInput({inputText, enableFocus, onSearch}: SearchInputProps) {
 
     const [onChange, textChange$] = useObservableCallback<
         string,
@@ -25,7 +25,7 @@ export default function SearchInput({inputText, onSearch}: SearchInputProps) {
         <div className="flex flex-col w-full max-w-lg items-center ">
             <div className="flex w-full max-w-lg items-center gap-1.5">
                 <Label htmlFor="email"> <Icons.search></Icons.search></Label>
-                <Input value={inputText} onChange={onChange} type="text"
+                <Input autoFocus={enableFocus} value={inputText} onChange={onChange} type="text"
                        placeholder="Try search by email or mobile number..."/>
 
             </div>
