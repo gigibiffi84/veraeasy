@@ -24,11 +24,11 @@ export default function StatefulSearchInput({
                             switchMap(() => fetchFunc(text)),
                             map(contacts => contacts),
                             catchError((err) => of({error: err})),
-                            startWith({state: "loading..."}),
+                            startWith({state: "loading"}),
                         )
                         : // cancel handling response, reset default state
                         timer(500).pipe(
-                            switchMap(() => cancelFunction(text))
+                            switchMap(() => of({state: "default"}))
                         )
                 )),
         [inputText, fetcherFunction]);
@@ -41,8 +41,6 @@ export default function StatefulSearchInput({
     return (
         <div className="flex flex-col w-full max-w-lg items-center ">
             <SearchInput inputText={inputText} onSearch={onSearch}></SearchInput>
-            <div>Search result count is:</div>
-
         </div>
     )
 }

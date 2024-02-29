@@ -40,9 +40,9 @@ the example showed in the tanstack query react router is very meaningful for our
 
 ### First iteration wave 2
 
-- [ ] create an homepage layout responsive with skeleton and tailwindcss
-- [ ] create a searchbar component that emits event when user finish write
-- [ ] i/o pipes and search results: create state manager for searchbar that bind the state of the search bar with a pipe
+- [x] create an homepage layout responsive with skeleton and tailwindcss
+- [x] create a searchbar component that emits event when user finish write
+- [x] i/o pipes and search results: create state manager for searchbar that bind the state of the search bar with a pipe
   to query the server
 - [ ] create a detail card component that take in input the id and take care to download it's detail info
 - [ ] incrementally fetch details in parallel ....

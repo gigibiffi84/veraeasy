@@ -6,5 +6,10 @@ export type SummaryCardPropsType = {
 export type SummaryCardType = {
     businessId?: string, //title
     description?: string, //desc
-    statusList?: string[] //string array of statuses
+    statusList?: SummaryStatusItem[] //string array of statuses
+}
+
+export type SummaryStatusItem = {
+    statusCode?: "CREATED" | "PENDING" | "COMPLETED" | undefined;
+    statusDescription?: string
 }

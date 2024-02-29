@@ -27,6 +27,14 @@
         "IT_SSN",
         "EN_SSN"
       ]
+    },
+    "currentStatus": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "PENDING",
+        "COMPLETED"
+      ]
     }
   },
   "required": [
