@@ -1,22 +1,38 @@
 import './HomePage.scss';
-import {SkeletonCard} from "@/components/SkeletonCard.tsx";
-import React from "react";
+import React, {useEffect} from "react";
 import StatefulSearchInput from "@/components/typeahead/StatefulSearchInput.tsx";
 import ContactVerificationApi from "@/api/ContactVerificationApi.ts";
 import {ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
+import {SummaryCardPropsType, SummaryCardType} from "@/components/Types.ts";
+import SummaryCardList from "@/components/summarycard/SummaryCardList.tsx";
 
 export default function HomePage() {
 
     const [text, updateText] = React.useState("");
+    const [contacts, setContacts] = React.useState([] as SummaryCardPropsType[]);
+
+
+    useEffect(() => {
+
+        setContacts([]);
+    }, []);
 
     const handleSearchComplete = (result: ContactVerificationType[] | { error: string; } | { state: string; }) => {
-        console.log("result", result);
         const contacts = result as ContactVerificationType[];
         if (contacts.length) {
-            console.log("Search completed", contacts.length);
+            const summaryCards = contacts.map(c => {
+                return c.id ? {
+                        summary: {
+                            businessId: c.businessKey,
+                            description: c.personId,
+                            statusList: ["Verification not started"]
+                        } as SummaryCardType,
+                        className: ""
+                    } as SummaryCardPropsType
+                    : {} as SummaryCardPropsType;
+            })
+            setContacts(summaryCards);
         }
-
-        //useSubscription(ref$, console.log)
     }
 
     return (
@@ -28,6 +44,7 @@ export default function HomePage() {
             </div>
             <div className="md:container md:mx-auto md:mt-5 flex justify-center border-2 border-sky-500">
                 <StatefulSearchInput fetcherFunction={ContactVerificationApi.contactList$}
+                                     cancelFunction={ContactVerificationApi.emptyContactList$}
                                      inputText={text}
                                      onSearch={updateText}
                                      onSearchResultComplete={handleSearchComplete}
@@ -37,27 +54,7 @@ export default function HomePage() {
                 <div>CardList</div>
             </div>
             <div className="md:container md:mx-auto md:mt-1 flex justify-center border-2 border-sky-500">
-                <h3></h3>
-                <div className="grid gap-4 grid-cols-3 auto-rows-auto">
-                    <div className="card">
-                        <SkeletonCard></SkeletonCard>
-                    </div>
-                    <div className="card">
-                        <SkeletonCard></SkeletonCard>
-                    </div>
-                    <div className="card">
-                        <SkeletonCard></SkeletonCard>
-                    </div>
-                    <div className="card">
-                        <SkeletonCard></SkeletonCard>
-                    </div>
-                    <div className="card">
-                        <SkeletonCard></SkeletonCard>
-                    </div>
-                    <div className="card">
-                        <SkeletonCard></SkeletonCard>
-                    </div>
-                </div>
+                <SummaryCardList cards={contacts}></SummaryCardList>
             </div>
         </div>
     )

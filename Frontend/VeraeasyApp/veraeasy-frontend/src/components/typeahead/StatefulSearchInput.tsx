@@ -8,6 +8,7 @@ export default function StatefulSearchInput({
                                                 inputText,
                                                 onSearch,
                                                 fetcherFunction,
+                                                cancelFunction,
                                                 onSearchResultComplete
                                             }: SearchContactInputProps) {
 
@@ -26,7 +27,9 @@ export default function StatefulSearchInput({
                             startWith({state: "loading..."}),
                         )
                         : // cancel handling response, reset default state
-                        of({state: "cancelled"})
+                        timer(500).pipe(
+                            switchMap(() => cancelFunction(text))
+                        )
                 )),
         [inputText, fetcherFunction]);
 

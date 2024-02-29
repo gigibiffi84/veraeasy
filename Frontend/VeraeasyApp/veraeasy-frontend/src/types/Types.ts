@@ -12,6 +12,7 @@ export interface SearchContactInputProps {
     inputText: string;
     onSearch: OnSearchFunction;
     onSearchResultComplete: OnSearchCompleteFunction;
+    cancelFunction: ContacListFetcherFunction;
     fetcherFunction: ContacListFetcherFunction;
 
 }

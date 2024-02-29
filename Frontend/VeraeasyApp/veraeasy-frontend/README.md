@@ -81,6 +81,10 @@ https://javascript.plainenglish.io/getting-best-of-rxjs-redux-react-f4c369ab181a
 
 https://redux-observable.js.org/docs/basics/Epics.html
 
+### Stateful search component
+
+https://codesandbox.io/p/devbox/github/crimx/observable-hooks/tree/main/examples/typeahead?file=%2Fsrc%2Findex.tsx%3A18%2C29-18%2C33
+
 ### React redux store and performances notes about memoized component
 
 https://react-redux.js.org/api/hooks#performance

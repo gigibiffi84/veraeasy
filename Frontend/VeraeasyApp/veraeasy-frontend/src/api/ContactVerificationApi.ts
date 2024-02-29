@@ -4,6 +4,7 @@ import {ajax} from "rxjs/ajax";
 
 export type ContacListFetcherFunction = (text: string) => Observable<ContactVerificationType[]>;
 
+
 const contactList$ = (): Observable<ContactVerificationType[]> => {
 
     const url = import.meta.env.VITE_CONTACTS_LIST_URL;
@@ -17,7 +18,20 @@ const contactList$ = (): Observable<ContactVerificationType[]> => {
         )
 }
 
+const emptyContactList$ = (): Observable<ContactVerificationType[]> => {
+    const result = of([1, 2, 3, 4, 5]).pipe(
+        map(slots =>
+            slots.map((a) => {
+                    return {} as ContactVerificationType
+                }
+            )
+        )
+    );
+    return result;
+}
+
 const api = {
-    contactList$
+    contactList$,
+    emptyContactList$
 }
 export default api;
