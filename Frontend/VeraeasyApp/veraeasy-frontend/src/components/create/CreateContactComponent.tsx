@@ -43,8 +43,9 @@ export default function CreateContactComponent() {
                 </SheetHeader>
                 <CreateContactForm>
                     <SheetFooter>
+                        <Button type="submit">Create contact</Button>
                         <SheetClose asChild>
-                            <Button type="submit">Create contact</Button>
+                            <Button variant="secondary">Cancel</Button>
                         </SheetClose>
                     </SheetFooter>
                 </CreateContactForm>
