@@ -10,11 +10,29 @@ import {
 } from "@/components/ui/sheet"
 import {Button} from "../ui/button";
 import CreateContactForm from "@/components/create/CreateContactForm.tsx";
+import {Toggle} from "../ui/toggle";
+import {Icons} from "../icons";
+import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 
 export default function CreateContactComponent() {
     return (<Sheet>
-            <SheetTrigger asChild>
-                <Button variant="outline">Create</Button>
+            <SheetTrigger>
+                <TooltipProvider>
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <Toggle className="ml-2 rounded-full h-10 px-2 border-blue-400"
+                                    variant="outline"
+                                    aria-label="Toggle new contact">
+                                <Icons.add className="h-4"/>
+                            </Toggle>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>Add new contact</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+
+
             </SheetTrigger>
             <SheetContent onInteractOutside={event => event.preventDefault()}>
                 <SheetHeader>

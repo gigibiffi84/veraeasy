@@ -110,6 +110,14 @@ export const MemoizedCounterComponent = React.memo(CounterComponent)
 
 ```
 
+### Autocomplete
+
+https://www.armand-salle.fr/post/autocomplete-select-shadcn-ui
+
+### Reactour
+
+https://docs.react.tours/quickstart
+
 ### Logo generator
 
 https://logomark.ai/

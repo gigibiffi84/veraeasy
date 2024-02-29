@@ -123,6 +123,9 @@ export default function HomePage() {
                             <button className='mr-6 font-semibold text-[15px] border-none outline-none'><a
                                 href='javascript:void(0)'
                                 className='text-[#007bff] hover:underline'>Sign out</a></button>
+                            <button className='mr-6 font-semibold text-[15px] border-none outline-none'><a
+                                href='javascript:void(0)'
+                                className='text-[#007bff] hover:underline'>Need Help?</a></button>
 
                             <button id="toggle" className='lg:hidden ml-7'>
                                 <svg className="w-7 h-7" fill="#333" viewBox="0 0 20 20"
@@ -138,19 +141,21 @@ export default function HomePage() {
                 </header>
             </div>
             <div className="md:container md:mx-auto md:mt-5 flex justify-center border-0 ">
+
                 <StatefulSearchInput fetcherFunction={ContactVerificationApi.contactList$}
                                      cancelFunction={ContactVerificationApi.emptyContactList$}
                                      inputText={text}
                                      onSearch={updateText}
                                      onSearchResultComplete={handleSearchComplete}
                 ></StatefulSearchInput>
+                <div>
+                    <CreateContactComponent></CreateContactComponent>
+                </div>
             </div>
             <div className="md:container md:mx-auto md:mt-5 flex justify-center border-0 ">
                 <div>Search result count is: {loading ? "..." : contacts.length}</div>
             </div>
-            <div>
-                <CreateContactComponent></CreateContactComponent>
-            </div>
+
             <div className="md:container md:mx-auto md:mt-1 flex justify-center border-0 ">
                 {isDefault ? <SkeletonCardList></SkeletonCardList> : <div></div>}
                 {!loading ? <SummaryCardList cards={contacts}></SummaryCardList> :
