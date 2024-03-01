@@ -1,33 +1,33 @@
-
+using Microsoft.OpenApi.Models;
 using Veraeasy.Auth;
 using Veraeasy.Common.Clock;
 using Veraeasy.Common.Events.EventBus;
 using Veraeasy.Common.Validation.Requests;
 using Veraeasy.ContactVerification;
-using Veraeasy.EmailVerification;
 using Veraeasy.ContactVerification.Application;
-
+using Veraeasy.EmailVerification;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Host.ConfigureKeycloakConfigurationSource();
 
 builder.Services.AddAuthModule(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
-            {
-                c.OperationFilter<AuthorizationHeaderOperationFilter>();
-                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo {Title = "ContactVerification API v1", Version = "v1"} );
-                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
-                {
-                    Scheme = "Bearer",
-                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
-                    BearerFormat = "JWT",
-                    In = Microsoft.OpenApi.Models.ParameterLocation.Header
-                });
-            }
+    {
+        c.OperationFilter<AuthorizationHeaderOperationFilter>();
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactVerification API v1", Version = "v1" });
+        c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+        {
+            Scheme = "Bearer",
+            Type = SecuritySchemeType.Http,
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header
+        });
+    }
 );
 builder.Services.AddEventBus();
 builder.Services.AddRequestsValidations();
@@ -45,13 +45,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseContactVerification();
 app.UseEmailVerificationModule();
 app.UseHttpsRedirection();
 //app.UseCors();
 
 //app.MapControllers();
-app.UseRouting().UseAuthentication().UseAuthorization().UseEndpoints( e=> e.MapControllers());
+app.UseRouting().UseAuthentication().UseAuthorization().UseEndpoints(e => e.MapControllers());
 app.MapContactVerificatinEndpoints();
 
 app.Run();
