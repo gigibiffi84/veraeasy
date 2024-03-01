@@ -1,11 +1,19 @@
 export type ContactVerificationType = {
-    "id"?: string,
+    "id"?: string | null,
     "email"?: string,
     "mobileNumber"?: string,
     "businessKey"?: string,
     "personId"?: string,
     "personIdStrategy"?: "EN_SSN" | "IT_SSN"
     "currentStatus"?: typeof ContactVerificationStatusTypeRef.value
+}
+
+export type CreateContactVerificationType = {
+    "id"?: string,
+    "email"?: string,
+    "mobileNumber"?: string,
+    "businessKey"?: string,
+    "personId"?: string
 }
 
 export type  ContactVerificationStatusType = {

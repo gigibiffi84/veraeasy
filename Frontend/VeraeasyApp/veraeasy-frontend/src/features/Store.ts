@@ -1,15 +1,18 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
 import {combineEpics, createEpicMiddleware} from 'redux-observable';
 import {signInReducers, userLoginEpic} from "@/features/signin/UserSignInState";
+import {createContactEpic, createContactReducer} from "@/features/createcontact/CreateContactState.tsx";
 
 const epicMiddleware = createEpicMiddleware();
 
 const rootEpic = combineEpics(
-    userLoginEpic
+    userLoginEpic,
+    createContactEpic
 )
 
 const rootReducer = combineReducers({
-    signinState: signInReducers
+    signinState: signInReducers,
+    createContact: createContactReducer
 })
 export const RootStore = configureStore({
     reducer: {

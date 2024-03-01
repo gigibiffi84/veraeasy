@@ -8,6 +8,8 @@ const AppToastContext = createContext(null);
 
 export const AppToastProvider = ({children}) => {
 
+    const createErrorReceived = useSelector<RootState>((state) => state.rootReducer.createContact.error) as string;
+    const created = useSelector<RootState>((state) => state.rootReducer.createContact.fetched) as boolean;
     const errorReceived = useSelector<RootState>((state) => state.rootReducer.signinState.error) as string;
     const {toast} = useToast()
 
@@ -19,7 +21,16 @@ export const AppToastProvider = ({children}) => {
                 title: "Error",
                 description: errorReceived
             })
-    }, [errorReceived, toast]);
+    }, [errorReceived, toast, createErrorReceived]);
+
+    useEffect(() => {
+        console.log('success created received>>>', errorReceived)
+        if (created)
+            toast({
+                title: "Success!",
+                description: "Contact created!"
+            })
+    }, [created, toast]);
 
     const value = useMemo(
         () => ({

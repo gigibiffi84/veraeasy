@@ -1,7 +1,7 @@
 import './HomePage.scss';
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import {SummaryCardPropsType, SummaryCardType} from "@/components/Types.ts";
-import {ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
+import {ContactVerificationType, CreateContactVerificationType} from "@/api/ContactVerificationTypes.ts";
 import {mapContactVerificationStatus} from "@/lib/utils.ts";
 import ContactVerificationApi from "@/api/ContactVerificationApi.ts";
 import SkeletonCardList from '@/components/summarycard/SkeletonCardList';
@@ -10,6 +10,10 @@ import LoadingSpinner from "@/components/ui/spinner.tsx";
 import SummaryCardList from "@/components/summarycard/SummaryCardList.tsx";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import CreateContactComponent from "@/components/create/CreateContactComponent.tsx";
+import useCreateContactAction from "@/lib/hooks/useCreateContactAction.tsx";
+import {useSelector} from "react-redux";
+import {RootState} from "@/features/Store.ts";
+import {CreateContactState} from "@/features/createcontact/CreateContactState.tsx";
 
 export const LoginButton = () => {
     return (<button
@@ -42,6 +46,9 @@ export default function HomePage() {
     const [loading, setIsLoading] = React.useState(false);
     const [isDefault, setIsDefault] = React.useState(true);
     const [contacts, setContacts] = React.useState([] as SummaryCardPropsType[]);
+    const {createNewContactCommand} = useCreateContactAction();
+    const [open, setOpen] = useState(false);
+    const createContactState = useSelector<RootState>((state) => state.rootReducer.createContact) as CreateContactState;
 
 
     useEffect(() => {
@@ -50,14 +57,10 @@ export default function HomePage() {
     }, []);
 
     useEffect(() => {
-        /* if ((!contacts || contacts.length <= 0)) {
-             setIsDefault(true);
-             setContacts([]);
-         } else {
- 
-             setIsDefault(false);
-         }*/
-    }, [loading, isDefault, contacts]);
+        if (createContactState.fetched || createContactState.error) {
+            setOpen(false);
+        }
+    }, [createContactState]);
 
     const handleSearchComplete = (result: ContactVerificationType[] | { error: string; } | { state: string; }) => {
         console.log('handle search complete', result);
@@ -98,6 +101,11 @@ export default function HomePage() {
             setIsLoading(false);
             setContacts(summaryCards);
         }
+    }
+
+    const handleCreateContact = (contact: CreateContactVerificationType) => {
+        console.log('new contact created', contact);
+        createNewContactCommand(contact);
     }
 
     return (
@@ -149,7 +157,8 @@ export default function HomePage() {
                                      onSearchResultComplete={handleSearchComplete}
                 ></StatefulSearchInput>
                 <div>
-                    <CreateContactComponent></CreateContactComponent>
+                    <CreateContactComponent open={open} onOpenChange={setOpen}
+                                            onCreateContact={handleCreateContact}></CreateContactComponent>
                 </div>
             </div>
             <div className="md:container md:mx-auto md:mt-5 flex justify-center border-0 ">

@@ -4,11 +4,10 @@ import {useForm, UseFormReturn} from "react-hook-form";
 import {z} from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import ContactFormInput from "@/components/create/ContactFormInput.tsx";
+import {useCallback} from "react";
 
 const formSchema = z.object({
-    dossierId: z.string().min(2, {
-        message: "Username must be at least 2 characters.",
-    }),
+    dossierId: z.string().min(2),
     personId: z.string().min(16),
     email: z
         .string()
@@ -16,7 +15,7 @@ const formSchema = z.object({
     mobileNumber: z.string().min(8)
 
 })
-export default function CreateContactForm({children}) {
+export default function CreateContactForm({children, onCreateContact}) {
     const form: UseFormReturn<{
         dossierId: string,
         personId: string,
@@ -33,14 +32,19 @@ export default function CreateContactForm({children}) {
         },
     });
 
-    const handlCreate = (e) => {
-
-    }
+    const handleCreate = useCallback((contact: {
+        dossierId: string,
+        personId: string,
+        email: string,
+        mobileNumber: string
+    }) => {
+        onCreateContact(contact);
+    }, [onCreateContact]);
 
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(handlCreate)} className="space-y-8 mt-2">
+            <form onSubmit={form.handleSubmit(handleCreate)} className="space-y-8 mt-2">
                 <div className="grid">
                     <ContactFormInput form={form} name="dossierId" label="DossierId"
                                       editable={true}

@@ -13,9 +13,21 @@ import CreateContactForm from "@/components/create/CreateContactForm.tsx";
 import {Toggle} from "../ui/toggle";
 import {Icons} from "../icons";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip.tsx";
+import {useCallback} from "react";
 
-export default function CreateContactComponent() {
-    return (<Sheet>
+export default function CreateContactComponent({onCreateContact, open, onOpenChange}) {
+
+    const handleCreate = useCallback((contact: {
+        dossierId: string,
+        personId: string,
+        email: string,
+        mobileNumber: string
+    }) => {
+        onCreateContact(contact);
+    }, [onCreateContact]);
+
+
+    return (<Sheet open={open} onOpenChange={onOpenChange}>
             <SheetTrigger>
                 <TooltipProvider>
                     <Tooltip>
@@ -41,7 +53,7 @@ export default function CreateContactComponent() {
                         Create a new contact. All fields are required.
                     </SheetDescription>
                 </SheetHeader>
-                <CreateContactForm>
+                <CreateContactForm onCreateContact={handleCreate}>
                     <SheetFooter>
                         <Button type="submit">Create contact</Button>
                         <SheetClose asChild>

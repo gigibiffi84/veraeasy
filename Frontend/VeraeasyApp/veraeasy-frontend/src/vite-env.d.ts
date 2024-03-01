@@ -2,7 +2,9 @@
 interface ImportMetaEnv {
     readonly VITE_LOGIN_URL: string;
     readonly VITE_REGISTER_USER_URL: string;
-    readonly VITE_CONTACTS_LIST_URL: string
+    readonly VITE_CONTACTS_LIST_URL: string;
+    readonly VITE_CONTACTS_CREATE_URL: string;
+
 
     // more env variables...
 }

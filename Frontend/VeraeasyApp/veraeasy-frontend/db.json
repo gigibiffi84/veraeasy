@@ -87,6 +87,27 @@
       "personId": "YIXLUTMUR3RPN8HV",
       "personIdStrategy": "EN_SSN",
       "currentStatus": "PENDING"
+    },
+    {
+      "dossierId": "IFIS_BANCA",
+      "personId": "BFLLGU84T15G813J",
+      "email": "bifulcoluigi@gmail.com",
+      "mobileNumber": "3405753976",
+      "id": "06fwlvS"
+    },
+    {
+      "dossierId": "asdas",
+      "personId": "BFLLGU84T15G813J",
+      "email": "bifulcoluigi@gmail.com",
+      "mobileNumber": "3405753976",
+      "id": "i5Z4sKx"
+    },
+    {
+      "dossierId": "asdasdasd",
+      "personId": "BFLLGU84T15G813J",
+      "email": "ASDASDA@ASDASD.IT",
+      "mobileNumber": "ASDASDASDASD",
+      "id": "McZi_cX"
     }
   ],
   "posts": [

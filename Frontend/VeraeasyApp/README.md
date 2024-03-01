@@ -44,20 +44,28 @@ the example showed in the tanstack query react router is very meaningful for our
 - [x] create a searchbar component that emits event when user finish write
 - [x] i/o pipes and search results: create state manager for searchbar that bind the state of the search bar with a pipe
   to query the server
-- [ ] create a detail card component that take in input the id and take care to download it's detail info
-- [ ] incrementally fetch details in parallel ....
-- [ ] to avoid pagination show all results in one page (count and limit by 10)
-- [ ] when user click on detail card navigate to detail route
+- [x] create a AddNewContactVerification page to show a form to submit new contact verification
+    - create relative business logic to save a contact
 
 ### Second iteration
 
+- [ ] create a detail card component that take in input the id and take care to download it's detail info
 - [ ] create a ContactVerificationDetail page to show details about workflow
-- [ ] create a AddNewContactVerification page to show a form to submit new contact verification
 - [ ] add a command to start a new verification from the detail page.
+- [ ] incrementally fetch details in parallel ....
+- [ ] when user click on detail card navigate to detail route
 
 ### Third iteration
 
+- [ ] to avoid pagination show all results in one page (count and limit by 10)
 - [ ] seeds email verification list given business_id, and person_id
 - [ ] create an AddEmailVerificationPage to enable user to add an email to a contact
 - [ ] create a component to lookup email list and its status
-- [ ] create a command to add a new email verification entry 
+- [ ] create a command to add a new email verification entry
+
+### 4th iteration (extends base contacts data)
+
+- [ ] in order to provide a customer point of view user experience spike the available options
+  to build dinamically the forms required by veraeasy when user need to extends data to a contact.
+  - [ ]document all in tech documents and forms paragrafh
+- 

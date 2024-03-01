@@ -122,6 +122,21 @@ https://docs.react.tours/quickstart
 
 https://logomark.ai/
 
+### Forms and form builders
+
+Need to spike all these tools and libraries:
+
+https://react-hook-form.com/get-started#Integratingwithservices
+https://github.com/react-hook-form/react-hook-form
+https://vitejs.dev/guide/ssr
+https://github.com/alexanderweigelt/ReactFormBuilder?tab=readme-ov-file
+https://formik.org/docs/tutorial
+
+### Dialog and portals
+
+To interact programmatically with any type of react portal refer to radix-ui doc
+https://www.radix-ui.com/primitives/docs/components/dialog
+
 ### Seed data
 
 To seed data was introduced json-serverdb
