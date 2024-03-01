@@ -1,6 +1,8 @@
 import {type ClassValue, clsx} from "clsx"
 import {twMerge} from "tailwind-merge"
 import {ContactVerificationStatusTypeRef} from "@/api/ContactVerificationTypes.ts";
+import {jwtDecode, JwtPayload} from "jwt-decode";
+
 
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs))
@@ -27,5 +29,25 @@ export function mapContactVerificationStatus(status: (typeof ContactVerification
             return "";
 
     }
+}
+
+export function getValueFromLocalStorage(key: string) {
+    if (typeof localStorage === "undefined") {
+        return null;
+    }
+
+    const storedValue = localStorage.getItem(key) ?? "null";
+    try {
+        return JSON.parse(storedValue);
+    } catch (error) {
+        console.error(error);
+    }
+
+    return storedValue;
+}
+
+export function decodeUserByJwtToken(token: string): string {
+    const decoded = jwtDecode<JwtPayload>(token);
+    return decoded.sub as string;
 
 }

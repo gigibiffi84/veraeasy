@@ -3,6 +3,7 @@ import {catchError, map, mergeMap, of} from "rxjs";
 import SignInService from "@/features/signin/SignInService.tsx";
 import {ActionCreatorWithPayload, createAction, createReducer} from "@reduxjs/toolkit";
 import {CredentialsType, UserLoginErrorType, UserSignInResponseSuccessType} from "@/api/SigninTypes";
+import {decodeUserByJwtToken} from "@/lib/utils.ts";
 
 export interface SignInState {
     currentUser: string,
@@ -50,6 +51,7 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
             return {
                 ...state,
                 fetched: true,
+                currentUser: decodeUserByJwtToken(action.payload.access_token as string),
                 currentToken: {
                     access_token: action.payload.access_token,
                     id_token: action.payload.id_token,

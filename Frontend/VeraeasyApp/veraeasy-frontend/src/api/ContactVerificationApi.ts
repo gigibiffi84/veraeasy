@@ -1,15 +1,15 @@
 import {catchError, map, Observable, of} from "rxjs";
 import {ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
-import {ajax} from "rxjs/ajax";
 import {CreatedType} from "@/api/CommonTypes.ts";
+import RxAxios from "./rxAxios.ts";
 
 export type ContacListFetcherFunction = (text: string) => Observable<ContactVerificationType[]>;
 
 const contactCreated$ = (newContact: ContactVerificationType): Observable<CreatedType> => {
     const url = import.meta.env.VITE_CONTACTS_CREATE_URL;
-    return ajax.post<CreatedType>(url, newContact)
+    return RxAxios.post<CreatedType>(url, newContact)
         .pipe(
-            map(r => r.response),
+            map(r => r),
             catchError(error => {
                 console.log('error: ', error);
                 return of(error);
@@ -19,9 +19,9 @@ const contactCreated$ = (newContact: ContactVerificationType): Observable<Create
 const contactList$ = (): Observable<ContactVerificationType[]> => {
 
     const url = import.meta.env.VITE_CONTACTS_LIST_URL;
-    return ajax.get<ContactVerificationType[]>(url)
+    return RxAxios.get<ContactVerificationType[]>(url)
         .pipe(
-            map(r => r.response),
+            map(r => r),
             catchError(error => {
                 console.log('error: ', error);
                 return of(error);

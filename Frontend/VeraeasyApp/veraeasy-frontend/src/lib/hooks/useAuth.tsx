@@ -8,7 +8,11 @@ import {SignInState} from "@/features/signin/UserSignInState.tsx";
 import {CredentialsType} from "@/api/SigninTypes.ts";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-const AuthContext = createContext();
+const AuthContext = createContext<{
+    user: string | null | undefined,
+    login: (data: CredentialsType) => Promise<void>,
+    logout: () => void
+}>();
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
@@ -23,6 +27,7 @@ export const AuthProvider = ({children}) => {
 
     const tokenReceived$ = useSelector<RootState>((state) => state.rootReducer.signinState.currentToken);
     const signinState = useSelector<RootState>((state) => state.rootReducer.signinState) as SignInState;
+    const signinStateCompleted = useSelector<RootState>((state) => state.rootReducer.signinState.fetched) as SignInState;
 
 
     const login = useCallback(async (data: CredentialsType) => {
@@ -30,12 +35,13 @@ export const AuthProvider = ({children}) => {
     }, [navigate, setUser]);
 
     useEffect(() => {
-        if (tokenReceived$) {
+        if (tokenReceived$ && signinStateCompleted) {
+            console.log("tokenReceived$,", tokenReceived$)
             setUser(signinState.currentUser);
             setToken(JSON.stringify(signinState.currentToken));
             navigate("/home");
         }
-    }, [tokenReceived$, signinState]);
+    }, [tokenReceived$, signinState, signinStateCompleted]);
 
 
     const logout = useCallback(() => {
@@ -56,6 +62,10 @@ export const AuthProvider = ({children}) => {
 
 };
 
-export const useAuth = () => {
+export const useAuth = (): {
+    user: string | null | undefined,
+    login: (data: CredentialsType) => Promise<void>,
+    logout: () => void
+} => {
     return useContext(AuthContext);
 };
