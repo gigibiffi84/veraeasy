@@ -17,6 +17,7 @@ internal sealed class CreateContactVerificationCommandHandler
                       cmd.Email,
                       cmd.MobileNumber,
                       owner: cmd.User is null ? "anonymous" : cmd?.User?.Identity?.Name,
+                      personId: cmd.PersonId,
                       DateTimeOffset.Parse(cmd.CreatedAt).UtcDateTime);
             await contractsRepository.AddAsync(cv);
             await contractsRepository.CommitAsync();

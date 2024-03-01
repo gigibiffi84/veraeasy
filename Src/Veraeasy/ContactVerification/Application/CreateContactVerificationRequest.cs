@@ -8,11 +8,12 @@ public sealed record CreateContactVerificationRequest(
     string BusinessId,
     string Email,
     string MobileNumber,
+    string PersonId,
     string CreatedAt)
 {
 
     public CreateContactVerificationCommand ToCommand(ref ClaimsPrincipal user)
-        => new(BusinessId, Email, MobileNumber, user, CreatedAt);
+        => new(BusinessId, Email, MobileNumber, PersonId, user, CreatedAt);
 
 }
 

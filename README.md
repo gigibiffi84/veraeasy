@@ -59,6 +59,8 @@ Migration Log:
 
 To add migrations when using more than one dbcontext use
 
+dotnet ef migrations add AddPersonId -c ContactVerificationDbContext
+
 dotnet ef migrations add EmailVerification -c EmailVerificationDbContext
 
 ### Run locally

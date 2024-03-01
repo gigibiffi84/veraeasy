@@ -51,6 +51,10 @@ namespace Veraeasy.ContactVerification.Data.Database.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("PersonId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.ToTable("ContactVerification", "ContactVerification");
