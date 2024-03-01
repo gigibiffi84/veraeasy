@@ -41,8 +41,4 @@
         <ProjectReference Include="..\..\ExternalAssembly\Veraeasy.Common.Lib\Veraeasy.Common.Lib.csproj"/>
     </ItemGroup>
 
-    <ItemGroup>
-        <Folder Include="Auth\Controller\"/>
-    </ItemGroup>
-
 </Project>

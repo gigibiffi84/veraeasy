@@ -6,10 +6,21 @@ namespace Veraeasy.Auth;
 
 internal static class AuthModule
 {
+    private static readonly string CorsPolicySpec = "_CorsPolicySpec";
+
     internal static IServiceCollection AddAuthModule(this IServiceCollection services, IConfiguration configuration)
     {
-        // services.AddAuthentication()
-        //    .AddJwtBearer();
+        services.AddCors(options =>
+        {
+            options.AddPolicy(CorsPolicySpec,
+                policy =>
+                {
+                    policy
+                        .WithOrigins("http://localhost:5173")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+        });
 
         var authenticationOptions = configuration
             .GetSection(KeycloakAuthenticationOptions.Section)
@@ -49,13 +60,13 @@ internal static class AuthModule
                 policy.RequireAuthenticatedUser();
             });
         });*/
-
+        services.AddSingleton(new HttpClient());
         return services;
     }
 
     internal static IApplicationBuilder UseAuthModule(this IApplicationBuilder applicationBuilder)
     {
-        applicationBuilder.UseCors();
+        applicationBuilder.UseCors(CorsPolicySpec);
         applicationBuilder.UseAuthentication();
         applicationBuilder.UseAuthorization();
 

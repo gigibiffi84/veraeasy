@@ -32,7 +32,7 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         if (tokenReceived$) {
             setUser(signinState.currentUser);
-            setToken(signinState.currentToken);
+            setToken(JSON.stringify(signinState.currentToken));
             navigate("/home");
         }
     }, [tokenReceived$, signinState]);

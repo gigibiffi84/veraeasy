@@ -3,11 +3,10 @@ export type UserType = {
 }
 
 export type UserSignInResponseSuccessType = {
-    "accessToken": string,
-    "user": {
-        "email": string,
-        "id": number
-    }
+    access_token?: string,
+    id_token?: string,
+    refresh_token?: string
+
 }
 
 export type UserLoginErrorType = {

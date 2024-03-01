@@ -6,7 +6,7 @@ import {CredentialsType, UserLoginErrorType, UserSignInResponseSuccessType} from
 
 export interface SignInState {
     currentUser: string,
-    currentToken: string,
+    currentToken?: UserSignInResponseSuccessType,
     loading: boolean,
     fetched: boolean,
     error: string | null | undefined
@@ -17,7 +17,7 @@ const initialState: SignInState = {
     loading: false,
     fetched: false,
     error: "",
-    currentToken: ""
+    currentToken: {}
 };
 
 // action types
@@ -50,8 +50,11 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
             return {
                 ...state,
                 fetched: true,
-                currentUser: (action.payload as UserSignInResponseSuccessType).user.email as string,
-                currentToken: (action.payload as UserSignInResponseSuccessType).accessToken,
+                currentToken: {
+                    access_token: action.payload.access_token,
+                    id_token: action.payload.id_token,
+                    refresh_token: action.payload.refresh_token
+                },
                 loading: false,
                 error: null
             };
@@ -61,7 +64,7 @@ export const signInReducers = createReducer<SignInState>(initialState, (builder)
                 ...state,
                 fetched: false,
                 currentUser: "",
-                currentToken: "",
+                currentToken: {},
                 loading: false,
                 error: action.payload.error as string
             }
