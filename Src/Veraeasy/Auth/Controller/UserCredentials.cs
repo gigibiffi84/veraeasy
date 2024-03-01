@@ -2,6 +2,8 @@ namespace Veraeasy.Auth;
 
 public record UserCredentials(string username, string password);
 
+public record TokenUserCredentials(string refresh_token);
+
 public record TokenResponse(
     string access_token,
     int expires_in,

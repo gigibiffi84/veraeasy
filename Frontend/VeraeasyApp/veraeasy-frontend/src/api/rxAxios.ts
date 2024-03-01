@@ -12,7 +12,12 @@ const get = <T>(url: string, queryParams?: object): Observable<T> => {
 };
 
 const post = <T>(url: string, body: object, queryParams?: object): Observable<T> => {
-    return defer(() => axiosInstance.post<T>(url, body, {params: queryParams}))
+    return defer(() => axiosInstance.post<T>(url, body, {
+        params: queryParams,
+        headers: {
+            "Content-type": "application/json"
+        }
+    }))
         .pipe(map(result => result.data));
 };
 

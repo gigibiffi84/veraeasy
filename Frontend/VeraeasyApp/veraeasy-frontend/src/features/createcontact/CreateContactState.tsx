@@ -57,7 +57,7 @@ export const createContactReducer = createReducer<CreateContactState>(initialSta
                 fetched: true,
                 newContact: {...state.newContact},
                 loading: false,
-                error: action.payload.error as string
+                error: action.payload.error
             }
         })
 );
@@ -72,7 +72,7 @@ export const createContactEpic = (action$, store) => action$.pipe(
                 return contactCreatedAction(response);
             }),
             catchError(error => {
-                return of(contactNotCreatedAction({error: error}));
+                return of(contactNotCreatedAction({error: error.message}));
             }),
         );
     }),

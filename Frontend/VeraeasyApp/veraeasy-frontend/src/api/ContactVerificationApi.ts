@@ -1,4 +1,4 @@
-import {catchError, map, Observable, of} from "rxjs";
+import {catchError, map, Observable, of, throwError} from "rxjs";
 import {ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
 import {CreatedType} from "@/api/CommonTypes.ts";
 import RxAxios from "./rxAxios.ts";
@@ -12,7 +12,7 @@ const contactCreated$ = (newContact: ContactVerificationType): Observable<Create
             map(r => r),
             catchError(error => {
                 console.log('error: ', error);
-                return of(error);
+                return throwError(error);
             })
         )
 }
@@ -24,7 +24,7 @@ const contactList$ = (): Observable<ContactVerificationType[]> => {
             map(r => r),
             catchError(error => {
                 console.log('error: ', error);
-                return of(error);
+                return throwError(error);
             })
         )
 }

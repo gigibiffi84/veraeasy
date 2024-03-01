@@ -24,13 +24,20 @@ export const AppToastProvider = ({children}) => {
     }, [errorReceived, toast, createErrorReceived]);
 
     useEffect(() => {
-        console.log('success created received>>>', errorReceived)
-        if (created)
+        console.log('success created received>>>', created)
+        if (created && !createErrorReceived) {
             toast({
                 title: "Success!",
                 description: "Contact created!"
             })
-    }, [created, toast]);
+        }
+        if (createErrorReceived && createErrorReceived.length > 0) {
+            toast({
+                title: "Error",
+                description: createErrorReceived
+            })
+        }
+    }, [created, createErrorReceived, toast]);
 
     const value = useMemo(
         () => ({
