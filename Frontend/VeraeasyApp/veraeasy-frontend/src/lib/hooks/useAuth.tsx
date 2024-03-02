@@ -1,15 +1,16 @@
 import {createContext, useCallback, useContext, useEffect, useMemo} from "react";
 import {useNavigate} from "react-router";
-import {useLocalstorageState} from "rooks";
 import useLoginAction from "@/lib/hooks/useLoginAction.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/features/Store.ts";
 import {SignInState} from "@/features/signin/UserSignInState.tsx";
 import {CredentialsType} from "@/api/SigninTypes.ts";
+import {useSessionStorageState} from "@/lib/hooks/useSessionStorageState.tsx";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 const AuthContext = createContext<{
     user: string | null | undefined,
+    token: string | null | undefined,
     login: (data: CredentialsType) => Promise<void>,
     logout: () => void
 }>();
@@ -18,8 +19,8 @@ const AuthContext = createContext<{
 // @ts-expect-error
 export const AuthProvider = ({children}) => {
 
-    const [user, setUser] = useLocalstorageState<string | null | undefined>("veraeasy:user", "");
-    const [token, setToken] = useLocalstorageState<string | null | undefined>("veraeasy:token", "");
+    const [user, setUser] = useSessionStorageState<string | null | undefined>("veraeasy:user", "");
+    const [token, setToken] = useSessionStorageState<string | null | undefined>("veraeasy:token", "");
 
     const navigate = useNavigate();
 
@@ -52,10 +53,11 @@ export const AuthProvider = ({children}) => {
     const value = useMemo(
         () => ({
             user,
+            token,
             login,
             logout,
         }),
-        [user, login, logout]
+        [user, token, login, logout]
     );
 
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
@@ -64,6 +66,7 @@ export const AuthProvider = ({children}) => {
 
 export const useAuth = (): {
     user: string | null | undefined,
+    token: string | null | undefined,
     login: (data: CredentialsType) => Promise<void>,
     logout: () => void
 } => {

@@ -37,13 +37,13 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost("refresh")]
-    public async Task<IActionResult> RefreshToken([FromBody] UserCredentials credentials)
+    public async Task<IActionResult> RefreshToken([FromBody] TokenUserCredentials credentials)
     {
-        _logger.LogInformation($"refresh  authetication for user {credentials.username}", credentials);
         var loginParams = new Dictionary<string, string>();
         loginParams.Add("grant_type", "refresh_token");
         loginParams.Add("client_id", "veraeasy-app-dev");
         loginParams.Add("client_secret", "XfyZc1pDo5TLmgpwjVxx0uzEqrCBKMsA");
+        loginParams.Add("refresh_token", credentials.refresh_token);
         var formContent = new FormUrlEncodedContent(loginParams);
         var response = await _httpClient.PostAsync(
             "http://localhost:8080/realms/master/protocol/openid-connect/token",

@@ -1,5 +1,5 @@
 import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
-import {getValueFromLocalStorage} from "@/lib/utils.ts";
+import {getToken, saveToken} from "@/lib/utils.ts";
 import SignInApi from "@/api/SignInApi.ts";
 
 const initialization = (config: AxiosRequestConfig): AxiosInstance => {
@@ -8,10 +8,9 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
     // Request interceptor for API calls
     axiosInstance.interceptors.request.use(
         async config => {
-            const value = getValueFromLocalStorage("veraeasy:token");
-            const keys = JSON.parse(value)
+            const value = getToken("veraeasy:token");
             config.headers = {
-                'Authorization': `Bearer ${keys.access_token}`,
+                'Authorization': `Bearer ${value.access_token}`,
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
@@ -28,10 +27,10 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
         const unauth = error.response && (error.response.status === 403 || error.response.status === 401);
         if (unauth && !originalRequest._retry) {
             originalRequest._retry = true;
-            const value = getValueFromLocalStorage("veraeasy:token");
-            const keys = JSON.parse(value)
-            const access_token = await SignInApi.refreshSession(keys["refresh_token"]);
-            axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+            const value = getToken("veraeasy:token");
+            const newToken = await SignInApi.refreshSession(value["refresh_token"]);
+            saveToken("veraeasy:token", newToken)
+            axios.defaults.headers.common['Authorization'] = 'Bearer ' + newToken.access_token;
             return axiosInstance(originalRequest);
         }
         return Promise.reject(error);

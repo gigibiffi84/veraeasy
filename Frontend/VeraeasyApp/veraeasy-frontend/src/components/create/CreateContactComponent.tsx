@@ -18,7 +18,7 @@ import {useCallback} from "react";
 export default function CreateContactComponent({onCreateContact, open, onOpenChange}) {
 
     const handleCreate = useCallback((contact: {
-        dossierId: string,
+        businessId: string,
         personId: string,
         email: string,
         mobileNumber: string

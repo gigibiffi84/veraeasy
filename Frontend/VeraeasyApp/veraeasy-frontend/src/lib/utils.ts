@@ -31,12 +31,12 @@ export function mapContactVerificationStatus(status: (typeof ContactVerification
     }
 }
 
-export function getValueFromLocalStorage(key: string) {
-    if (typeof localStorage === "undefined") {
+export function getToken(key: string) {
+    if (typeof sessionStorage === "undefined") {
         return null;
     }
 
-    const storedValue = localStorage.getItem(key) ?? "null";
+    const storedValue = sessionStorage.getItem(key) ?? "null";
     try {
         return JSON.parse(storedValue);
     } catch (error) {
@@ -44,6 +44,20 @@ export function getValueFromLocalStorage(key: string) {
     }
 
     return storedValue;
+}
+
+export function saveToken(key: string, token: object): void {
+    if (typeof sessionStorage === "undefined") {
+        return;
+    }
+
+    try {
+        const tokenValue = JSON.stringify(token);
+        sessionStorage.setItem(key, tokenValue);
+
+    } catch (error) {
+        console.error(error);
+    }
 }
 
 export function decodeUserByJwtToken(token: string): string {

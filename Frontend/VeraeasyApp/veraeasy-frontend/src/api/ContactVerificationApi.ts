@@ -7,6 +7,7 @@ export type ContacListFetcherFunction = (text: string) => Observable<ContactVeri
 
 const contactCreated$ = (newContact: ContactVerificationType): Observable<CreatedType> => {
     const url = import.meta.env.VITE_CONTACTS_CREATE_URL;
+
     return RxAxios.post<CreatedType>(url, newContact)
         .pipe(
             map(r => r),

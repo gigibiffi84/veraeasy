@@ -7,7 +7,7 @@ import ContactFormInput from "@/components/create/ContactFormInput.tsx";
 import {useCallback} from "react";
 
 const formSchema = z.object({
-    dossierId: z.string().min(2),
+    businessId: z.string().min(2),
     personId: z.string().min(16),
     email: z
         .string()
@@ -17,14 +17,14 @@ const formSchema = z.object({
 })
 export default function CreateContactForm({children, onCreateContact}) {
     const form: UseFormReturn<{
-        dossierId: string,
+        businessId: string,
         personId: string,
         email: string,
         mobileNumber: string
     }> = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            dossierId: "",
+            businessId: "",
             personId: "",
             email: "",
             mobileNumber: ""
@@ -33,7 +33,7 @@ export default function CreateContactForm({children, onCreateContact}) {
     });
 
     const handleCreate = useCallback((contact: {
-        dossierId: string,
+        businessId: string,
         personId: string,
         email: string,
         mobileNumber: string
@@ -46,7 +46,7 @@ export default function CreateContactForm({children, onCreateContact}) {
         <Form {...form}>
             <form onSubmit={form.handleSubmit(handleCreate)} className="space-y-8 mt-2">
                 <div className="grid">
-                    <ContactFormInput form={form} name="dossierId" label="DossierId"
+                    <ContactFormInput form={form} name="businessId" label="DossierId"
                                       editable={true}
                                       type="text"/>
 

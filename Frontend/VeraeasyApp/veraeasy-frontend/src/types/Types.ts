@@ -31,7 +31,7 @@ export type ContactFormFieldProps = {
     type: string;
     label: string;
     name: string;
-    form: UseFormReturn<{ dossierId: string, personId: string, email: string, mobileNumber: string }>;
+    form: UseFormReturn<{ businessId: string, personId: string, email: string, mobileNumber: string }>;
     editable: boolean;
 };
 
