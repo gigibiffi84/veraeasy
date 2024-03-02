@@ -146,6 +146,26 @@ When an email verification is started then:
 - Error Handling: Implement proper error handling to handle exceptions during the email verification process, providing
   meaningful error messages to users.
 
+## Package all with docker
+
+https://devblogs.microsoft.com/ise/dotnet-multi-repo/
+https://learn.microsoft.com/en-us/nuget/reference/nuget-config-file
+https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-8.0#evcp
+
+### Backend
+
+dotnet publish -c Release
+docker build -t veraeasy-image -f Dockerfile .
+docker create --name veraeasy-app veraeasy-image
+docker start veraeasy-app
+
+https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux&pivots=dotnet-8-0#publish-net-app
+
+### Kubernetes
+
+https://github.com/acehko/kubernetes-examples/tree/main/postgres
+https://github.com/dbeaver/cloudbeaver/wiki/Run-Docker-Container
+
 ### Troubleshooting
 
 MediaTr issue when receiving duplicate event in notification handler.
