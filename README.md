@@ -163,6 +163,16 @@ https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux&
 
 ### Kubernetes
 
+## Expose health checks
+
+https://blog.devart.com/how-to-implement-health-checks-in-asp-net-6.html
+
+## Expose services
+
+- to expose http services ingress
+- to expose other tyopes of service NodePort
+- to secure db and other ClusterIp
+
 https://github.com/acehko/kubernetes-examples/tree/main/postgres
 https://github.com/dbeaver/cloudbeaver/wiki/Run-Docker-Container
 

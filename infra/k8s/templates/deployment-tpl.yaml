@@ -1,0 +1,112 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: veraeasy-mono-v1
+  name: veraeasy-mono-v1
+spec:
+  replicas: 2
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: averaeasy-mono-v1
+  strategy: { }
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: averaeasy-mono-v1
+    spec:
+      restartPolicy: Always
+      hostAliases:
+        - ip: "194.182.91.193"
+          hostnames:
+            - "jaeger-1684312594-collector"
+      containers:
+        - image: www.luigibifulco.it/veraeasy-mono-v1:%TPL_ENV_VERSION%
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: staging
+            - name: SERVER_SERVLET_CONTEXT_PATH
+              value: /acc-reg-ddd-v1
+            - name: MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE
+              value: "*"
+          imagePullPolicy: Always
+          name: veraeasy-mono-v1
+          resources:
+            requests:
+              memory: '512Mi'
+              cpu: '500m'
+            limits:
+              memory: '1024Mi'
+              cpu: '1'
+          ports:
+            - name: http
+              containerPort: 8080
+          readinessProbe:
+            httpGet:
+              path: /acc-reg-ddd-v1/actuator/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            failureThreshold: 6
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /acc-reg-ddd-v1/actuator/health
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 180
+            successThreshold: 1
+      imagePullSecrets:
+        - name: regcred
+status: { }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: acc-reg-ddd-v1
+  name: acc-reg-ddd-v1
+spec:
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: acc-reg-ddd-v1
+  type: ClusterIP
+status:
+  loadBalancer: { }
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: acc-reg-ddd-ingress-v1
+  annotations:
+    traefik.ingress.kubernetes.io/router.entrypoints: web
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: ard-dev.luigibifulco.it
+    - http:
+        paths:
+          - path: /acc-reg-ddd-v1/api
+            pathType: Prefix
+            backend:
+              service:
+                name: acc-reg-ddd-v1
+                port:
+                  number: 8080
+          - path: /acc-reg-ddd-v1/actuator
+            pathType: Prefix
+            backend:
+              service:
+                name: acc-reg-ddd-v1
+                port:
+                  number: 8080

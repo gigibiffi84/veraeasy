@@ -1,0 +1,7 @@
+version: '3.9'
+
+services:
+  veraeasy-app:
+    image: veraeasy-image
+    ports:
+      - 5000:8080

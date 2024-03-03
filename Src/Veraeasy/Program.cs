@@ -34,8 +34,14 @@ builder.Services.AddRequestsValidations();
 builder.Services.AddClock();
 builder.Services.AddContactVerification(builder.Configuration);
 builder.Services.AddEmailVerificationModule(builder.Configuration);
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
+app.UseRouting().UseEndpoints(endpoints =>
+{
+    endpoints.MapHealthChecks("/ops/health");
+    endpoints.MapHealthChecks("/ops/health/liveness");
+});
 
 app.UseAuthModule();
 
@@ -49,6 +55,7 @@ if (app.Environment.IsDevelopment())
 app.UseContactVerification();
 app.UseEmailVerificationModule();
 app.UseHttpsRedirection();
+
 //app.UseCors();
 
 //app.MapControllers();
