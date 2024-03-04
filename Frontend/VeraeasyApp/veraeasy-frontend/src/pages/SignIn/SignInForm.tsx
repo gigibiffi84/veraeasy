@@ -59,9 +59,7 @@ export default function SignInForm({onSubmit}) {
                 <SignInFormInput form={form} name="username" label="Username"
                                  editable={!isLoading || isLoggedIn}
                                  type="text">
-                    {<a href="#" className="text-xs text-gray-500 dark:text-gray-300 hover:underline">
-                        Forget
-                        Username?</a>}
+                    <div></div>
                 </SignInFormInput>
                 <SignInFormInput form={form} name="password" label="Password" editable={!isLoading || isLoggedIn}
                                  type="password">

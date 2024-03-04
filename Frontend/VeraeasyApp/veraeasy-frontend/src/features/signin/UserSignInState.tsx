@@ -84,7 +84,12 @@ export const userLoginEpic = (action$, store) => action$.pipe(
         // @ts-expect-error
         return SignInService.login(action.payload as CredentialsType).pipe(
             map((response: UserSignInResponseSuccessType) => {
-                return loginSuccessAction(response);
+                if (response.access_token) {
+                    return loginSuccessAction(response);
+                } else {
+                    return loginFailuerAction({error: "Wrong Creentials"});
+                }
+
             }),
             catchError(error => {
                 return of(loginFailuerAction({error: error}));

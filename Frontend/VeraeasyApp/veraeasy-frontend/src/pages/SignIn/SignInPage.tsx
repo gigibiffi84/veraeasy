@@ -1,4 +1,3 @@
-import HeroComponent from "@/components/signin/HeroComponent";
 import {useAuth} from "@/lib/hooks/useAuth";
 import {useEffect, useRef} from "react";
 import SignIngLogo from "@/components/signin/SignInLogo.tsx";
@@ -6,7 +5,7 @@ import GSignComponent from "@/components/signin/GSignComponent.tsx";
 import SignInForm from "@/pages/SignIn/SignInForm.tsx";
 import {useOutletContext} from "react-router";
 import {useAppToast} from "@/lib/hooks/useToasts.tsx";
-
+import './SigninPage.css';
 
 export default function SignInPage() {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -37,16 +36,16 @@ export default function SignInPage() {
     }
     return (
         <>
-            <HeroComponent onScrollDown={() => setScrollDown(true)}></HeroComponent>
+
 
             <div
                 id="scrollInto-1"
                 ref={divRef}
-                className="flex mx-auto">
+                className="flex mx-auto h-dvh h-lvh">
                 <div className="login-bg-image hidden bg-cover lg:block lg:w-1/2"
                 ></div>
 
-                <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
+                <div className="w-full center-signin flex-col space-y-4 px-6 py-8 md:px-8 lg:w-1/2">
                     <SignIngLogo>Welcome</SignIngLogo>
                     <GSignComponent/>
 
