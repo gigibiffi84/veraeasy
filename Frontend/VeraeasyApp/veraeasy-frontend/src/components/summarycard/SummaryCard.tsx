@@ -1,10 +1,8 @@
-import {Check} from "lucide-react"
-
 import {cn, mapClassStatus} from "@/lib/utils"
-import {Button} from "@/components/ui/button"
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,} from "@/components/ui/card"
 
 import {SummaryCardPropsType,} from "@/components/Types.ts";
+import {AddEmailVerificationComponent} from "@/components/addemail/AddEmailVerificationComponent.tsx";
 
 export default function SummaryCard({className, ...props}: SummaryCardPropsType) {
     return (
@@ -31,9 +29,8 @@ export default function SummaryCard({className, ...props}: SummaryCardPropsType)
                 </div>
             </CardContent>
             <CardFooter>
-                <Button variant="secondary" className="w-full">
-                    <Check className="mr-2 h-4 w-4"/> Verifica stato
-                </Button>
+
+                <AddEmailVerificationComponent contactId={props.summary.id}></AddEmailVerificationComponent>
             </CardFooter>
         </Card>
     )

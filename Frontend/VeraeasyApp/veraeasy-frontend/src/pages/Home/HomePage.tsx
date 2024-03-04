@@ -109,6 +109,7 @@ export default function HomePage() {
                         summary: {
                             businessId: c.businessId,
                             description: c.personId,
+                            id: c.id,
                             currentStatus: {
                                 statusCode: c.status,
                                 statusDescription: mapContactVerificationStatus(c.status)

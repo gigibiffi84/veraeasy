@@ -15,4 +15,9 @@ public class ContactVerificationQueryService(IMediator mediator) : IContactVerif
     {
         return await mediator.Send(new ListContactVerificationByOwner(owner));
     }
+
+    public async Task<ContactVerificationAddress> GetContactVerificationEmailbyId(string id)
+    {
+        return await mediator.Send(new GetContactVerificationEmailById(id));
+    }
 }

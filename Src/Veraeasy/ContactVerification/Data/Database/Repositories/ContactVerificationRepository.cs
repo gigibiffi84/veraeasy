@@ -44,4 +44,10 @@ internal sealed class ContactVerificationRepository(
         return persistence.ContactEntries.Include(c => c.Events).Where(c => c.Owner.ToLower().Equals(owner))
             .AsAsyncEnumerable();
     }
+
+    public async Task<ContactVerification?> GetByIdWithoutEventsAsync(Guid id,
+        CancellationToken cancellationToken = default)
+    {
+        return await persistence.ContactEntries.FindAsync([id]);
+    }
 }

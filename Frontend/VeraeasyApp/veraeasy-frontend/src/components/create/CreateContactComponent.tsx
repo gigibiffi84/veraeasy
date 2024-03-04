@@ -15,7 +15,17 @@ import {Icons} from "../icons";
 import {Tooltip, TooltipContent, TooltipProvider, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 import {useCallback} from "react";
 
-export default function CreateContactComponent({onCreateContact, open, onOpenChange}) {
+export default function CreateContactComponent({onCreateContact, open, onOpenChange}:
+                                                   {
+                                                       onCreateContact: (contact: {
+                                                           businessId: string,
+                                                           personId: string,
+                                                           email: string,
+                                                           mobileNumber: string
+                                                       }) => void,
+                                                       open: boolean,
+                                                       onOpenChange: (open: boolean) => void
+                                                   }) {
 
     const handleCreate = useCallback((contact: {
         businessId: string,

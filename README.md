@@ -39,7 +39,7 @@ third iteration:
 - enable users to extends a contact verification with e lead and a profile.
 - enable contact verificatin owner to attach a link or a copy about a privacy compliance document.
 
-Below the link of the event stormin diagram: https://miro.com/app/board/uXjVNrD1N88=/
+Below the link of the event storming diagram: https://miro.com/app/board/uXjVNrD1N88=/
 
 To design application architecture we need to use DI (dependency injection features) provided by .net8+ and documented
 at this link:
@@ -122,6 +122,10 @@ https://medium.com/@ahmed.gaduo_93938/how-to-implement-keycloak-authentication-i
 https://nikiforovall.github.io/aspnetcore/dotnet/2022/08/24/dotnet-keycloak-auth.html#:~:text=Learn%20how%20to%20use%20Keycloak%20in%20ASP.NET%20Core,Keycloak%20-%20Open%20Source%20Identity%20and%20Access%20Management.
 https://github.com/NikiforovAll/keycloak-authorization-services-dotnet/blob/main/samples/AuthGettingStarted/Program.cs
 
+### Entity Relationships
+
+https://learn.microsoft.com/en-us/ef/core/modeling/relationships
+
 ### Transactions
 
 Despite contactverification module is a simple module that commit oneshot transaction
@@ -134,6 +138,8 @@ Observable models and entity: https://learn.microsoft.com/it-it/ef/core/change-t
 
 https://medium.com/@ramyelnaghy/choosing-the-right-net-core-object-mapper-a-comparative-guide-175ae215845b
 we found that tinymapper is best
+
+https://learn.microsoft.com/en-us/archive/msdn-magazine/2019/november/csharp-iterating-with-async-enumerables-in-csharp-8
 
 https://github.com/TinyMapper/TinyMapper/wiki/Custom-mapping
 

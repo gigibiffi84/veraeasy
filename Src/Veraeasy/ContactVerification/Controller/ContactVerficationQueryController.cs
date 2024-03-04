@@ -30,11 +30,17 @@ public class ContactVerficationQueryController : ControllerBase
     }
 
     [HttpGet("id/{id}")]
-    //[TodoItem_HandleExceptionFilter]
-    //[TodoItem_ValidateTodoItemFilter]
     public async Task<IActionResult> GetContatactVerificationById(string id)
     {
         var result = await queryService.GetContactVerificationbyId(id);
+        return Ok(result);
+    }
+
+    [HttpGet("email/{id}")]
+    public async Task<IActionResult> GetContatactVerificationEmailById(string id)
+    {
+        var result = await queryService.GetContactVerificationEmailbyId(id);
+
         return Ok(result);
     }
 

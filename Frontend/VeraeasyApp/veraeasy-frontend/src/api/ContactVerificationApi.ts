@@ -1,5 +1,5 @@
 import {catchError, map, Observable, of, throwError} from "rxjs";
-import {ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
+import {ContactVerificationAddressType, ContactVerificationType} from "@/api/ContactVerificationTypes.ts";
 import {CreatedType} from "@/api/CommonTypes.ts";
 import RxAxios from "./rxAxios.ts";
 
@@ -11,6 +11,19 @@ const contactCreated$ = (newContact: ContactVerificationType): Observable<Create
     return RxAxios.post<CreatedType>(url, newContact)
         .pipe(
             map(r => r),
+            catchError(error => {
+                console.log('error: ', error);
+                return throwError(error);
+            })
+        )
+}
+
+const contactMailAddressById$ = (guid: string): Observable<string> => {
+    const url = import.meta.env.VITE_GET_CONTACT_ADDRESS_URL;
+    const interpolated = `${url}/${guid}`;
+    return RxAxios.get<ContactVerificationAddressType>(interpolated)
+        .pipe(
+            map(r => r.email),
             catchError(error => {
                 console.log('error: ', error);
                 return throwError(error);
@@ -59,6 +72,7 @@ const api = {
     contactList$,
     emptyContactList$,
     contactCreated$,
-    contactListByOwner$
+    contactListByOwner$,
+    contactMailAddressById$
 }
 export default api;

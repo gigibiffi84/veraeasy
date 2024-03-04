@@ -8,6 +8,11 @@ export type ContactVerificationType = {
     "status"?: typeof ContactVerificationStatusTypeRef.value
 }
 
+export type ContactVerificationAddressType = {
+    "id": string | null,
+    "email": string
+}
+
 export type CreateContactVerificationType = {
     "id"?: string,
     "email"?: string,

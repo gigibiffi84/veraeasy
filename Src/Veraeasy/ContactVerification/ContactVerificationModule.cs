@@ -26,11 +26,20 @@ internal static class ContactVerificationModule
     {
         TinyMapper.Bind<Data.ContactVerification, ContactVerificationStatus>(config =>
         {
-            config.Ignore(x => x.Id);
             config.Ignore(x => x.Events);
             config.Bind(source => source.BusinessId, target => target.BusinessId);
             config.Bind(source => source.CreatedAt, target => target.CreatedAt);
             config.Bind(source => source.PersonId, target => target.PersonId);
+        });
+
+        TinyMapper.Bind<Data.ContactVerification, ContactVerificationAddress>(config =>
+        {
+            config.Ignore(x => x.Events);
+            config.Ignore(x => x.BusinessId);
+            config.Ignore(x => x.CreatedAt);
+            config.Ignore(x => x.PersonId);
+            config.Bind(source => source.EmailHash, target => target.Email);
+            config.Bind(source => source.Id, target => target.Id);
         });
     }
 

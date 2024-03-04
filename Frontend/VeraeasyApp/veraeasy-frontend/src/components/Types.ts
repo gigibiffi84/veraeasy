@@ -5,6 +5,7 @@ export type SummaryCardPropsType = {
 
 export type SummaryCardType = {
     businessId?: string, //title
+    id: string, //guid
     description?: string, //desc
     currentStatus?: SummaryStatusItem //string array of statuses
 }
