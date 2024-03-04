@@ -1,6 +1,6 @@
-using MediatR;
 using Veraeasy.Common.Cqrs;
+using Veraeasy.ContactVerification.Domain.Model;
 
 namespace Veraeasy.ContactVerification.Domain.Queries;
 
-public record ListContactVerificationByOwner(string Owner) : IQuery<IAsyncEnumerable<Data.ContactVerification>>;
+public record ListContactVerificationByOwner(string Owner) : IQuery<IAsyncEnumerable<ContactVerificationStatus>>;

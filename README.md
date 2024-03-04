@@ -130,6 +130,13 @@ https://learn.microsoft.com/it-it/ef/ef6/saving/transactions?redirectedfrom=MSDN
 
 Observable models and entity: https://learn.microsoft.com/it-it/ef/core/change-tracking/change-detection
 
+### Mapping of Objects (DTO, integration events...)
+
+https://medium.com/@ramyelnaghy/choosing-the-right-net-core-object-mapper-a-comparative-guide-175ae215845b
+we found that tinymapper is best
+
+https://github.com/TinyMapper/TinyMapper/wiki/Custom-mapping
+
 ### Email verification steps
 
 The Email verification module is responsible to receive ContactVerificationCreated integration events

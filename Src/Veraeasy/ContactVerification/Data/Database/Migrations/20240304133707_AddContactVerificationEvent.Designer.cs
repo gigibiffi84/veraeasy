@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Veraeasy.ContactVerification.Data.Database;
@@ -11,9 +12,11 @@ using Veraeasy.ContactVerification.Data.Database;
 namespace Veraeasy.ContactVerification.Data.Database.Migrations
 {
     [DbContext(typeof(ContactVerificationDbContext))]
-    partial class ContactVerificationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240304133707_AddContactVerificationEvent")]
+    partial class AddContactVerificationEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

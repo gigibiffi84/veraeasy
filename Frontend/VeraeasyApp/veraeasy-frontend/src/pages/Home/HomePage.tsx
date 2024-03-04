@@ -96,23 +96,23 @@ export default function HomePage() {
         if (stateResult.state && stateResult.state === "default") {
             console.log("setIsloading true");
             setIsLoading(false);
-            setIsDefault(true);
-            setContacts([]);
-            return
+            if (contacts && contacts.length <= 0) {
+                setIsDefault(true);
+                setContacts([]);
+                return;
+            }
         }
 
         if (contacts.length) {
             const summaryCards = contacts.map(c => {
-                return c.id ? {
+                return c.businessId ? {
                         summary: {
                             businessId: c.businessId,
                             description: c.personId,
-                            statusList: [
-                                {
-                                    statusCode: c.currentStatus,
-                                    statusDescription: mapContactVerificationStatus(c.currentStatus)
-                                }
-                            ]
+                            currentStatus: {
+                                statusCode: c.status,
+                                statusDescription: mapContactVerificationStatus(c.status)
+                            }
                         } as SummaryCardType,
                         className: ""
                     } as SummaryCardPropsType

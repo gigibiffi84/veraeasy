@@ -1,10 +1,10 @@
+using Veraeasy.ContactVerification.Domain.Model;
+
 namespace Veraeasy.ContactVerification.Domain.Service;
 
 public interface IContactVerificationQueryService
 {
-    Task<Data.ContactVerification> GetContactVerificationbyId(string id);
+    Task<ContactVerificationStatus> GetContactVerificationbyId(string id);
 
-    Task<IAsyncEnumerable<Data.ContactVerification>> ListContactVerificationByOwner(string owner);
-
-
+    Task<IAsyncEnumerable<ContactVerificationStatus>> ListContactVerificationByOwner(string owner);
 }

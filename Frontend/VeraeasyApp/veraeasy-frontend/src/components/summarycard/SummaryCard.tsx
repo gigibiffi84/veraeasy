@@ -15,25 +15,19 @@ export default function SummaryCard({className, ...props}: SummaryCardPropsType)
             </CardHeader>
             <CardContent className="grid gap-4">
                 <div>
-                    {props.summary.statusList ? props.summary.statusList.map((item, index) => (
-                            <div
-                                key={index}
-                                className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0"
-                            >
-                                <span
-                                    className={cn("flex", "h-2", "w-2", "translate-y-1", "rounded-full", mapClassStatus(item.statusCode))}/>
-                                <div className="space-y-1">
-                                    <p className="text-sm font-medium leading-none">
-                                        {item.statusCode}
-                                    </p>
-                                    <p className="text-sm text-muted-foreground">
-                                        {item.statusDescription}
-                                    </p>
-                                </div>
-                            </div>
-                        )
-                    ) : (<div>Show default when status list is empty!</div>)
-                    }
+                    <div className="mb-4 grid grid-cols-[25px_1fr] items-start pb-4 last:mb-0 last:pb-0">
+                        <span
+                            className={cn("flex", "h-2", "w-2", "translate-y-1", "rounded-full", mapClassStatus(props.summary.currentStatus?.statusCode))}/>
+                        <div className="space-y-1">
+                            <p className="text-sm font-medium leading-none">
+                                {props.summary.currentStatus?.statusCode}
+                            </p>
+                            <p className="text-sm text-muted-foreground">
+                                {props.summary.currentStatus?.statusDescription}
+
+                            </p>
+                        </div>
+                    </div>
                 </div>
             </CardContent>
             <CardFooter>

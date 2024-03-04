@@ -5,7 +5,7 @@ export type ContactVerificationType = {
     "businessId"?: string,
     "personId"?: string,
     "personIdStrategy"?: "EN_SSN" | "IT_SSN"
-    "currentStatus"?: typeof ContactVerificationStatusTypeRef.value
+    "status"?: typeof ContactVerificationStatusTypeRef.value
 }
 
 export type CreateContactVerificationType = {
