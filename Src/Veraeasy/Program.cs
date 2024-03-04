@@ -46,11 +46,10 @@ app.UseRouting().UseEndpoints(endpoints =>
 app.UseAuthModule();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+
+app.UseSwagger();
+app.UseSwaggerUI();
+
 
 app.UseContactVerification();
 app.UseEmailVerificationModule();

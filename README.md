@@ -84,6 +84,13 @@ dotnet ef migrations add EmailVerification -c EmailVerificationDbContext
 
 From Src/Veraeasy folder run dotnet run then go to browser http://localhost:5166/swagger/index.html
 
+### Environemnts
+
+to run with specific environment run with --environment  <env_name>
+env name can be on of Development,Staging,Production
+if no one is passed
+with dot net run locally is set to Development when build is set to Production
+
 ### Naive test from swagger
 
 #### Dev mode authentication
@@ -172,6 +179,9 @@ https://blog.devart.com/how-to-implement-health-checks-in-asp-net-6.html
 - to expose http services ingress
 - to expose other tyopes of service NodePort
 - to secure db and other ClusterIp
+
+- kubectl -n lb-namespace port-forward service/postgresql-1683898476 55432:5432
+-
 
 https://github.com/acehko/kubernetes-examples/tree/main/postgres
 https://github.com/dbeaver/cloudbeaver/wiki/Run-Docker-Container
