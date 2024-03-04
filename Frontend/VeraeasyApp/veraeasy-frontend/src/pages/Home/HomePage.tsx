@@ -14,6 +14,10 @@ import useCreateContactAction from "@/lib/hooks/useCreateContactAction.tsx";
 import {useSelector} from "react-redux";
 import {RootState} from "@/features/Store.ts";
 import {CreateContactState} from "@/features/createcontact/CreateContactState.tsx";
+import {useObservable, useSubscription} from "observable-hooks";
+import {useAuth} from "@/lib/hooks/useAuth.tsx";
+import {catchError, distinctUntilChanged, map, startWith, switchMap, tap} from "rxjs/operators";
+import {of} from "rxjs";
 
 export const LoginButton = () => {
     return (<button
@@ -47,14 +51,28 @@ export default function HomePage() {
     const [isDefault, setIsDefault] = React.useState(true);
     const [contacts, setContacts] = React.useState([] as SummaryCardPropsType[]);
     const {createNewContactCommand} = useCreateContactAction();
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(undefined);
     const createContactState = useSelector<RootState>((state) => state.rootReducer.createContact) as CreateContactState;
-
+    const {user} = useAuth();
 
     useEffect(() => {
+        console.log('current user is', user);
+    }, [user]);
 
-        setContacts([]);
-    }, []);
+    const initialList$ = useObservable(($user) => {
+        return $user.pipe(
+            distinctUntilChanged((a, b) => a[0] === b[0]),
+            tap((val) => console.log(val)),
+            switchMap(([open, _user]) => open === true ? [] : ContactVerificationApi.contactListByOwner$(_user)),
+            map(contacts => contacts),
+            catchError((err) => of({error: err})),
+            startWith([]),
+        )
+    }, [open, user, text]);
+
+    useEffect(() => {
+        console.log("open state changed", open);
+    }, [open]);
 
     useEffect(() => {
         if (createContactState.fetched || createContactState.error) {
@@ -85,7 +103,7 @@ export default function HomePage() {
             const summaryCards = contacts.map(c => {
                 return c.id ? {
                         summary: {
-                            businessId: c.businessKey,
+                            businessId: c.businessId,
                             description: c.personId,
                             statusList: [
                                 {
@@ -102,6 +120,9 @@ export default function HomePage() {
             setContacts(summaryCards);
         }
     }
+
+    useSubscription(initialList$, handleSearchComplete);
+
 
     const handleCreateContact = (contact: CreateContactVerificationType) => {
         console.log('new contact created', contact);

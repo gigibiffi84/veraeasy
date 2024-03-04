@@ -37,11 +37,13 @@ builder.Services.AddEmailVerificationModule(builder.Configuration);
 builder.Services.AddHealthChecks();
 
 var app = builder.Build();
-app.UseRouting().UseEndpoints(endpoints =>
+
+//TODO: reverted health check due to auth middleware conflicts
+/*app.UseRouting().UseEndpoints(endpoints =>
 {
     endpoints.MapHealthChecks("/ops/health");
     endpoints.MapHealthChecks("/ops/health/liveness");
-});
+});*/
 
 app.UseAuthModule();
 

@@ -17,10 +17,23 @@ const contactCreated$ = (newContact: ContactVerificationType): Observable<Create
             })
         )
 }
-const contactList$ = (): Observable<ContactVerificationType[]> => {
+const contactList$ = (searchTerm): Observable<ContactVerificationType[]> => {
 
     const url = import.meta.env.VITE_CONTACTS_LIST_URL;
-    return RxAxios.get<ContactVerificationType[]>(url)
+    return RxAxios.get<ContactVerificationType[]>(`${url}/search`, {search: searchTerm})
+        .pipe(
+            map(r => r),
+            catchError(error => {
+                console.log('error: ', error);
+                return throwError(error);
+            })
+        )
+}
+
+const contactListByOwner$ = (user: string | null | undefined): Observable<ContactVerificationType[]> => {
+
+    const url = import.meta.env.VITE_CONTACTS_LIST_URL;
+    return RxAxios.get<ContactVerificationType[]>(`${url}/owner`, {user: user})
         .pipe(
             map(r => r),
             catchError(error => {
@@ -45,6 +58,7 @@ const emptyContactList$ = (): Observable<ContactVerificationType[]> => {
 const api = {
     contactList$,
     emptyContactList$,
-    contactCreated$
+    contactCreated$,
+    contactListByOwner$
 }
 export default api;

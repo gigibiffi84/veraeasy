@@ -11,7 +11,6 @@ namespace Veraeasy.ContactVerification.Controller;
 [Route("api/[controller]")]
 public class ContactVerficationQueryController : ControllerBase
 {
-
     private readonly ILogger<ContactVerficationQueryController> logger;
 
     private readonly IContactVerificationQueryService queryService;
@@ -39,11 +38,17 @@ public class ContactVerficationQueryController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("owner/{owner}")]
-    public async Task<IActionResult> ListContactVerificationByOwner(string owner)
+    [HttpGet("search")]
+    public async Task<IActionResult> ListContactVerificationBySearchTerm([FromQuery(Name = "search")] string term)
+    {
+        var result = await queryService.ListContactVerificationByOwner(term);
+        return Ok(result);
+    }
+
+    [HttpGet("owner")]
+    public async Task<IActionResult> ListContactVerificationByOwner([FromQuery(Name = "user")] string owner)
     {
         var result = await queryService.ListContactVerificationByOwner(owner);
         return Ok(result);
     }
-
 }
