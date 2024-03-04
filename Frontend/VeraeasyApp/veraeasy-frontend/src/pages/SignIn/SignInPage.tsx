@@ -18,6 +18,10 @@ export default function SignInPage() {
     const divRef = useRef(null);
 
     useEffect(() => {
+        sessionStorage.clear();
+    }, [])
+
+    useEffect(() => {
         console.log('scroll down context is', scrollDown);
         if (scrollDown && divRef && divRef.current) {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -5,30 +5,39 @@ import {useFreshRef} from "rooks";
 // Gets value from sessionStorage
 function getValueFromSessionStorage(key: string) {
     if (typeof sessionStorage === "undefined") {
+        console.log("axios-interceptor getValueFromSessionStorage undefined", key);
         return null;
     }
 
     const storedValue = sessionStorage.getItem(key) ?? "null";
+
     try {
-        return JSON.parse(storedValue);
+        const parsed = JSON.parse(storedValue);
+        console.log("axios-interceptor getValueFromSessionStorage", key, parsed);
+        return parsed;
     } catch (error) {
         console.error(error);
+        console.log("axios-interceptor getValueFromSessionStorage error", key, error);
     }
 
+    console.log("axios-interceptor getValueFromSessionStorage storedValue", key, storedValue);
     return storedValue;
 }
 
 // Saves value to sessionStorage
 function saveValueToSessionStorage<S>(key: string, value: S) {
     if (typeof sessionStorage === "undefined") {
+        console.log("axios-interceptor saveValueToSessionStorage undefined", key);
         return null;
     }
 
     if (value === undefined) {
+        console.log("axios-interceptor saveValueToSessionStorage value undefined", key);
         return sessionStorage.removeItem(key);
     }
 
-    return sessionStorage.setItem(key, JSON.stringify(value));
+    console.log("axios-interceptor saveValueToSessionStorage", key, JSON.stringify(value));
+    sessionStorage.setItem(key, JSON.stringify(value));
 }
 
 /**

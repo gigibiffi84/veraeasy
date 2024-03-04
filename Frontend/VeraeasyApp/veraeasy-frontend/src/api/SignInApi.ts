@@ -20,8 +20,10 @@ const userLogin = (credentials: CredentialsType): Observable<UserSignInResponseS
     )
 }
 
-const refreshSession = (refreshToken: string): Promise<UserSignInResponseSuccessType> => {
-
+const refreshSession = (refreshToken: string): Promise<UserSignInResponseSuccessType | string> => {
+    if (!refreshToken) {
+        return firstValueFrom(throwError("refresh token is empty"));
+    }
     const url = import.meta.env.VITE_LOGIN_REFRESH_URL;
     return firstValueFrom(ajax.post<UserSignInResponseSuccessType>(url, {
         refresh_token: refreshToken

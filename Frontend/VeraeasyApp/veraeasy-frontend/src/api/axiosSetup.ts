@@ -9,6 +9,7 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
     axiosInstance.interceptors.request.use(
         async config => {
             const value = getToken("veraeasy:token");
+            console.log('axios-interceptor >>>', value)
             config.headers = {
                 'Authorization': `Bearer ${value.access_token}`,
                 'Accept': 'application/json',
@@ -28,7 +29,14 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
         if (unauth && !originalRequest._retry) {
             originalRequest._retry = true;
             const value = getToken("veraeasy:token");
-            const newToken = await SignInApi.refreshSession(value["refresh_token"]);
+            let parsed = undefined;
+
+            if (typeof value === "string") {
+                parsed = JSON.parse(value as string);
+            }
+            console.log('axios-interceptor <<<', parsed)
+            const refreshToken = parsed ? parsed["refresh_token"] : value["refresh_token"];
+            const newToken = await SignInApi.refreshSession(refreshToken);
             saveToken("veraeasy:token", newToken)
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + newToken.access_token;
             return axiosInstance(originalRequest);

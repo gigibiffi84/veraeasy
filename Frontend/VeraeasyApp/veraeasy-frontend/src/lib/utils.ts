@@ -31,37 +31,43 @@ export function mapContactVerificationStatus(status: (typeof ContactVerification
     }
 }
 
-export function getToken(key: string) {
+export function getToken(key: string): object | string | null {
     if (typeof sessionStorage === "undefined") {
+        console.log("axios-interceptor utils getToken return null", key);
         return null;
     }
 
     const storedValue = sessionStorage.getItem(key) ?? "null";
+
     try {
-        return JSON.parse(storedValue);
+        const parsed = JSON.parse(storedValue);
+        console.log("axios-interceptor utils getToken", key, parsed);
+        return parsed;
     } catch (error) {
         console.error(error);
     }
-
+    console.log("axios-interceptor utils getToken", key, storedValue);
     return storedValue;
 }
 
-export function saveToken(key: string, token: object): void {
+export function saveToken(key: string, token: object): void | null {
     if (typeof sessionStorage === "undefined") {
-        return;
+        console.log("axios-interceptor utils sessionStorage undefined", key);
+
+        return null;
     }
 
-    try {
-        const tokenValue = JSON.stringify(token);
-        sessionStorage.setItem(key, tokenValue);
-
-    } catch (error) {
-        console.error(error);
+    if (token === undefined) {
+        console.log("axios-interceptor utils removeItem", key);
+        return sessionStorage.removeItem(key);
     }
+
+    console.log("axios-interceptor utils saveToken", key, JSON.stringify(token));
+    sessionStorage.setItem(key, JSON.stringify(token));
 }
 
 export function decodeUserByJwtToken(token: string): string {
     const decoded = jwtDecode<JwtPayload>(token);
-    return decoded.sub as string;
+    return decoded["preferred_username"] as string;
 
 }
