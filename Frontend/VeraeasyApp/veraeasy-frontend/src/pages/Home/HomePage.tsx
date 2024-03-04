@@ -18,6 +18,7 @@ import {useObservable, useSubscription} from "observable-hooks";
 import {useAuth} from "@/lib/hooks/useAuth.tsx";
 import {catchError, distinctUntilChanged, map, startWith, switchMap, tap} from "rxjs/operators";
 import {of} from "rxjs";
+import {useNavigate} from "react-router";
 
 export const LoginButton = () => {
     return (<button
@@ -54,6 +55,7 @@ export default function HomePage() {
     const [open, setOpen] = useState(undefined);
     const createContactState = useSelector<RootState>((state) => state.rootReducer.createContact) as CreateContactState;
     const {user} = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log('current user is', user);
@@ -145,12 +147,13 @@ export default function HomePage() {
                             <AvatarImage src="https://github.com/shadcn.png"/>
                             <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
-                        <p>Wellcome user</p>
+                        <p>Wellcome {user}</p>
                         <div className='flex items-center ml-auto lg:order-1'>
 
 
                             <button className='mr-6 font-semibold text-[15px] border-none outline-none'><a
                                 href='javascript:void(0)'
+                                onClick={() => navigate("/login")}
                                 className='text-[#007bff] hover:underline'>Sign out</a></button>
                             <button className='mr-6 font-semibold text-[15px] border-none outline-none'><a
                                 href='javascript:void(0)'
