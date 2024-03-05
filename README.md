@@ -156,7 +156,16 @@ When an email verification is started then:
 - Validate OTP: FINALLY When the user enters the received OTP, compare it with the stored OTP in the database. If they
   match, mark the email address as verified and allow the user to proceed.
 
-#### Securitu considerations
+#### Email sender service
+
+we found more strategies trough smtp releay trough http cloud service
+https://jonathancrozier.com/blog/smtpclient-is-obsolete-the-new-way-to-send-emails-from-your-net-app
+then we found
+https://github.com/dotnet/platform-compat/blob/master/docs/DE0005.md
+https://github.com/jstedfast/MailKit
+https://medium.com/@abhinandkr56/how-to-send-emails-using-net-core-mailkit-and-googles-smtp-server-6521827c4198
+
+#### Security considerations
 
 - Secure Storage: Store OTPs securely in your application's database, utilizing encryption and hashing techniques to
   protect sensitive information.

@@ -37,7 +37,7 @@ public class LoginController : ControllerBase
         loginParams.Add("client_secret", authConfig.Credentials.Secret);
         var formContent = new FormUrlEncodedContent(loginParams);
         using var response = await _httpClient.PostAsync(
-            $"{authConfig.AuthServerUrl}realms/master/protocol/openid-connect/token",
+            $"{authConfig.AuthServerUrl}realms/{authConfig.Realm}/protocol/openid-connect/token",
             formContent);
         var token = await response.Content.ReadFromJsonAsync<TokenResponse>();
         return Ok(token);
@@ -56,7 +56,7 @@ public class LoginController : ControllerBase
         loginParams.Add("refresh_token", credentials.refresh_token);
         var formContent = new FormUrlEncodedContent(loginParams);
         using var response = await _httpClient.PostAsync(
-            $"{authConfig.AuthServerUrl}realms/master/protocol/openid-connect/token",
+            $"{authConfig.AuthServerUrl}realms/{authConfig.Realm}/protocol/openid-connect/token",
             formContent);
         var token = await response.Content.ReadFromJsonAsync<TokenResponse>();
         return Ok(token);

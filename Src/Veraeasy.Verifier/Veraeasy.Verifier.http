@@ -1,0 +1,6 @@
+@Veraeasy.Verifier_HostAddress = http://localhost:5236
+
+GET {{Veraeasy.Verifier_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
