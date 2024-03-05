@@ -2,7 +2,7 @@ using Keycloak.AuthServices.Authentication;
 using Keycloak.AuthServices.Authorization;
 using Keycloak.AuthServices.Sdk.Admin;
 
-namespace Veraeasy.Auth;
+namespace Veraeasy.Verifier.Auth;
 
 internal static class AuthModule
 {
@@ -38,10 +38,10 @@ internal static class AuthModule
             .AddAuthorization(o => o.AddPolicy("IsOtpMatcher", b =>
             {
                 b.RequireRealmRoles("veraeasy_read_role");
-                b.RequireResourceRoles("view-profile");
+                //b.RequireResourceRoles("view-profile");
                 // TokenValidationParameters.RoleClaimType is overriden
                 // by KeycloakRolesClaimsTransformation
-                b.RequireRole("view-profile");
+                //b.RequireRole("view-profile");
             }))
             .AddKeycloakAuthorization(authorizationOptions);
 
