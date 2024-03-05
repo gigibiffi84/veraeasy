@@ -30,6 +30,11 @@ const router = createBrowserRouter([
                 path: 'verifications/:id',
                 element: <ContactVerificationWorkflowPage></ContactVerificationWorkflowPage>
 
+            },
+            {
+                path: 'otp/',
+                element: <ContactVerificationWorkflowPage></ContactVerificationWorkflowPage>
+
             }
         ]
     }
