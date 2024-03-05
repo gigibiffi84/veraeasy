@@ -1,4 +1,5 @@
 using Veraeasy.Verifier.EmailVerification.Data.Database;
+using Veraeasy.Verifier.EmailVerifier.Service;
 
 namespace Veraeasy.Verifier.EmailVerifier;
 
@@ -9,7 +10,7 @@ internal static class ContactVerificationModule
     {
         services.AddEmailVerificationDatabase(configuration);
 
-        //TODO: add missin transient or scoped services.AddScoped<ContactVerficationQueryController>();
+        services.AddScoped<IOtpVerifier, OtpVerifier>();
 
         AddMapper();
         return services;
