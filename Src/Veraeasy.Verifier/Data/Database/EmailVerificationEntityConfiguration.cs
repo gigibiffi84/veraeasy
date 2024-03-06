@@ -8,8 +8,9 @@ internal sealed class EmailVerificationEntityConfiguration : IEntityTypeConfigur
     public void Configure(EntityTypeBuilder<EmailVerificationProjection> builder)
     {
         //builder.ToView("EmailVerificationProjection");
-        //builder.HasKey(cv => cv.Id);
-        builder.HasNoKey();
+        builder.HasKey(cv => cv.Id);
+        //builder.HasNoKey();
+        builder.ToView("email_not_verified");
         builder.Property(cv => cv.CreatedAt).IsRequired();
         builder.Property(cv => cv.EmailAddress).IsRequired();
         builder.Property(cv => cv.Otp).IsRequired();

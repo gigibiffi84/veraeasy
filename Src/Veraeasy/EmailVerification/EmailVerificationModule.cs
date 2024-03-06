@@ -1,6 +1,7 @@
 using Veraeasy.EmailVerification.Controller;
 using Veraeasy.EmailVerification.Data.Database;
 using Veraeasy.EmailVerification.Domain.Otp;
+using Veraeasy.EmailVerification.Domain.PrepareEmailVerification;
 using Veraeasy.EmailVerification.Domain.Service;
 using Veraeasy.EmailVerification.Infrastructure;
 using Veraeasy.EmailVerification.Infrastructure.Otp;
@@ -16,6 +17,7 @@ internal static class EmailVerificationModule
         services.AddScoped<EmailVerificationController>();
         services.AddScoped<IOtpService, OtpService>();
         services.AddScoped<IEmailSenderService, SimpleEmailSender>();
+        services.AddScoped<IAuthService, AuthService>();
         return services;
     }
 

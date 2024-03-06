@@ -34,7 +34,7 @@ public class OtpMatcherController(
         logger.LogInformation("{@User}", identity.Name);
         var verification = await emailVerificationRepository.GetByIdAsync(new Guid(uuid));
 
-        return Ok("ok");
+        return Ok(verification);
     }
 
     [HttpPut("verifyOtp")]

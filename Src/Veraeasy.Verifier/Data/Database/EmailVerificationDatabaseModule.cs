@@ -5,7 +5,7 @@ namespace Veraeasy.Verifier.EmailVerification.Data.Database;
 
 internal static class EmailVerificationDatabaseModule
 {
-    private const string ConnectionStringName = "ContactVerification";
+    private const string ConnectionStringName = "EmailVerification";
 
     internal static IServiceCollection AddEmailVerificationDatabase(this IServiceCollection services,
         IConfiguration configuration)

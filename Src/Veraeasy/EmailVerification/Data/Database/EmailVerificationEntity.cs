@@ -1,19 +1,9 @@
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
 namespace Veraeasy.EmailVerification.Data;
 
 public sealed class EmailVerificationEntity
 {
-    public Guid Id { get; init; }
-    public string EmailAddress { get; init; }
-    public string Otp { get; init; }
-    public string Secret { get; init; }
-    public string? AuthToken { get; init; }
-    public DateTimeOffset CreatedAt { get; init; }
-    public bool Verified { get; init; }
-
-
-    private EmailVerificationEntity(Guid id, string emailAddress, string secret, string otp, string authToken, DateTimeOffset createdAt, bool verified)
+    private EmailVerificationEntity(Guid id, string emailAddress, string secret, string otp, string authToken,
+        DateTimeOffset createdAt, bool verified)
     {
         Id = id;
         EmailAddress = emailAddress;
@@ -34,20 +24,26 @@ public sealed class EmailVerificationEntity
         Verified = false;
     }
 
-    public static EmailVerificationEntity PrepareEmailVerificationSlot(string emailAddress, string secret, string otp, DateTimeOffset createdAt)
+    public Guid Id { get; init; }
+    public string EmailAddress { get; init; }
+    public string Otp { get; init; }
+    public string Secret { get; init; }
+    public string? AuthToken { get; init; }
+    public DateTimeOffset CreatedAt { get; init; }
+    public bool Verified { get; init; }
+
+    public static EmailVerificationEntity PrepareEmailVerificationSlot(string emailAddress, string secret, string otp,
+        string authToken, DateTimeOffset createdAt)
     {
         var e = new EmailVerificationEntity(
             Guid.NewGuid(),
             emailAddress,
             secret,
             otp,
-            "",
+            authToken,
             createdAt,
             false);
 
         return e;
     }
-
-
-
 }

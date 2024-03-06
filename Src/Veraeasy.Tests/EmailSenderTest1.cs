@@ -11,6 +11,6 @@ public class EmailSenderTest1
     {
         var mockedService = Mock.Of<IEmailSenderService>();
         IEmailSenderService service = new SimpleEmailSender();
-        service.sendEmail("bifulcoluigi@gmail.com", "test", "http://www.veraeasy.cloud");
+        service.sendEmail("bifulcoluigi@gmail.com", "test", "message", "http://www.veraeasy.cloud");
     }
 }
