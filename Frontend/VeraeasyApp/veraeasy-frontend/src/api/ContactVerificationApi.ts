@@ -18,7 +18,7 @@ const contactCreated$ = (newContact: ContactVerificationType): Observable<Create
         )
 }
 
-const contactMailAddressById$ = (guid: string): Observable<string> => {
+const contactMailAddressById$ = (guid: string | undefined): Observable<string> => {
     const url = import.meta.env.VITE_GET_CONTACT_ADDRESS_URL;
     const interpolated = `${url}/${guid}`;
     return RxAxios.get<ContactVerificationAddressType>(interpolated)

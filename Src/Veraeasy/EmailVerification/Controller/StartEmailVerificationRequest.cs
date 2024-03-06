@@ -3,12 +3,10 @@ using Veraeasy.EmailVerification.Domain.PrepareEmailVerification;
 namespace Veraeasy.EmailVerification.Controller;
 
 public sealed record StartEmailVerificationRequest(
-    string Email,
-    string CreatedAt)
+    string Email)
 {
-
     public PrepareEmailVerificationCommand ToCommand()
-        => new(Email);
-
+    {
+        return new PrepareEmailVerificationCommand(Email);
+    }
 }
-
