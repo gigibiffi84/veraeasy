@@ -8,6 +8,7 @@ import {ThemeProvider} from "@/components/theme-provider.tsx";
 import {AuthRoute} from "@/components/auth/AuthRoute.tsx";
 import {RootStore} from "@/features/Store.ts";
 import {Provider} from "react-redux";
+import OtpMatchPage from "@/pages/OtpMatch/OtpMatchPage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -15,7 +16,6 @@ const router = createBrowserRouter([
         element: <Root className={"p-0"}></Root>,
         children: [
             {
-                index: true,
                 element: <AuthRoute><HomePage></HomePage></AuthRoute>
             },
             {
@@ -32,8 +32,9 @@ const router = createBrowserRouter([
 
             },
             {
-                path: 'otp/',
-                element: <ContactVerificationWorkflowPage></ContactVerificationWorkflowPage>
+                index: true,
+                path: 'otp/:uuid',
+                element: <OtpMatchPage></OtpMatchPage>
 
             }
         ]

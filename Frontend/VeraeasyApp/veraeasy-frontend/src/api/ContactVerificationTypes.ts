@@ -13,6 +13,11 @@ export type ContactVerificationAddressType = {
     "email": string
 }
 
+export type OtpEmailVerificationType = {
+    "emailAddress"?: string,
+    "authToken"?: string
+}
+
 export type CreateContactVerificationType = {
     "id"?: string,
     "email"?: string,
