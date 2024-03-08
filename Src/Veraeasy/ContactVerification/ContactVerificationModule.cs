@@ -1,5 +1,6 @@
 using Nelibur.ObjectMapper;
 using Veraeasy.ContactVerification.Controller;
+using Veraeasy.ContactVerification.Data;
 using Veraeasy.ContactVerification.Data.Database;
 using Veraeasy.ContactVerification.Domain;
 using Veraeasy.ContactVerification.Domain.Model;
@@ -30,6 +31,15 @@ internal static class ContactVerificationModule
             config.Bind(source => source.BusinessId, target => target.BusinessId);
             config.Bind(source => source.CreatedAt, target => target.CreatedAt);
             config.Bind(source => source.PersonId, target => target.PersonId);
+        });
+
+        TinyMapper.Bind<ContactVerificationEvent, ContactVerificationStatus>(config =>
+        {
+            config.Bind(source => source.BusinessId, target => target.BusinessId);
+            config.Bind(source => source.CreatedAt, target => target.CreatedAt);
+            config.Bind(source => source.PersonId, target => target.PersonId);
+            config.Bind(source => source.Status, target => target.Status);
+            config.Bind(source => source.ContactVerificationId, target => target.Id);
         });
 
         TinyMapper.Bind<Data.ContactVerification, ContactVerificationAddress>(config =>

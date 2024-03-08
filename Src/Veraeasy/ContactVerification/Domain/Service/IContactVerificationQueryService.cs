@@ -8,5 +8,7 @@ public interface IContactVerificationQueryService
 
     Task<ContactVerificationAddress> GetContactVerificationEmailbyId(string id);
 
+    Task<List<ContactVerificationStatus>> ListContactVerificationBySearchTerm(string term);
+
     Task<IAsyncEnumerable<ContactVerificationStatus>> ListContactVerificationByOwner(string owner);
 }

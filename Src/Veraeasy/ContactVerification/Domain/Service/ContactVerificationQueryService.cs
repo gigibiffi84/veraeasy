@@ -11,6 +11,11 @@ public class ContactVerificationQueryService(IMediator mediator) : IContactVerif
         return await mediator.Send(new GetContactVerificationById(id));
     }
 
+    public async Task<List<ContactVerificationStatus>> ListContactVerificationBySearchTerm(string term)
+    {
+        return await mediator.Send(new ListContactVerificationBySearch(term));
+    }
+
     public async Task<IAsyncEnumerable<ContactVerificationStatus>> ListContactVerificationByOwner(string owner)
     {
         return await mediator.Send(new ListContactVerificationByOwner(owner));

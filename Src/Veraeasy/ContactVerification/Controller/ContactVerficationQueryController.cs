@@ -47,7 +47,7 @@ public class ContactVerficationQueryController : ControllerBase
     [HttpGet("search")]
     public async Task<IActionResult> ListContactVerificationBySearchTerm([FromQuery(Name = "search")] string term)
     {
-        var result = await queryService.ListContactVerificationByOwner(term);
+        var result = await queryService.ListContactVerificationBySearchTerm(term);
         return Ok(result);
     }
 

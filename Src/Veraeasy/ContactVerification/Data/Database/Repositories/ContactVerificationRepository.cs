@@ -38,16 +38,55 @@ internal sealed class ContactVerificationRepository(
             .FirstOrDefaultAsync();
     }
 
-    public async Task<IAsyncEnumerable<ContactVerification>> ListByOwnerAsync(string owner,
+    public Task<IAsyncEnumerable<ContactVerification>> ListByOwnerAsync(string owner,
         CancellationToken cancellationToken = default)
     {
-        return persistence.ContactEntries.Include(c => c.Events).Where(c => c.Owner.ToLower().Equals(owner))
-            .AsAsyncEnumerable();
+        return Task.FromResult(persistence.ContactEntries.Include(c => c.Events)
+            .Where(c => c.Owner.ToLower().Equals(owner))
+            .AsAsyncEnumerable());
+    }
+
+    public async Task<List<ContactVerification>> ListBySearchTermAsync(string search,
+        CancellationToken cancellationToken = default)
+    {
+        var l = await ListByEmail(search, cancellationToken);
+        var contactVerifications = l.Concat(await ListByBusinessId(search, cancellationToken))
+            .Concat(await ListByMobileNumber(search, cancellationToken))
+            .Concat(await ListByPersonId(search, cancellationToken));
+        return contactVerifications.ToList();
     }
 
     public async Task<ContactVerification?> GetByIdWithoutEventsAsync(Guid id,
         CancellationToken cancellationToken = default)
     {
         return await persistence.ContactEntries.FindAsync([id]);
+    }
+
+    public Task<List<ContactVerification>> ListByEmail(string search,
+        CancellationToken cancellationToken = default)
+    {
+        return persistence.ContactEntries.Include(c => c.Events)
+            .Where(q => q.EmailHash.Contains(search)).ToListAsync(cancellationToken);
+    }
+
+    public Task<List<ContactVerification>> ListByBusinessId(string search,
+        CancellationToken cancellationToken = default)
+    {
+        return persistence.ContactEntries.Include(c => c.Events)
+            .Where(q => q.BusinessId.Contains(search)).ToListAsync(cancellationToken);
+    }
+
+    public Task<List<ContactVerification>> ListByMobileNumber(string search,
+        CancellationToken cancellationToken = default)
+    {
+        return persistence.ContactEntries.Include(c => c.Events)
+            .Where(q => q.MobileNumberHash.Contains(search)).ToListAsync(cancellationToken);
+    }
+
+    public Task<List<ContactVerification>> ListByPersonId(string search,
+        CancellationToken cancellationToken = default)
+    {
+        return persistence.ContactEntries.Include(c => c.Events)
+            .Where(q => q.PersonId.Contains(search)).ToListAsync(cancellationToken);
     }
 }

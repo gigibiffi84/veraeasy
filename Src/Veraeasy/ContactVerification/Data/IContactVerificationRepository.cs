@@ -9,6 +9,9 @@ public interface IContactVerificationRepository
     Task<IAsyncEnumerable<ContactVerification>> ListByOwnerAsync(string owner,
         CancellationToken cancellationToken = default);
 
+    Task<List<ContactVerification>> ListBySearchTermAsync(string owner,
+        CancellationToken cancellationToken = default);
+
     Task AddAsync(ContactVerification contract, CancellationToken cancellationToken = default);
     Task CommitAsync(CancellationToken cancellationToken = default);
 }
