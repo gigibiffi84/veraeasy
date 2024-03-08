@@ -1,55 +1,167 @@
-import React, {useEffect, useState} from "react";
+import {JSX, useEffect, useState} from "react";
 import {useDidMount} from "rooks";
 import {useParams} from "react-router";
-import {useObservable, useSubscription} from "observable-hooks";
-import {distinctUntilChanged, switchMap} from "rxjs/operators";
+import {useObservable, useObservableState, useSubscription} from "observable-hooks";
+import {catchError, switchMap, tap} from "rxjs/operators";
 import otpMatchApi from "@/api/OtpMatchApi.ts";
 import {OtpEmailVerificationType} from "@/api/ContactVerificationTypes.ts";
 import {OtpInput} from "reactjs-otp-input";
 import "./OtpMatchPage.scss";
 import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar.tsx";
 import {Button} from "@/components/ui/button.tsx";
-import {ShieldCheck} from "lucide-react";
+import {RefreshCcw, ShieldCheck} from "lucide-react";
+import useQueryParam from "@/lib/hooks/useQueryParam.tsx";
+import {of, timer} from "rxjs";
+import {ButtonSuccess} from "@/components/addemail/ButtonSuccess.tsx";
+
+export type OtpVerifyRequest = {
+    otp: string;
+    token: string
+}
+
+export type OtpVerifyResponse = {
+    success: boolean;
+    error: string | undefined
+}
+
+const OtpInputComponent = ({userOtp, handleOtpChange, otpVerified, onOtpVerify, otpAuthToken}) => (
+    <>
+        <div className="otp-container">
+            <h3>Insert the One Time Password received on your email address to verify your contact</h3>
+        </div>
+        <OtpInput
+            value={userOtp}
+            onChange={handleOtpChange}
+            numInputs={6}
+            inputStyle={"otp-input"}
+            containerStyle={"otp-container"}
+            isInputSecure={false}
+            separator={<span>_</span>}
+            isInputNum={true}/>
+        <div className="otp-container">
+            {otpVerified ?
+                <ButtonSuccess>Otp Verified</ButtonSuccess>
+                :
+                <Button onClick={() => onOtpVerify({
+                    otp: userOtp,
+                    token: otpAuthToken
+                })} variant={"default"}><ShieldCheck/> Verify</Button>
+            }
+
+
+        </div>
+    </>
+);
+
+const InvalidLinkComponent = () => (
+    <>
+        <div className="otp-container">
+            <h3>Sorry this link is invalid or expired</h3>
+        </div>
+    </>
+)
+
+const InvalidOtpComponent = () => (
+    <>
+        <div className="otp-container">
+            <h3>Sorry the otp you submit is invalid or expired</h3>
+        </div>
+        <div className="otp-container">
+            <Button onClick={() => window.location.reload()} variant={"default"}><RefreshCcw/> Click here to
+                retry</Button>
+        </div>
+    </>
+)
 
 const OtpMatchPage = () => {
 
     const [userOtp, setUserOtp] = useState<string>("");
+    const [otpComponent, setOtpComponent] = useState<JSX.Element>(undefined);
+    const [otpVerified, setOtpVerified] = useState<boolean>(false);
+    const [otpAuthToken, setOtpAuthToken] = useState<string>("");
     const [otpSession, setOtpSession] = useState<OtpEmailVerificationType>({});
 
     const {uuid} = useParams<string>();
+    const queryParam = useQueryParam()
 
     useEffect(() => {
         console.log("otp-match use effect init", uuid);
     }, [uuid]);
 
     useDidMount(() => {
-        console.log("otp-match use did mount", uuid)
+        const authToken = queryParam.get("token");
+        console.log("otp-match use did mount", uuid, authToken)
+        setOtpAuthToken(authToken as string);
+
     });
 
     const onInitComplete = (result: OtpEmailVerificationType) => {
         console.log('otp-match init completed', result);
-        setOtpSession(result);
+
+        if (result && result.error) {
+            switch (result.error) {
+                case "invalid_link":
+                    setOtpComponent(<InvalidLinkComponent/>);
+                    break;
+                case "invalid_otp":
+                    setOtpComponent(<InvalidOtpComponent/>)
+
+                    break;
+            }
+        } else {
+            setOtpSession(result);
+        }
     }
 
     const init$ = useObservable((event$) => {
         return event$.pipe(
-            distinctUntilChanged((a, b) => a[0] === b[0]),
-            switchMap(([uuid]) =>
-                otpMatchApi.otpLogin$({username: "veraeasy", password: "12345678"})
+            //distinctUntilChanged((a, b) => a[0] === b[0]),
+            //distinctUntilChanged((a, b) => a[1] === b[1]),            
+            switchMap(([uuid, authToken]) =>
+                timer(100)
                     .pipe(
-                        switchMap(token => otpMatchApi.emailVerificationByUuid$(uuid as string, token.access_token as string))
+                        switchMap(() => otpMatchApi.emailVerificationByUuid$(uuid as string, authToken as string)),
+                        catchError(() => of({error: "invalid_link"}))
                     )
             )
         )
-    }, [uuid]);
+    }, [uuid, otpAuthToken]);
 
     useSubscription(init$, onInitComplete);
 
 
     const handleOtpChange = (e: string) => {
-        console.log('handle otp change', e);
+        console.log('otp-match handle otp change', e);
         setUserOtp(e);
     }
+
+    const [verifyResult, onOtpVerify] = useObservableState<OtpVerifyResponse, OtpVerifyRequest>(otpEvent$ =>
+            otpEvent$.pipe(
+                tap((event) => console.log('otp-match', event)),
+                switchMap((input) => otpMatchApi.otpVerified$(uuid as string, input.otp, input.token)
+                    .pipe(
+                        catchError(() => of({success: false, error: "invalid_otp"}))
+                    )
+                )
+            ),
+        {success: false, error: undefined}
+    );
+
+    useEffect(() => {
+        console.log("otp-match verifyResult", verifyResult)
+        setOtpVerified(verifyResult && verifyResult.success);
+        if (verifyResult && verifyResult.error) {
+            switch (verifyResult.error) {
+                case "invalid_link":
+                    setOtpComponent(<InvalidLinkComponent/>);
+                    break;
+                case "invalid_otp":
+                    setOtpComponent(<InvalidOtpComponent/>)
+
+                    break;
+            }
+        }
+    }, [verifyResult]);
 
 
     return (
@@ -86,22 +198,13 @@ const OtpMatchPage = () => {
 
                     </div>
                 </header>
+                {otpComponent ? otpComponent : <OtpInputComponent
+                    userOtp={userOtp}
+                    onOtpVerify={onOtpVerify}
+                    otpVerified={otpVerified}
+                    handleOtpChange={handleOtpChange} otpAuthToken={otpAuthToken}
+                ></OtpInputComponent>}
 
-                <div className="otp-container">
-                    <h3>Insert the One Time Password received on your email address to verify your contact</h3>
-                </div>
-                <OtpInput
-                    value={userOtp}
-                    onChange={handleOtpChange}
-                    numInputs={6}
-                    inputStyle={"otp-input"}
-                    containerStyle={"otp-container"}
-                    isInputSecure={false}
-                    separator={<span>_</span>}
-                    isInputNum={true}/>
-                <div className="otp-container">
-                    <Button variant={"default"}><ShieldCheck/> Verify</Button>
-                </div>
 
             </div>
         </div>

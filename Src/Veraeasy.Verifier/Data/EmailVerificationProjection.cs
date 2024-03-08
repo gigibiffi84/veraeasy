@@ -1,4 +1,4 @@
-namespace Veraeasy.Verifier.EmailVerification.Data;
+namespace Veraeasy.Verifier.Data;
 
 public sealed class EmailVerificationProjection
 {

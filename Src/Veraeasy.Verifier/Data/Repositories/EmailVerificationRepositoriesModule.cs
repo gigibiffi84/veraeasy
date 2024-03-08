@@ -1,7 +1,4 @@
-using Veraeasy.Verifier.EmailVerification.Data.Database.Repositories;
-using Veraeasy.Verifier.EmailVerification.Data.Repositories;
-
-namespace Veraeasy.EmailVerification.Data.Database.Reporitories;
+namespace Veraeasy.Verifier.Data.Repositories;
 
 internal static class EmailVerificationRepositoriesModule
 {

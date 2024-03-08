@@ -1,10 +1,13 @@
 import {catchError, map, Observable, throwError} from "rxjs";
 import RxAxios from "@/api/rxAxios.ts";
 
-const emailVerificationCreated$ = (emailAddress: string): Observable<object> => {
+const emailVerificationCreated$ = (emailAddress: string, contactId: string): Observable<object> => {
     const url = import.meta.env.VITE_EMAIL_VERIFICATION_CREATE_URL;
 
-    return RxAxios.post<object>(url, {email: emailAddress})
+    return RxAxios.post<object>(url, {
+        email: emailAddress,
+        contactId
+    })
         .pipe(
             map(r => r),
             catchError(error => {

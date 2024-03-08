@@ -4,6 +4,7 @@ import {ajax} from "rxjs/ajax";
 import {tap} from "rxjs/operators";
 import RxAxios from "@/api/rxAxios.ts";
 import {OtpEmailVerificationType} from "@/api/ContactVerificationTypes.ts";
+import {OtpVerifyResponse} from "@/pages/OtpMatch/OtpMatchPage.tsx";
 
 const otpLogin$ = (credentials: CredentialsType): Observable<UserSignInResponseSuccessType> => {
 
@@ -34,9 +35,29 @@ const emailVerificationByUuid$ = (guid: string, token: string): Observable<OtpEm
         )
 }
 
+const otpVerified$ = (uuid: string, otp: string, token: string): Observable<OtpVerifyResponse> => {
+    console.log("otp-match", uuid, otp, token);
+    const url = import.meta.env.VITE_OTP_VERIFY;
+    const interpolated = `${url}`;
+    return RxAxios.simplePut<OtpVerifyResponse>(interpolated, token, {uuid, otp})
+        .pipe(
+            map(() => {
+                return {
+                    success: true,
+                    error: undefined
+                }
+            }),
+            catchError(error => {
+                console.log('error: ', error);
+                return throwError(error);
+            })
+        )
+}
+
 
 const api = {
     otpLogin$,
-    emailVerificationByUuid$
+    emailVerificationByUuid$,
+    otpVerified$
 }
 export default api;

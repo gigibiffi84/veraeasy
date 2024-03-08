@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Veraeasy.EmailVerification.Data.Database.Reporitories;
+using Veraeasy.Verifier.Data.Repositories;
 
-namespace Veraeasy.Verifier.EmailVerification.Data.Database;
+namespace Veraeasy.Verifier.Data.Database;
 
 internal static class EmailVerificationDatabaseModule
 {

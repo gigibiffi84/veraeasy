@@ -1,4 +1,4 @@
-using Veraeasy.Verifier.EmailVerification.Data.Database;
+using Veraeasy.Verifier.Data.Database;
 using Veraeasy.Verifier.EmailVerifier.Service;
 
 namespace Veraeasy.Verifier.EmailVerifier;

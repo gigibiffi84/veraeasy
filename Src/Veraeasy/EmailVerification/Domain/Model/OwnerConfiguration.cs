@@ -17,8 +17,10 @@ public class OwnerConfiguration(
 
 public static class OwnerConfigurationEmailExtension
 {
-    public static string GetTemplateInterpolation(this OwnerConfiguration? c, string emailVerificationUuid, string otp)
+    public static string GetTemplateInterpolation(this OwnerConfiguration? c, string emailVerificationUuid, string otp,
+        string authToken)
     {
-        return string.Format(c.EmailTemplate, c.OtpMatcherUrl + "/" + emailVerificationUuid, otp);
+        return string.Format(c.EmailTemplate, c.OtpMatcherUrl + "/" + emailVerificationUuid + "?token=" + authToken,
+            otp);
     }
 }

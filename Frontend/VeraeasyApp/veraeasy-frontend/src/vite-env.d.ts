@@ -9,6 +9,7 @@ interface ImportMetaEnv {
     readonly VITE_OTP_LOGIN_URL: string;
     readonly VITE_OTP_GET_EMAIL_VERIFICATION: string;
     readonly VITE_EMAIL_VERIFICATION_CREATE_URL: string;
+    readonly VITE_OTP_VERIFY: string;
 
 
     // more env variables...

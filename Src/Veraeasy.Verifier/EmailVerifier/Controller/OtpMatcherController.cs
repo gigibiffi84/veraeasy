@@ -1,11 +1,11 @@
 using Asp.Versioning;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Veraeasy.Verifier.EmailVerification.Data.Repositories;
-using Veraeasy.Verifier.EmailVerifier.Controller;
+using Veraeasy.Verifier.Data;
+using Veraeasy.Verifier.Data.Repositories;
 using Veraeasy.Verifier.EmailVerifier.Service;
 
-namespace Veraeasy.Verifier.Email.Controller;
+namespace Veraeasy.Verifier.EmailVerifier.Controller;
 
 [ApiController]
 [ApiVersion(1.0)]
@@ -28,24 +28,35 @@ public class OtpMatcherController(
 
     [HttpGet("getEmailVerificationByUuuid")]
     [Authorize(Policy = "IsOtpMatcher")]
-    public async Task<IActionResult> getEmailVerificationByUuuid([FromQuery(Name = "uuid")] string uuid)
+    public async Task<IActionResult> GetEmailVerificationByUuuid([FromQuery(Name = "uuid")] string uuid)
     {
         var identity = httpContextAccessor.HttpContext.User.Identity;
         logger.LogInformation("{@User}", identity.Name);
         var verification = await emailVerificationRepository.GetByIdAsync(new Guid(uuid));
-
-        return Ok(verification);
+        var result = new EmailVerifierResponse(
+            verification!.EmailAddress,
+            verification.AuthToken,
+            verification.CreatedAt);
+        return Ok(result);
     }
 
     [HttpPut("verifyOtp")]
     [Authorize(Policy = "IsOtpMatcher")]
-    public async Task<IActionResult> getEmailVerificationByUuuid([FromBody] VerifyOtpRequest request)
+    public async Task<IActionResult> PutEmailVerification([FromBody] VerifyOtpRequest request)
     {
         var identity = httpContextAccessor.HttpContext.User.Identity;
         logger.LogInformation("{@User}", identity.Name);
         var verification = await emailVerificationRepository.GetByIdAsync(new Guid(request.uuid));
+        if (verification == null) return NotFound();
 
-        otpVerifier.validateOtp(verification?.Secret, int.Parse(request.Otp));
-        return Ok("ok");
+        var valid = otpVerifier.validateOtp(verification?.Secret, int.Parse(request.Otp));
+        if (valid)
+        {
+            var created = await emailVerificationRepository.AddVerifiedEvent(
+                EmailVerifierEvent.createEvent(verification.EmailAddress, verification.Id.ToString()));
+            return NoContent();
+        }
+
+        return Conflict();
     }
 }

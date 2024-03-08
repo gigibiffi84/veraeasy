@@ -34,7 +34,7 @@ internal sealed class PrepareEmailVerificationCommandHandler(
             request.ContactId,
             timeProvider.GetUtcNow());
         await repository.AddAsync(slot, cancellationToken);
-        var msg = ownerConfiguration.GetTemplateInterpolation(slot.Id.ToString(), otp);
+        var msg = ownerConfiguration.GetTemplateInterpolation(slot.Id.ToString(), otp, token.access_token);
         senderService.sendEmail(request.Owner, request.Email, "Veraeasy otp verification", msg);
         return slot.Id;
     }

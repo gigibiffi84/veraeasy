@@ -54,14 +54,14 @@ export function AddEmailVerificationComponent({open, onOpenChange, contactId}: {
     const emailAdded$ = useObservable(event$ => {
         return event$.pipe(
             distinctUntilChanged((a, b) => a[0] === b[0]),
-            switchMap(([sending, email]) =>
+            switchMap(([sending, email, contactId]) =>
                 timer(500).pipe(
                     filter(() => sending !== undefined && sending),
-                    switchMap(() => emailVerificationApi.emailVerificationCreated$(email as string))
+                    switchMap(() => emailVerificationApi.emailVerificationCreated$(email as string, contactId))
                 ),
             )
         )
-    }, [sending, email])
+    }, [sending, email, contactId])
 
     function resetState() {
         setLoading(true);
@@ -119,7 +119,7 @@ export function AddEmailVerificationComponent({open, onOpenChange, contactId}: {
             return;
         }
         if (success) {
-            setCurrentButton(<ButtonSuccess></ButtonSuccess>);
+            setCurrentButton(<ButtonSuccess>Email sent</ButtonSuccess>);
             return;
         } else {
             setCurrentButton(

@@ -24,7 +24,7 @@ const simpleGet = <T>(url: string, token: string, queryParams?: object): Observa
         .pipe(map(result => result.data));
 };
 
-const simplePut = <T>(url: string, body: object, token: string, queryParams?: object): Observable<T> => {
+const simplePut = <T>(url: string, token: string, body: object, queryParams?: object): Observable<T> => {
     return defer(() => simpleAxiosInstance.put<T>(url, body, {
         params: queryParams,
         headers: {

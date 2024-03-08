@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Veraeasy.Verifier.EmailVerification.Data.Database;
+namespace Veraeasy.Verifier.Data.Database;
 
 internal sealed class EmailVerificationEntityConfiguration : IEntityTypeConfiguration<EmailVerificationProjection>
 {

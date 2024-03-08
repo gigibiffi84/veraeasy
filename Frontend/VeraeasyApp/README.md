@@ -51,12 +51,14 @@ the example showed in the tanstack query react router is very meaningful for our
 
 - [x] create a command to add a new email verification entry
 - [x] prepare email verification slot with owner
-- [ ] prepare email verification slot with contactId
-- [ ] extends link used by send email to put authtoken in query string
-- [ ] extends otp matcher to get by uuid with token in query string
+- [x] prepare email verification slot with contactId
+- [x] send contactId from frontend
+- [x] extends link used by send email to put authtoken in query string
+- [x] extends otp matcher to get by uuid with token in query string
 - [ ] extends otp matcher to insert in db (uuid, address, owner, contact_id) verifier_email when verify is ok
 - [ ] extends otp matcher to send a message trough rabbit mq to the email verifier
-- [ ] extends otp matcher with GET API to get verified status: check if row is in view too (auth from email verification)
+- [ ] extends otp matcher with GET API to get verified status: check if row is in view too (auth from email
+  verification)
 - [ ] extends email verifier to use the GET API and pull the status
 - [ ] extends email verifier to update the verified flag when the pull is OK.
 

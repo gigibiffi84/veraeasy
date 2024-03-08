@@ -4,7 +4,7 @@ namespace Veraeasy.EmailVerification.Controller;
 
 public sealed record StartEmailVerificationRequest(
     string Email,
-    string? ContactId)
+    string ContactId)
 {
     public PrepareEmailVerificationCommand ToCommand(string owner)
     {
