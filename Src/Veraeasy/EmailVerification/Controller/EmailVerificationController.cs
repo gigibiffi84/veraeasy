@@ -13,13 +13,16 @@ namespace Veraeasy.EmailVerification.Controller;
 public class EmailVerificationController(
     ILogger<EmailVerificationController> logger,
     IMediator mediator,
+    IHttpContextAccessor httpContextAccessor,
     IEmailVerificationRepository repository) : ControllerBase
 {
     [HttpPost]
     public async Task<IResult> CreateSlot([FromBody] StartEmailVerificationRequest item,
         CancellationToken cancellationToken = default)
     {
-        var cmd = item.ToCommand();
+        var identity = httpContextAccessor.HttpContext.User.Identity;
+
+        var cmd = item.ToCommand(identity.Name);
         var newId = await mediator.Send(cmd, cancellationToken);
         var routeValues = new
         {

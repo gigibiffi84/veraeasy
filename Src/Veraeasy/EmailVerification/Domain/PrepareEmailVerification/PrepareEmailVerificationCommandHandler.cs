@@ -14,20 +14,28 @@ internal sealed class PrepareEmailVerificationCommandHandler(
     IOtpService otpService,
     IAuthService authService,
     IEmailSenderService senderService,
+    OwnerUserCredentilasMapping ownerUserCredentilasMapping,
     TimeProvider timeProvider) : ICommandHandler<PrepareEmailVerificationCommand, Guid>
 {
     public async Task<Guid> Handle(PrepareEmailVerificationCommand request, CancellationToken cancellationToken)
     {
+        var owner = request.Owner ?? throw new InvalidOperationException("owner can't be null");
         logger.LogInformation($"creating new item with id {request.Email}", request);
+        var ownerConfiguration = ownerUserCredentilasMapping.getOwnerConfiguration(owner);
         var secret = Guid.NewGuid().ToString();
         var otp = otpService.generateOtp(secret);
-        var token = await authService.generateAuthToken(new UserCredentials("veraeasy", "12345678"));
-        var slot = EmailVerificationEntity.PrepareEmailVerificationSlot(request.Email, secret, otp, token.access_token,
+        var token = await authService.generateAuthToken(request.Owner);
+        var slot = EmailVerificationEntity.PrepareEmailVerificationSlot(
+            request.Email,
+            secret,
+            otp,
+            token.access_token,
+            request.Owner,
+            request.ContactId,
             timeProvider.GetUtcNow());
-        var msg = $"Use this otp to verify your email address: {otp}";
-        await repository.AddAsync(slot);
-        var link = $"http://localhost:5173/otp/{slot.Id}";
-        senderService.sendEmail(request.Email, "Vereasy otp verification", msg, link);
+        await repository.AddAsync(slot, cancellationToken);
+        var msg = ownerConfiguration.GetTemplateInterpolation(slot.Id.ToString(), otp);
+        senderService.sendEmail(request.Owner, request.Email, "Veraeasy otp verification", msg);
         return slot.Id;
     }
 }

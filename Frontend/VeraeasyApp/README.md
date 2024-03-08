@@ -47,25 +47,61 @@ the example showed in the tanstack query react router is very meaningful for our
 - [x] create a AddNewContactVerification page to show a form to submit new contact verification
     - create relative business logic to save a contact
 
-### Second iteration
+### Second iteration (VERIFY EMAIL)
 
-- [ ] create a detail card component that take in input the id and take care to download it's detail info
+- [x] create a command to add a new email verification entry
+- [x] prepare email verification slot with owner
+- [ ] prepare email verification slot with contactId
+- [ ] extends link used by send email to put authtoken in query string
+- [ ] extends otp matcher to get by uuid with token in query string
+- [ ] extends otp matcher to insert in db (uuid, address, owner, contact_id) verifier_email when verify is ok
+- [ ] extends otp matcher to send a message trough rabbit mq to the email verifier
+- [ ] extends otp matcher with GET API to get verified status: check if row is in view too (auth from email verification)
+- [ ] extends email verifier to use the GET API and pull the status
+- [ ] extends email verifier to update the verified flag when the pull is OK.
+
+
+- [ ] minify and obfuscate link send in email
+- [ ] show an status to operator owner that match with EMAIL_VERIFIED
+- [ ] provide an owner configuration table with
+    - operator_key as user that login to the system
+    - issuer: the email seen by end user when receives otp
+    - otp_matcher_url: the url used in the email to link the otp insert page
+    - email_template: the template body of the email to send as html
+    - email_subject:
+    - sms_template: the template bod of sms to send
+
+### Third iteration (COMPLETE DOSSIER)
+
+- [ ] send notification to owner with a link to (verify/:owner/:type/:uuid) where type can be email or sms
+- [ ] when user access the link show a component that enable user to complete the task of type email verification
+- [ ] create a component to lookup email list and its status
+
+### 5TH iteration (mobile number contact flow)
+
+- create a MobileNumberVerification module that send otp trough sms
+- and send a notification to the owner when user match the mobile number and the otp
+- use Verifier to push verified rows even for mobile number
+
+### 6th iteration (COMPLETE DOSSIER)
+
+- [ ] avoid add email verification if exists email in the view
+- [ ] avoid add email verification if exists email in the view with a temporal window of last 5 minutes
+- [x] create an AddEmailVerificationPage to enable user to add an email to a contact
+- [x] seeds email verification list given business_id, and person_id
+- [x] to avoid pagination show all results in one page (count and limit by 10)
+- [x] create otp confirm page
+
+### 7TH iteration (detail page and workflow of all email and mobile number)
+
 - [ ] create a ContactVerificationDetail page to show details about workflow
 - [ ] add a command to start a new verification from the detail page.
-- [ ] incrementally fetch details in parallel ....
 - [ ] when user click on detail card navigate to detail route
-
-### Third iteration
-
-- [ ] to avoid pagination show all results in one page (count and limit by 10)
-- [ ] seeds email verification list given business_id, and person_id
-- [ ] create an AddEmailVerificationPage to enable user to add an email to a contact
-- [ ] create a component to lookup email list and its status
-- [ ] create a command to add a new email verification entry
+- [ ] create a detail card component that take in input the id and take care to download it's detail info
 
 ### 4th iteration (extends base contacts data)
 
 - [ ] in order to provide a customer point of view user experience spike the available options
   to build dinamically the forms required by veraeasy when user need to extends data to a contact.
   - [ ]document all in tech documents and forms paragrafh
-- 
+

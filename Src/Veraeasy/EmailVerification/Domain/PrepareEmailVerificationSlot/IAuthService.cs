@@ -4,5 +4,5 @@ namespace Veraeasy.EmailVerification.Domain.PrepareEmailVerification;
 
 public interface IAuthService
 {
-    Task<TokenResponse> generateAuthToken(UserCredentials credentials);
+    Task<TokenResponse> generateAuthToken(string? owner);
 }

@@ -21,8 +21,15 @@ a Get by uuid must be provided
 
 Because the match otp is idempotent the PUT METHOD must be used:
 
-- 204 no content if the match is ok
+- 204 no content if the match is ok and row exists
+- 201 Created if the match is ok and the row is inserted
 - 404 if uuid is not found
 - 409 Conflict if otp does not match
 - 401 if the match otp is without bearer auth
 - 403 forbidden if an invalid token is used
+
+Put method must be authenticated with the token obtained with get operation
+The method should create a resource as object or entity or row or document or in memory tuple to
+"signal" that an email is successfull verified
+
+insert UUID, emailAddress

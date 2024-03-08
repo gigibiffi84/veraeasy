@@ -9,20 +9,29 @@ public class AuthService : IAuthService
     private readonly IConfiguration _configuration;
     private readonly HttpClient _httpClient;
     private readonly ILogger<AuthService> _logger;
+    private readonly OwnerUserCredentilasMapping _ownerMappingService;
 
     public AuthService(
         ILogger<AuthService> logger,
         IConfiguration configuration,
+        OwnerUserCredentilasMapping ownerMappingService,
         HttpClient httpClient)
     {
         _logger = logger;
         _configuration = configuration;
         _httpClient = httpClient;
+        _ownerMappingService = ownerMappingService;
     }
 
 
-    public async Task<TokenResponse> generateAuthToken(UserCredentials credentials)
+    public async Task<TokenResponse> generateAuthToken(string? owner)
     {
+        var ownerConfiguration = getOwnerConfiguration(owner);
+
+        if (ownerConfiguration == null || ownerConfiguration.OwnerCredentials == null)
+            throw new InvalidOperationException("owner credentials not found");
+
+        var credentials = ownerConfiguration.OwnerCredentials;
         _logger.LogInformation($"creating new authetication for user {credentials.username}", credentials);
         var authConfig = _configuration
             .GetSection(KeycloakAuthenticationOptions.Section)
@@ -40,5 +49,10 @@ public class AuthService : IAuthService
             formContent);
         var token = await response.Content.ReadFromJsonAsync<TokenResponse>();
         return token;
+    }
+
+    private OwnerConfiguration? getOwnerConfiguration(string? owner)
+    {
+        return _ownerMappingService.getOwnerConfiguration(owner);
     }
 }
