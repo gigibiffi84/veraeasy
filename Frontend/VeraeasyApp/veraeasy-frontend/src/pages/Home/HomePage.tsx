@@ -2,7 +2,7 @@ import './HomePage.scss';
 import React, {useEffect, useState} from "react";
 import {SummaryCardPropsType, SummaryCardType} from "@/components/Types.ts";
 import {ContactVerificationType, CreateContactVerificationType} from "@/api/ContactVerificationTypes.ts";
-import {mapContactVerificationStatus} from "@/lib/utils.ts";
+import {mapContactVerificationStatus, saveToken} from "@/lib/utils.ts";
 import ContactVerificationApi from "@/api/ContactVerificationApi.ts";
 import SkeletonCardList from '@/components/summarycard/SkeletonCardList';
 import StatefulSearchInput from '@/components/typeahead/StatefulSearchInput';
@@ -20,6 +20,11 @@ import {catchError, distinctUntilChanged, map, startWith, switchMap, tap} from "
 import {of} from "rxjs";
 import {useNavigate} from "react-router";
 
+const clearSession = () => {
+    saveToken("veraeasy:token", undefined);
+    saveToken("veraeasy:user", undefined);
+    window.location.reload();
+}
 export const LoginButton = () => {
     return (<button
         className='px-4 py-2 text-sm rounded-sm font-bold text-white border-2 border-[#007bff] bg-[#007bff] transition-all ease-in-out duration-300 hover:bg-transparent hover:text-[#007bff]'>Sign
@@ -154,7 +159,7 @@ export default function HomePage() {
 
                             <button className='mr-6 font-semibold text-[15px] border-none outline-none'><a
                                 href='javascript:void(0)'
-                                onClick={() => navigate("/login")}
+                                onClick={() => clearSession()}
                                 className='text-[#007bff] hover:underline'>Sign out</a></button>
                             <button className='mr-6 font-semibold text-[15px] border-none outline-none'><a
                                 href='javascript:void(0)'

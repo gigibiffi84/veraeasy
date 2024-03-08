@@ -55,14 +55,8 @@ the example showed in the tanstack query react router is very meaningful for our
 - [x] send contactId from frontend
 - [x] extends link used by send email to put authtoken in query string
 - [x] extends otp matcher to get by uuid with token in query string
-- [ ] extends otp matcher to insert in db (uuid, address, owner, contact_id) verifier_email when verify is ok
-- [ ] extends otp matcher to send a message trough rabbit mq to the email verifier
-- [ ] extends otp matcher with GET API to get verified status: check if row is in view too (auth from email
-  verification)
-- [ ] extends email verifier to use the GET API and pull the status
-- [ ] extends email verifier to update the verified flag when the pull is OK.
-
-
+- [x] extends otp matcher to insert in db (uuid, address, owner, contact_id) verifier_email when verify is ok
+- [x] extends otp matcher page to check valid otp and update page status
 - [ ] minify and obfuscate link send in email
 - [ ] show an status to operator owner that match with EMAIL_VERIFIED
 - [ ] provide an owner configuration table with
@@ -72,6 +66,20 @@ the example showed in the tanstack query react router is very meaningful for our
     - email_template: the template body of the email to send as html
     - email_subject:
     - sms_template: the template bod of sms to send
+
+### Contact Verification CRUD
+
+- [ ] create a query to search in or by omnibox
+- [ ] add a modify icon and provide update capability of a contact
+- [ ] add a delete icon and provide delete capability of a contact
+
+### Email verification transfer
+
+- [ ] extends otp matcher to send a message trough rabbit mq to the email verifier
+- [ ] extends otp matcher with GET API to get verified status: check if row is in view too (auth from email
+  verification)
+- [ ] extends email verifier to use the GET API and pull the status
+- [ ] extends email verifier to update the verified flag when the pull is OK.
 
 ### Third iteration (COMPLETE DOSSIER)
 

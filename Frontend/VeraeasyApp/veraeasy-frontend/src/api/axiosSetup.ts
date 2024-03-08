@@ -2,6 +2,12 @@ import axios, {AxiosInstance, AxiosRequestConfig} from 'axios';
 import {getToken, saveToken} from "@/lib/utils.ts";
 import SignInApi from "@/api/SignInApi.ts";
 
+const clearSession = () => {
+    saveToken("veraeasy:token", undefined);
+    saveToken("veraeasy:user", undefined);
+    window.location.reload();
+}
+
 const initialization = (config: AxiosRequestConfig): AxiosInstance => {
     const axiosInstance = axios.create(config);
 
@@ -34,10 +40,17 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
             if (typeof value === "string") {
                 parsed = JSON.parse(value as string);
             }
+
             console.log('axios-interceptor <<<', parsed)
             const refreshToken = parsed ? parsed["refresh_token"] : value["refresh_token"];
+            if (!refreshToken) {
+                clearSession();
+            }
             const newToken = await SignInApi.refreshSession(refreshToken);
-            saveToken("veraeasy:token", newToken)
+            if (!newToken || !newToken.access_token) {
+                clearSession();
+            }
+
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + newToken.access_token;
             return axiosInstance(originalRequest);
         }

@@ -50,7 +50,7 @@ export function getToken(key: string): object | string | null {
     return storedValue;
 }
 
-export function saveToken(key: string, token: object): void | null {
+export function saveToken(key: string, token: object | undefined): void | null {
     if (typeof sessionStorage === "undefined") {
         console.log("axios-interceptor utils sessionStorage undefined", key);
 

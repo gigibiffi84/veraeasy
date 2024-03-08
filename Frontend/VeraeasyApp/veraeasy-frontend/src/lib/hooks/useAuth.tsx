@@ -39,7 +39,7 @@ export const AuthProvider = ({children}) => {
         if (tokenReceived$ && signinStateCompleted) {
             console.log("tokenReceived$,", tokenReceived$)
             setUser(signinState.currentUser);
-            setToken(JSON.stringify(signinState.currentToken));
+            setToken(signinState.currentToken as string);
             navigate("/home");
         }
     }, [tokenReceived$, signinState, signinStateCompleted]);

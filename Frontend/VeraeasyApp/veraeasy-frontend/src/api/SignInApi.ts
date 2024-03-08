@@ -20,7 +20,7 @@ const userLogin = (credentials: CredentialsType): Observable<UserSignInResponseS
     )
 }
 
-const refreshSession = (refreshToken: string): Promise<UserSignInResponseSuccessType | string> => {
+const refreshSession = (refreshToken: string): Promise<UserSignInResponseSuccessType> => {
     if (!refreshToken) {
         return firstValueFrom(throwError("refresh token is empty"));
     }
