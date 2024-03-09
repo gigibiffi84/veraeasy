@@ -1,3 +1,5 @@
+using Veraeasy.ContactVerification.Domain.Model;
+
 namespace Veraeasy.ContactVerification.Data;
 
 public interface IContactVerificationRepository
@@ -13,5 +15,9 @@ public interface IContactVerificationRepository
         CancellationToken cancellationToken = default);
 
     Task AddAsync(ContactVerification contract, CancellationToken cancellationToken = default);
+
+    Task UpdateContactVerificationAsync(Guid contactId, ContactVerificationUpdate cv,
+        CancellationToken cancellationToken = default);
+
     Task CommitAsync(CancellationToken cancellationToken = default);
 }

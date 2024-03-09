@@ -2,7 +2,7 @@
 using Veraeasy.Common.Cqrs;
 using Veraeasy.Common.Events;
 using Veraeasy.ContactVerification.Data.Database.Reporitories;
-using Veraeasy.ContactVerification.Domain.CreateContactVerification;
+using Veraeasy.ContactVerification.Domain.Features.CreateContactVerificationUseCase;
 
 namespace Veraeasy.ContactVerification.Domain;
 
@@ -51,6 +51,16 @@ public class ContactVerificationAggregate(
         var result = await mediator.Send(command, cancellationToken);
         await PublishDomainEventsAsync(cancellationToken);
         return result;
+    }
+
+
+    public async Task ContactVerificationUpdated(ContactVerificationCreatedDomainEvent e,
+        CancellationToken cancellationToken = default)
+    {
+        Id = e.VerificationId;
+        logger.LogInformation($"Contact Verification Created {e.VerificationId}");
+        RaiseDomainEvent(e);
+        await PublishIntegrationEventsAsync(cancellationToken);
     }
 
     public IReadOnlyList<IDomainEvent> GetDomainEvents()

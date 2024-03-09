@@ -58,7 +58,6 @@ the example showed in the tanstack query react router is very meaningful for our
 - [x] extends otp matcher to insert in db (uuid, address, owner, contact_id) verifier_email when verify is ok
 - [x] extends otp matcher page to check valid otp and update page status
 - [ ] minify and obfuscate link send in email
-- [ ] show an status to operator owner that match with EMAIL_VERIFIED
 - [ ] provide an owner configuration table with
     - operator_key as user that login to the system
     - issuer: the email seen by end user when receives otp
@@ -67,13 +66,28 @@ the example showed in the tanstack query react router is very meaningful for our
     - email_subject:
     - sms_template: the template bod of sms to send
 
-### Contact Verification CRUD
+### Contact Verification CRUD ß
 
-- [ ] create a query to search in or by omnibox
-- [ ] add a modify icon and provide update capability of a contact
+- [x] create a query to search in or by omnibox
+- [ ] add a clone from icon and provide insert capability of a contact with form autofill
 - [ ] add a delete icon and provide delete capability of a contact
 
-### Email verification transfer
+### ContactVerification status management
+
+- [ ] extends prepare email verification with EMAIL_SENT status
+- [ ] provide checkEmailVerificationStatus => read from emeail_verified_event
+    - take all verification by contact id and check if EXISTS at least one row in email_verified_event
+    - if Any exists then cache result in EmailVerification and update flag to true
+    - if Any exists then cache result in ContactVerificationEvent and add event
+- [ ] the previous check MUST start when user try to verify email
+- [ ] when status is EMAIL_VERIFIED operator can still send a new verification
+
+### History
+
+- [ ] provide the history of all email sent for a contact.
+- [ ] for each email in the history show if is verified
+
+### Email verification transfer (not useful if user press check)
 
 - [ ] extends otp matcher to send a message trough rabbit mq to the email verifier
 - [ ] extends otp matcher with GET API to get verified status: check if row is in view too (auth from email

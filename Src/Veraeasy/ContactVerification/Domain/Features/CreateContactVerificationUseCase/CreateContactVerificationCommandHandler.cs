@@ -1,7 +1,7 @@
 using Veraeasy.Common.Cqrs;
 using Veraeasy.ContactVerification.Data;
 
-namespace Veraeasy.ContactVerification.Domain.CreateContactVerification;
+namespace Veraeasy.ContactVerification.Domain.Features.CreateContactVerificationUseCase;
 
 [UsedImplicitly]
 internal sealed class CreateContactVerificationCommandHandler(

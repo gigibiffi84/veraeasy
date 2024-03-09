@@ -61,6 +61,6 @@ app.UseHttpsRedirection();
 
 //app.MapControllers();
 app.UseRouting().UseAuthentication().UseAuthorization().UseEndpoints(e => e.MapControllers());
-app.MapContactVerificatinEndpoints();
+app.MapContactVerificationEndpoints();
 
 app.Run();

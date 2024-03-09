@@ -16,15 +16,15 @@ public sealed class ContactVerification
     }
 
     public Guid Id { get; init; }
-    public string BusinessId { get; init; }
-    public string EmailHash { get; init; }
-    public string MobileNumberHash { get; init; }
+    public string BusinessId { get; set; }
+    public string EmailHash { get; set; }
+    public string MobileNumberHash { get; set; }
     public string Owner { get; init; }
-    public string PersonId { get; init; }
+    public string PersonId { get; set; }
     public DateTimeOffset CreatedAt { get; init; }
     public DateTimeOffset ExpireAt { get; init; }
 
-    public ICollection<ContactVerificationEvent> Events { get; } = new List<ContactVerificationEvent>();
+    public ICollection<ContactVerificationEvent> Events { get; set; } = new List<ContactVerificationEvent>();
 
     public static ContactVerification PrepareEntryWithDefaultExpire(string businessId, string email, string mobile,
         string? owner, string personId, DateTimeOffset nowDate)

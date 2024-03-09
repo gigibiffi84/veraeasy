@@ -42,6 +42,18 @@ internal static class ContactVerificationModule
             config.Bind(source => source.ContactVerificationId, target => target.Id);
         });
 
+        TinyMapper.Bind<Data.ContactVerification, Data.ContactVerification>(config =>
+        {
+            config.Bind(source => source.BusinessId, target => target.BusinessId);
+            config.Bind(source => source.PersonId, target => target.PersonId);
+            config.Bind(source => source.EmailHash, target => target.EmailHash);
+            config.Bind(source => source.MobileNumberHash, target => target.MobileNumberHash);
+            config.Bind(source => source.Id, target => target.Id);
+            config.Ignore(s => s.Owner);
+            config.Ignore(s => s.CreatedAt);
+            config.Ignore(s => s.Events);
+        });
+
         TinyMapper.Bind<Data.ContactVerification, ContactVerificationAddress>(config =>
         {
             config.Ignore(x => x.Events);

@@ -1,9 +1,7 @@
-namespace Veraeasy.ContactVerification.Data.Database;
-
-using System.Runtime.InteropServices;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Veraeasy.ContactVerification.Data;
+
+namespace Veraeasy.ContactVerification.Data.Database;
 
 internal sealed class ContactVerificationEntityConfiguration : IEntityTypeConfiguration<ContactVerification>
 {
@@ -17,5 +15,6 @@ internal sealed class ContactVerificationEntityConfiguration : IEntityTypeConfig
         builder.Property(cv => cv.BusinessId).IsRequired();
         builder.Property(cv => cv.MobileNumberHash).IsRequired();
         builder.Property(cv => cv.ExpireAt).IsRequired();
+        builder.HasMany(cv => cv.Events);
     }
 }
