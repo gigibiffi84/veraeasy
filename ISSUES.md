@@ -7,3 +7,5 @@ Fixed
 
 When user submit create a contact no loading and no diasbling of button is performed.
 Solution: disable create button and show loading while reload items.
+
+https://veraeasy.atlassian.net/jira/servicedesk/projects/VER/queues/custom/4

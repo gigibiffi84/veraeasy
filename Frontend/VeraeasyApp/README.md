@@ -69,17 +69,20 @@ the example showed in the tanstack query react router is very meaningful for our
 ### Contact Verification CRUD ß
 
 - [x] create a query to search in or by omnibox
-- [ ] add a clone from icon and provide insert capability of a contact with form autofill
-- [ ] add a delete icon and provide delete capability of a contact
+- [x] add update contact verification api
+- [ ] add delete contact verification api (low)
+- [ ] add a delete icon and provide delete capability of a contact (low)
 
 ### ContactVerification status management
 
 - [ ] extends prepare email verification with EMAIL_SENT status
-- [ ] provide checkEmailVerificationStatus => read from emeail_verified_event
-    - take all verification by contact id and check if EXISTS at least one row in email_verified_event
-    - if Any exists then cache result in EmailVerification and update flag to true
-    - if Any exists then cache result in ContactVerificationEvent and add event
-- [ ] the previous check MUST start when user try to verify email
+- [ ] add a modify icon when click load current contact and show in form
+- [ ] when load check email popup call checkJustVerified API
+- [ ] provide getEmailVerificationStatus (verified field) API : see verified status on EmailVerification
+- [ ] create materialized view in EmailVerification that reads from public.email_verified_event
+- [ ] provide checkEmailVerified API : get by emailverificationUUID count >=1
+- [ ] WHEN JUSTVERIFIED, SHOW STATUS
+  the previous check MUST start when user try to verify email
 - [ ] when status is EMAIL_VERIFIED operator can still send a new verification
 
 ### History

@@ -4,6 +4,8 @@ This README would normally document whatever steps are necessary to get your app
 
 ### Mvp Requirements
 
+Jira: https://veraeasy.atlassian.net/
+
 first iteration for the mvp project focus on real and urgent needs:
 
 - a way to verify email address trough otp
@@ -142,6 +144,22 @@ we found that tinymapper is best
 https://learn.microsoft.com/en-us/archive/msdn-magazine/2019/november/csharp-iterating-with-async-enumerables-in-csharp-8
 
 https://github.com/TinyMapper/TinyMapper/wiki/Custom-mapping
+
+### CRUD with ef core
+
+https://learn.microsoft.com/en-us/ef/core/saving/related-data#adding-a-related-entity
+
+### Multitenancy
+
+Veraeasy can map multitenant in different ways:
+
+- user can view contacts of more tenants and can manage more tenants and switch from tenant A to tenant B
+- user is part of the tenant organization in this case to manage partitioned contacts another entity of Type
+  ContactGroup nned to be managed
+  ß
+  https://learn.microsoft.com/it-it/ef/core/miscellaneous/multitenancy#conclusion
+
+https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Multitenancy
 
 ### Email verification steps
 
