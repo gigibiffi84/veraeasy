@@ -5,8 +5,11 @@ import {createContactEpic, createContactReducer} from "@/features/createcontact/
 
 const epicMiddleware = createEpicMiddleware();
 
+
 const rootEpic = combineEpics(
     userLoginEpic,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     createContactEpic
 )
 

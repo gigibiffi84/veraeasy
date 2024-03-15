@@ -15,7 +15,7 @@ export default function ContactFormInput({
         <div className="mt-0">
             <FormField
                 control={form.control}
-                name={name as "dossierId" | "personId" | "email" | "mobileNumber"}
+                name={name as never}
                 render={({field}) => {
                     return (
                         <FormItem className="mt-0">

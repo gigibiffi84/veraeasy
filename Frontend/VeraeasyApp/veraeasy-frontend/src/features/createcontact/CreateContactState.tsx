@@ -2,7 +2,7 @@ import {ContactVerificationType, CreateContactVerificationType} from "@/api/Cont
 import {ActionCreatorWithPayload, createAction, createReducer} from "@reduxjs/toolkit";
 import {CreatedType, ErrorMsgType} from "@/api/CommonTypes.ts";
 import {ofType} from "redux-observable";
-import {catchError, map, mergeMap, of} from "rxjs";
+import {catchError, map, mergeMap, of, OperatorFunction} from "rxjs";
 import ContactVerificationService from "@/features/createcontact/CreateContactService.ts";
 
 
@@ -62,7 +62,12 @@ export const createContactReducer = createReducer<CreateContactState>(initialSta
         })
 );
 
-export const createContactEpic = (action$, store) => action$.pipe(
+export const createContactEpic = (action$: {
+    pipe: (arg0: OperatorFunction<unknown, never>, arg1: OperatorFunction<unknown, {
+        payload: CreatedType;
+        type: string;
+    } | { payload: ErrorMsgType; type: string; }>) => never;
+}) => action$.pipe(
     ofType(types.CREATE_CONTACT_REQUEST),
     mergeMap((action) => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment

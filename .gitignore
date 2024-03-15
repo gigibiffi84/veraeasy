@@ -8,6 +8,7 @@ node_modules/
 dist/
 bin/
 obj/
+out/
 
 # Compiled Java class files
 *.class
@@ -52,3 +53,4 @@ Thumbs.db
 
 /Frontend/remote-profile/
 /Frontend/remote-profile/*
+/Src/Veraeasy/out/

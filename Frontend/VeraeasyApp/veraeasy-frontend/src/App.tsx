@@ -13,7 +13,7 @@ import OtpMatchPage from "@/pages/OtpMatch/OtpMatchPage.tsx";
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Root className={"p-0"}></Root>,
+        element: <Root></Root>,
         children: [
             {
                 element: <AuthRoute><HomePage></HomePage></AuthRoute>

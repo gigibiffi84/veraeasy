@@ -132,3 +132,5 @@ the example showed in the tanstack query react router is very meaningful for our
   to build dinamically the forms required by veraeasy when user need to extends data to a contact.
   - [ ]document all in tech documents and forms paragrafh
 
+todo build for production
+https://github.com/Eptagone/Vite.AspNetCore/blob/main/examples/basic/frameworks/ViteNET.React/vite.config.ts

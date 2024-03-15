@@ -23,11 +23,8 @@ import emailVerificationApi from "@/api/EmailVerificationApi.ts";
 import {ButtonSuccess} from "@/components/addemail/ButtonSuccess.tsx";
 import {ButtonLoading} from "@/components/addemail/ButtonLoading.tsx";
 
-export function AddEmailVerificationComponent({open, onOpenChange, contactId}: {
-    open: boolean,
-    loading: boolean,
-    contactId: string,
-    onOpenChange: (open: boolean) => void
+export function AddEmailVerificationComponent({contactId}: {
+    contactId: string
 }) {
 
     const [email, setEmail] = useState<string | undefined>(undefined);
@@ -82,6 +79,7 @@ export function AddEmailVerificationComponent({open, onOpenChange, contactId}: {
     }
 
     const onEmailAdded = (result: object) => {
+        console.log(result);
         setSending(false);
         setLoading(false);
         setSuccess(true);
@@ -103,7 +101,7 @@ export function AddEmailVerificationComponent({open, onOpenChange, contactId}: {
         if (!e) {
             resetState();
         }
-        onOpenChange && onOpenChange(e);
+        // onOpenChange && onOpenChange(e);
     }
 
     const handleSendOtp = () => {
@@ -133,7 +131,7 @@ export function AddEmailVerificationComponent({open, onOpenChange, contactId}: {
 
 
     return (
-        <Dialog open={open} onOpenChange={handleOpenChange}>
+        <Dialog onOpenChange={handleOpenChange}>
             <DialogTrigger asChild>
                 <Button variant="outline" className="w-full">
                     <Mail className="mr-2 h-4"/> Check email

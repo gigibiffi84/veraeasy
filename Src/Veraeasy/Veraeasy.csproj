@@ -47,4 +47,70 @@
     <ItemGroup>
         <Folder Include="ContactVerification\Domain\Features\"/>
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="out\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="out\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="out\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="out\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="out\NuGet.config" />
+      <_ContentIncludedByDefault Remove="out\out\NuGet.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\NuGet.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\NuGet.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\NuGet.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\NuGet.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\out\web.config" />
+      <_ContentIncludedByDefault Remove="out\web.config" />
+      <_ContentIncludedByDefault Remove="out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="out\appsettings.Staging.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="out\out\appsettings.Staging.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\appsettings.Staging.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\appsettings.Staging.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\appsettings.Production.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\appsettings.Staging.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\appsettings.Development.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\appsettings.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\appsettings.Staging.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\Veraeasy.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\out\Veraeasy.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\Veraeasy.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\out\Veraeasy.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\Veraeasy.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\out\Veraeasy.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\Veraeasy.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\out\Veraeasy.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\out\Veraeasy.deps.json" />
+      <_ContentIncludedByDefault Remove="out\out\Veraeasy.runtimeconfig.json" />
+      <_ContentIncludedByDefault Remove="out\Veraeasy.deps.json" />
+      <_ContentIncludedByDefault Remove="out\Veraeasy.runtimeconfig.json" />
+    </ItemGroup>
 </Project>

@@ -8,7 +8,6 @@ export default function StatefulSearchInput({
                                                 inputText,
                                                 onSearch,
                                                 fetcherFunction,
-                                                cancelFunction,
                                                 onSearchResultComplete
                                             }: SearchContactInputProps) {
 
@@ -21,7 +20,7 @@ export default function StatefulSearchInput({
                     text && text.length > 3 ?
                         timer(2000).pipe(
                             filter(() => text.length > 3),
-                            switchMap(() => fetchFunc(text)),
+                            switchMap(() => fetchFunc(text as never)),
                             map(contacts => contacts),
                             catchError((err) => of({error: err})),
                             startWith({state: "loading"}),

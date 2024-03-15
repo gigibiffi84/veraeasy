@@ -18,7 +18,6 @@ import {useObservable, useSubscription} from "observable-hooks";
 import {useAuth} from "@/lib/hooks/useAuth.tsx";
 import {catchError, distinctUntilChanged, map, startWith, switchMap, tap} from "rxjs/operators";
 import {of} from "rxjs";
-import {useNavigate} from "react-router";
 
 const clearSession = () => {
     saveToken("veraeasy:token", undefined);
@@ -57,10 +56,9 @@ export default function HomePage() {
     const [isDefault, setIsDefault] = React.useState(true);
     const [contacts, setContacts] = React.useState([] as SummaryCardPropsType[]);
     const {createNewContactCommand} = useCreateContactAction();
-    const [open, setOpen] = useState(undefined);
+    const [open, setOpen] = useState(false);
     const createContactState = useSelector<RootState>((state) => state.rootReducer.createContact) as CreateContactState;
     const {user} = useAuth();
-    const navigate = useNavigate();
 
     useEffect(() => {
         console.log('current user is', user);
@@ -179,6 +177,7 @@ export default function HomePage() {
                 </header>
             </div>
             <div className="md:container md:mx-auto md:mt-5 flex justify-center border-0 ">
+
 
                 <StatefulSearchInput fetcherFunction={ContactVerificationApi.contactList$}
                                      cancelFunction={ContactVerificationApi.emptyContactList$}

@@ -15,6 +15,8 @@ const formSchema = z.object({
     mobileNumber: z.string().min(8)
 
 })
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 export default function CreateContactForm({children, onCreateContact}) {
     const form: UseFormReturn<{
         businessId: string,

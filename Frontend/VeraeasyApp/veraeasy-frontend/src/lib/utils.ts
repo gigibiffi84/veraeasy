@@ -31,7 +31,7 @@ export function mapContactVerificationStatus(status: (typeof ContactVerification
     }
 }
 
-export function getToken(key: string): object | string | null {
+export function getToken(key: string): object | string | null | [] {
     if (typeof sessionStorage === "undefined") {
         console.log("axios-interceptor utils getToken return null", key);
         return null;
@@ -68,6 +68,8 @@ export function saveToken(key: string, token: object | undefined): void | null {
 
 export function decodeUserByJwtToken(token: string): string {
     const decoded = jwtDecode<JwtPayload>(token);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     return decoded["preferred_username"] as string;
 
 }

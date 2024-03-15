@@ -6,6 +6,8 @@ import {useToast} from "@/components/ui/use-toast.ts";
 
 const AppToastContext = createContext(null);
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 export const AppToastProvider = ({children}) => {
 
     const createErrorReceived = useSelector<RootState>((state) => state.rootReducer.createContact.error) as string;
@@ -46,6 +48,8 @@ export const AppToastProvider = ({children}) => {
         [toast]
     );
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     return <AppToastContext.Provider value={value}>{children}</AppToastContext.Provider>;
 
 }

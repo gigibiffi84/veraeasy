@@ -201,14 +201,48 @@ https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=a
 
 ### Backend
 
+### Local docker build
+
 dotnet publish -c Release
 docker build -t veraeasy-image -f Dockerfile .
 docker create --name veraeasy-app veraeasy-image
 docker start veraeasy-app
 
+### Dcoker build and deploy
+
+docker build -t veraeasy.azurecr.io/veraeasy:latest -f Dockerfile .
+
+docker run -it veraeasy.azurecr.io/veraeasy:latest
+
+az login
+az account set -s <subscription ID>
+az config set defaults.acr=<your registry name>
+az acr login
+
+docker push veraeasy.azurecr.io/veraeasy:latest
+
 https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux&pivots=dotnet-8-0#publish-net-app
 
-### Kubernetes
+### Kubernetes on Azure (without or not VM or AKS)
+
+https://bluexp.netapp.com/blog/azure-anf-blg-kubernetes-in-azure-architecture-and-service-options
+https://bluexp.netapp.com/blog/azure-cvo-blg-azure-container-instances-vs-aks-how-to-choose#h_h2
+https://kubernetes.io/docs/reference/access-authn-authz/rbac/
+
+https://learn.microsoft.com/it-it/azure/aks/cluster-container-registry-integration?tabs=azure-cli
+veraeasy-k8s-dns
+
+https://learn.microsoft.com/en-us/cli/azure/install-azure-cli-macos
+
+az aks show --name VeraeasyK8sCluster --resource-group VeraeasyResourceGroup
+
+az aks stop --name VeraeasyK8sCluster --resource-group VeraeasyResourceGroup
+
+az aks start --name VeraeasyK8sCluster --resource-group VeraeasyResourceGroup
+
+az aks update -n VeraeasyK8sCluster --resource-group VeraeasyResourceGroup --attach-acr veraeasy
+
+https://www.geeksforgeeks.org/difference-between-kubernetes-ingress-and-loadbalancer/
 
 ## Expose health checks
 

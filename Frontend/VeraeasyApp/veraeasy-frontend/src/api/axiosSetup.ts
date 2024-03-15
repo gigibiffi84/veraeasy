@@ -14,13 +14,14 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
     // Request interceptor for API calls
     axiosInstance.interceptors.request.use(
         async config => {
-            const value = getToken("veraeasy:token");
+            const value = getToken("veraeasy:token") as [];
             console.log('axios-interceptor >>>', value)
-            config.headers = {
-                'Authorization': `Bearer ${value.access_token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
+            const at = value["access_token"];
+            config.headers.setAuthorization(`Bearer ${at}`);
+            config.headers.setAccept('application/json');
+            config.headers.setContentType('application/json');
             return config;
         },
         error => {
@@ -34,7 +35,7 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
         const unauth = error.response && (error.response.status === 403 || error.response.status === 401);
         if (unauth && !originalRequest._retry) {
             originalRequest._retry = true;
-            const value = getToken("veraeasy:token");
+            const value = getToken("veraeasy:token") as [];
             let parsed = undefined;
 
             if (typeof value === "string") {
@@ -42,6 +43,8 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
             }
 
             console.log('axios-interceptor <<<', parsed)
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             const refreshToken = parsed ? parsed["refresh_token"] : value["refresh_token"];
             if (!refreshToken) {
                 clearSession();

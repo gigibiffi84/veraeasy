@@ -3,15 +3,21 @@ WORKDIR /App
 
 # Copy everything
 COPY . ./
+
+WORKDIR /App/Veraeasy
+RUN cd /App/Veraeasy
 # Restore as distinct layers
 RUN dotnet restore
-#Build external deps
-RUN dotnet publish -c Release -o out
+
+RUN dotnet clean
+
+RUN dotnet build
+
 # Build and publish a release
 RUN dotnet publish -c Release -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /App
-COPY --from=build-env /App/out .
+COPY --from=build-env /App/Veraeasy/out .
 ENTRYPOINT ["dotnet", "Veraeasy.dll"]

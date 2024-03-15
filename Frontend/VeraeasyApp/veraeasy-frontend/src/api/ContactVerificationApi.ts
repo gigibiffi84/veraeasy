@@ -3,7 +3,7 @@ import {ContactVerificationAddressType, ContactVerificationType} from "@/api/Con
 import {CreatedType} from "@/api/CommonTypes.ts";
 import RxAxios from "./rxAxios.ts";
 
-export type ContacListFetcherFunction = (text: string) => Observable<ContactVerificationType[]>;
+export type ContacListFetcherFunction = (text: never) => Observable<ContactVerificationType[]>;
 
 const contactCreated$ = (newContact: ContactVerificationType): Observable<CreatedType> => {
     const url = import.meta.env.VITE_CONTACTS_CREATE_URL;
@@ -30,7 +30,7 @@ const contactMailAddressById$ = (guid: string | undefined): Observable<string> =
             })
         )
 }
-const contactList$ = (searchTerm): Observable<ContactVerificationType[]> => {
+const contactList$ = (searchTerm: never): Observable<ContactVerificationType[]> => {
 
     const url = import.meta.env.VITE_CONTACTS_LIST_URL;
     return RxAxios.get<ContactVerificationType[]>(`${url}/search`, {search: searchTerm})
@@ -59,7 +59,7 @@ const contactListByOwner$ = (user: string | null | undefined): Observable<Contac
 const emptyContactList$ = (): Observable<ContactVerificationType[]> => {
     const result = of([1, 2, 3, 4, 5]).pipe(
         map(slots =>
-            slots.map((a) => {
+            slots.map(() => {
                     return {} as ContactVerificationType
                 }
             )

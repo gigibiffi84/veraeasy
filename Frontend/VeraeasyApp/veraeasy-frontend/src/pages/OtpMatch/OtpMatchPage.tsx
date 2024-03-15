@@ -24,6 +24,8 @@ export type OtpVerifyResponse = {
     error: string | undefined
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const OtpInputComponent = ({userOtp, handleOtpChange, otpVerified, onOtpVerify, otpAuthToken}) => (
     <>
         <div className="otp-container">
@@ -76,6 +78,8 @@ const InvalidOtpComponent = () => (
 const OtpMatchPage = () => {
 
     const [userOtp, setUserOtp] = useState<string>("");
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     const [otpComponent, setOtpComponent] = useState<JSX.Element>(undefined);
     const [otpVerified, setOtpVerified] = useState<boolean>(false);
     const [otpAuthToken, setOtpAuthToken] = useState<string>("");

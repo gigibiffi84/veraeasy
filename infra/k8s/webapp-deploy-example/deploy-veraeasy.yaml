@@ -1,0 +1,49 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: veraeasy-backend
+  namespace: veraeasy-full
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: veraeasy-backend
+  template:
+    metadata:
+      labels:
+        app: veraeasy-backend
+    spec:
+      nodeSelector:
+        beta.kubernetes.io/os: linux
+      containers:
+        - name: veraeasy-backend
+          image: veraeasy.azurecr.io/veraeasy:latest
+          env:
+            - name: ALLOW_EMPTY_PASSWORD
+              value: 'yes'
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+          ports:
+            - containerPort: 8080
+              name: http
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: veraeasy-backend
+  namespace: veraeasy-full
+spec:
+  ports:
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    app: veraeasy-backend
+  type: ClusterIP
