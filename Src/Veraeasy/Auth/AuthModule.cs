@@ -16,7 +16,7 @@ internal static class AuthModule
                 policy =>
                 {
                     policy
-                        .WithOrigins("http://localhost:5173")
+                        .WithOrigins(["http://localhost:5173", "http://az-app.veraeasy.cloud"])
                         .AllowAnyHeader()
                         .AllowAnyMethod();
                 });

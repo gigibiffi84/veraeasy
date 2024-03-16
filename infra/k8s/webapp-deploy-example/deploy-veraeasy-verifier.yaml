@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: veraeasy-backend
+  name: veraeasy-verifier-backend
   namespace: veraeasy-full
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: veraeasy-backend
+      app: veraeasy-verifier-backend
   template:
     metadata:
       labels:
-        app: veraeasy-backend
+        app: veraeasy-verifier-backend
     spec:
       nodeSelector:
         beta.kubernetes.io/os: linux
       containers:
-        - name: veraeasy-backend
-          image: veraeasy.azurecr.io/veraeasy:latest
+        - name: veraeasy-verifier-backend
+          image: veraeasy.azurecr.io/veraeasy-verifier:latest
           imagePullPolicy: Always
           env:
             - name: ALLOW_EMPTY_PASSWORD
@@ -37,7 +37,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: veraeasy-backend
+  name: veraeasy-verifier-backend
   namespace: veraeasy-full
 spec:
   ports:
@@ -46,5 +46,5 @@ spec:
       protocol: TCP
       targetPort: 8080
   selector:
-    app: veraeasy-backend
+    app: veraeasy-verifier-backend
   type: ClusterIP

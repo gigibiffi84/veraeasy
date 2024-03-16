@@ -208,18 +208,30 @@ docker build -t veraeasy-image -f Dockerfile .
 docker create --name veraeasy-app veraeasy-image
 docker start veraeasy-app
 
-### Dcoker build and deploy
-
-docker build -t veraeasy.azurecr.io/veraeasy:latest -f Dockerfile .
-
-docker run -it veraeasy.azurecr.io/veraeasy:latest
+### Docker build and deploy
 
 az login
 az account set -s <subscription ID>
 az config set defaults.acr=<your registry name>
 az acr login
 
+#### Build veraeasy
+
+docker build -t veraeasy.azurecr.io/veraeasy:latest -f Dockerfile .
+docker run -it veraeasy.azurecr.io/veraeasy:latest
 docker push veraeasy.azurecr.io/veraeasy:latest
+
+#### Build veraeasy-verifier
+
+docker build -t veraeasy.azurecr.io/veraeasy-verifier:latest -f Dockerfile.Verifier .
+docker run -it veraeasy.azurecr.io/veraeasy-verifier:latest
+docker push veraeasy.azurecr.io/veraeasy-verifier:latest
+
+#### Build veraeasy-frontend -app
+
+docker build -t veraeasy.azurecr.io/veraeasy-app:latest .
+docker run -p 8180:80 veraeasy.azurecr.io/veraeasy-app:latest
+docker push veraeasy.azurecr.io/veraeasy-app:latest
 
 https://learn.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=linux&pivots=dotnet-8-0#publish-net-app
 
