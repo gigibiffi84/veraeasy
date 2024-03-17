@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react-swc'
 import {defineConfig} from "vite"
 
 export default defineConfig({
+    base: "/",
     server: {
         proxy: {
             '/api/veraeasy': {
@@ -10,10 +11,10 @@ export default defineConfig({
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api\/veraeasy/, 'api'),
             },
-            '/otp/api/veraeasy-verifier': {
+            '/api/verifier': {
                 target: 'http://localhost:8889/',
                 changeOrigin: true,
-                rewrite: (path) => path.replace(/^\/otp\/api\/veraeasy-verifier/, 'api'),
+                rewrite: (path) => path.replace(/^\/api\/verifier/, 'api'),
             }
         }
     },

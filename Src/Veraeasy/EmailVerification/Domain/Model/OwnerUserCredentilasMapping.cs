@@ -10,7 +10,7 @@ public class OwnerUserCredentilasMapping
         ownerCredentialsMapping.Add("bifulcoluigi",
             new OwnerConfiguration(
                 new UserCredentials("veraeasy", "12345678"),
-                "http://localhost:5173/otp",
+                "http://98.64.169.211/otp",
                 "<div>" +
                 "<h3>Hi this is your OTP <b>{1}</b></h3>" +
                 "<p>Please verify email <a href=\"{0}\">here</a></p>" +

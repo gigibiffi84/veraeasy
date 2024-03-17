@@ -54,6 +54,7 @@ const initialization = (config: AxiosRequestConfig): AxiosInstance => {
                 clearSession();
             }
 
+            saveToken("veraeasy:token", newToken);
             axios.defaults.headers.common['Authorization'] = 'Bearer ' + newToken.access_token;
             return axiosInstance(originalRequest);
         }

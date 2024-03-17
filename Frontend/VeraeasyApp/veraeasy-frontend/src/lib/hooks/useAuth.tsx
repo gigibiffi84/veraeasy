@@ -47,7 +47,7 @@ export const AuthProvider = ({children}) => {
 
     const logout = useCallback(() => {
         setUser(null);
-        navigate("/", {replace: true});
+        navigate("login", {replace: true});
     }, [navigate, setUser]);
 
     const value = useMemo(
