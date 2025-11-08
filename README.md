@@ -107,8 +107,8 @@ Then authenticate from swagger copy and paste the token.
 To test from swagger use this example json
 {
 "businessId": "test",
-"email": "bifulcoluigi@gmail.com",
-"mobileNumber": "+393405753976",
+"email": "email@email.com",
+"mobileNumber": "+12347473773",
 "createdAt": "2024-02-20 00:00:00"
 }
 
